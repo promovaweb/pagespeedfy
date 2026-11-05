@@ -1,6 +1,6 @@
 ---
 name: pagespeedfy-otimizar-pagina
-description: Mede uma única página com o CLI do Pagespeedfy, lê o relatório inteiro do PageSpeed Insights e aplica as correções no projeto Astro, com build e comparação antes e depois.
+description: Mede uma única página com o CLI do Pagespeedfy, lê todos os relatórios da rota, cria e exibe um plano de correções e só altera o projeto Astro depois da autorização da pessoa.
 ---
 
 # Otimizar uma página Astro com o Pagespeedfy
@@ -53,10 +53,22 @@ do `report.json`. Guarde esse caminho como linha de base. A consulta leva de
 Se o comando falhar por cota diária, chave recusada ou URL inacessível, relate
 a mensagem do CLI e pare. Não repita em laço.
 
-### 2. Ler o relatório inteiro
+### 2. Ler todos os relatórios
 
-Leia `references/leitura-relatorio.md` e depois o `report.json` completo,
-das duas estratégias. Não leia apenas o `report.md`: ele resume os itens.
+Leia `references/leitura-relatorio.md` e depois **todos** os arquivos da
+pasta da medição, sem pular nenhum:
+
+- `report.json`, das duas estratégias;
+- `mobile.raw.json` e `desktop.raw.json`, para conferir cada auditoria
+  reprovada e completar os itens que o `report.json` cortou
+  (`truncated: true`);
+- `report.md`, só como conferência do resumo.
+
+Depois liste as medições anteriores da mesma rota, nas pastas irmãs de
+`pagespeedfy-reports/<host>/<rota>/`, e leia o `report.json` de cada uma.
+Use o histórico para separar auditorias recorrentes das novas e para saber se
+uma correção anterior já foi tentada. Quando houver mais de uma medição, rode
+`pagespeedfy compare` entre a mais antiga e a atual.
 
 Para cada estratégia, registre:
 
@@ -64,10 +76,8 @@ Para cada estratégia, registre:
 - `runWarnings`: avisos que afetam a confiança na medição, como redirecionamento
   ou página lenta demais.
 - `scores`, `labMetrics` e `field` (CrUX de página e de origem).
-- Cada item de `failedAudits`, com todos os `items`. Quando `truncated` for
-  `true`, abra o arquivo indicado em `rawFile` e leia
-  `lighthouseResult.audits.<id>.details.items` inteiro.
-- `manualAudits`, que vão para o relatório final como verificação humana.
+- Cada item de `failedAudits`, com todos os `items`, conferidos no JSON bruto.
+- `manualAudits`, que vão para o plano como verificação humana.
 
 ### 3. Localizar a página no código
 
@@ -85,29 +95,52 @@ os dados dos itens para chegar ao arquivo certo:
 - URLs de outros domínios: scripts de terceiros, fontes externas ou embeds.
   Procure o domínio no código.
 
-### 4. Classificar cada auditoria
+Nesta etapa, só leia. Não altere nenhum arquivo do projeto.
 
-Monte uma tabela com uma linha por auditoria reprovada, na ordem do
-`report.json`, com estas colunas: auditoria, estratégias afetadas, escopo,
-arquivo, correção e efeito esperado.
+### 4. Criar o plano
+
+Monte o plano com o modelo de `references/modelo-plano.md` e grave em
+`plano.md`, na pasta da medição, ao lado do `report.json`. O plano tem uma
+linha por auditoria reprovada, na ordem do `report.json`, e diz para cada uma:
+estratégias afetadas, escopo, arquivo, correção proposta e efeito esperado.
 
 Use quatro escopos:
 
-| Escopo | Significado | Como agir |
-| --- | --- | --- |
-| Página | Muda só o arquivo da rota ou conteúdo dela | Aplique |
-| Componente | Muda componente usado em outras páginas | Aplique e liste as páginas afetadas |
-| Global | Muda layout base, `astro.config.*`, dependências ou tokens de design | Mostre a mudança e peça confirmação antes |
-| Fora do código | Servidor, CDN, cabeçalhos de cache, DNS, conteúdo de terceiros | Não altere; descreva o ajuste no relatório |
+| Escopo | Significado |
+| --- | --- |
+| Página | Muda só o arquivo da rota ou conteúdo dela |
+| Componente | Muda componente usado em outras páginas; liste as páginas afetadas |
+| Global | Muda layout base, `astro.config.*`, dependências ou tokens de design |
+| Fora do código | Servidor, CDN, cabeçalhos de cache, DNS, conteúdo de terceiros; só descreva o ajuste |
 
 Consulte `references/astro-correcoes.md` para a correção de cada ID de
 auditoria. Auditoria sem item e sem orientação clara entra como pendência
 explicada, sem correção inventada.
 
-### 5. Aplicar as correções
+### 5. Exibir o plano e aguardar autorização
 
-Aplique as linhas de escopo Página e Componente. Para o escopo Global, mostre
-o diff proposto e aguarde a resposta da pessoa.
+Mostre o plano completo na tela, no chat, e não só o caminho do arquivo.
+Termine com a pergunta: "Posso aplicar as correções deste plano?"
+
+Pare e aguarde a resposta. Não altere arquivo do projeto antes de a pessoa
+informar que pode corrigir. Esta regra vale mesmo em sessões com modo
+automático, `/goal` ou `/loop`.
+
+A pessoa pode:
+
+- autorizar o plano inteiro;
+- autorizar só algumas linhas ou só alguns escopos;
+- pedir ajustes no plano. Nesse caso, atualize o `plano.md`, mostre a nova
+  versão e pergunte de novo.
+
+Registre a resposta no `plano.md`, na seção "Autorização", com a data e as
+linhas autorizadas.
+
+### 6. Aplicar as correções autorizadas
+
+Aplique só as linhas autorizadas, na ordem do plano. Atualize a coluna
+"Status" do `plano.md` a cada linha: `aplicada`, `não aplicada` (com o
+motivo) ou `fora do código`.
 
 Siga estas regras ao editar:
 
@@ -116,19 +149,22 @@ Siga estas regras ao editar:
   existentes e mostre o antes e depois do valor.
 - Não remova conteúdo, seção, funcionalidade, analytics ou consentimento de
   cookies para ganhar nota. Quando a única saída for remover, pergunte.
-- Não adicione dependência sem confirmação.
+- Não adicione dependência que o plano autorizado não listou.
 - Prefira os recursos nativos do Astro (`astro:assets`, diretivas `client:*`,
   `build.inlineStylesheets`, prefetch) a soluções manuais.
 - Documente o código alterado conforme as regras do projeto.
 
-### 6. Validar localmente
+Se surgir uma correção que não estava no plano, acrescente a linha, mostre e
+peça autorização antes de aplicar.
+
+### 7. Validar localmente
 
 Rode o build do projeto (`npm run build` ou o script equivalente) e, se
 existir, `astro check` e a suíte de testes. Corrija o que quebrar antes de
 seguir. Abra o HTML gerado em `dist/` para conferir o resultado das mudanças
 no `<head>`, nas imagens e nos scripts.
 
-### 7. Medir de novo
+### 8. Medir de novo
 
 O PageSpeed Insights só mede URL pública. Quando a pessoa tiver uma URL de
 preview com as mudanças publicadas, rode:
@@ -145,15 +181,15 @@ As notas de laboratório variam entre execuções. Diferença de até 5 pontos e
 Performance pode ser ruído. Para conclusões, compare métricas e a lista de
 auditorias resolvidas, não só a nota.
 
-### 8. Relatório final
+### 9. Relatório final
 
-Entregue em Markdown:
+Entregue em Markdown e atualize o `plano.md` com o resultado:
 
-1. URL, data da medição e caminho do `report.json` de base.
+1. URL, data da medição e caminhos do `report.json` e do `plano.md`.
 2. Notas e métricas por estratégia, antes e depois quando houver remedição.
-3. Tabela de auditorias com a correção aplicada, o arquivo e o resultado.
+3. Tabela do plano com o status final de cada linha.
 4. Mudanças em componentes compartilhados e as páginas que elas alcançam.
-5. Itens de escopo Global aguardando confirmação.
+5. Linhas não autorizadas ou não aplicadas, com o motivo.
 6. Itens fora do código, com o ajuste recomendado para servidor ou CDN.
 7. Verificações manuais de `manualAudits`.
 8. Dados de campo do CrUX, lembrando que eles refletem 28 dias de usuários
@@ -162,5 +198,6 @@ Entregue em Markdown:
 ## Limites
 
 - Uma URL por execução. Para outra página, comece de novo pelo passo 1.
+- Nenhuma correção sem plano exibido e autorizado pela pessoa.
 - A skill não altera configuração de hospedagem nem de CDN.
 - A skill não grava, lê nem exibe a API key.

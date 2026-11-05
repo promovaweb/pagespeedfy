@@ -86,11 +86,12 @@ No projeto Astro, peça ao agente:
 Use $pagespeedfy-otimizar-pagina para otimizar https://promovaweb.com/blog/
 ```
 
-A skill confere o CLI e a chave, mede a página, lê o `report.json` completo e
-classifica cada auditoria em quatro escopos: Página, Componente, Global e Fora
-do código. Ela aplica as correções de Página e Componente, pede confirmação
-para mudanças globais e descreve o que depende da hospedagem. Ao fim, roda o
-build e entrega um relatório com o antes e o depois.
+A skill confere o CLI e a chave, mede a página e lê todos os relatórios da
+rota: o `report.json`, os JSON brutos e as medições anteriores. Com isso ela
+cria um plano de correções em `plano.md`, com escopo, arquivo e efeito
+esperado de cada auditoria, **mostra o plano na tela e espera você autorizar**.
+Só então aplica as linhas autorizadas, roda o build e entrega um relatório
+com o antes e o depois.
 
 O fluxo completo está em
 [`.codex/skills/pagespeedfy-otimizar-pagina/SKILL.md`](.codex/skills/pagespeedfy-otimizar-pagina/SKILL.md).

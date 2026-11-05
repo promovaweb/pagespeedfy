@@ -21,23 +21,27 @@ e salva três coisas numa pasta datada:
 
 A API key fica em `~/.pagespeedfy/credentials`, fora de qualquer projeto.
 
-## A skill lê e corrige
+## A skill planeja e corrige
 
 A skill `pagespeedfy-otimizar-pagina` roda dentro de um agente de programação
-aberto no projeto Astro. Ela executa o CLI, lê o `report.json` inteiro e segue
-cada item reprovado até o arquivo de origem: a rota em `src/pages/`, o layout,
-o componente, a imagem ou o script.
+aberto no projeto Astro. Ela executa o CLI, lê todos os relatórios da página
+(o `report.json`, os JSON brutos e as medições anteriores) e segue cada item
+reprovado até o arquivo de origem: a rota em `src/pages/`, o layout, o
+componente, a imagem ou o script.
+
+Com isso ela escreve um plano de correções, mostra o plano na tela e espera
+você autorizar. Só depois altera o código.
 
 Cada auditoria recebe um escopo:
 
 | Escopo | Exemplo | O que a skill faz |
 | --- | --- | --- |
-| Página | Imagem de capa sem `<Image>` | Corrige |
-| Componente | Botão do header sem nome acessível | Corrige e avisa quais páginas mudam junto |
-| Global | `build.inlineStylesheets` no `astro.config.mjs` | Mostra a mudança e espera sua resposta |
+| Página | Imagem de capa sem `<Image>` | Propõe a correção na rota |
+| Componente | Botão do header sem nome acessível | Propõe e lista as páginas que mudam junto |
+| Global | `build.inlineStylesheets` no `astro.config.mjs` | Propõe com o diff resumido |
 | Fora do código | Cabeçalho de cache da CDN | Descreve o ajuste para a hospedagem |
 
-Depois das correções, a skill roda o build. Quando existe uma URL de preview
+Depois das correções autorizadas, a skill roda o build. Quando existe uma URL de preview
 com as mudanças, ela mede de novo e compara.
 
 ## Uma página por vez
