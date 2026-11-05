@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "version": "0.1.0",
-  "edition": "v0.1.0",
-  "generated_at": "2026-11-05T14:56:43Z",
-  "source_sha256": "261e42428132f1c08206889f1ee5f460add0242f21e841418ad81ec73a6c3233",
+  "version": "0.2.0",
+  "edition": "v0.2.0",
+  "generated_at": "2026-11-05T15:26:36Z",
+  "source_sha256": "baebebca6b6e669b2641a31cea9a815a5dd6f712bf5b176f50f822768324431f",
   "sources": [
     ".ebook/assets/logo.svg",
     ".ebook/build-ebook.mjs",
@@ -25,12 +25,12 @@
   ],
   "artifacts": {
     "pdf": {
-      "file": "Pagespeedfy-Guia-do-Usuario-v0.1.0.pdf",
-      "sha256": "b200c77114f5460fc2f209a2cfdc6626d0e36939a6c7ee726bedb7a669f8be89"
+      "file": "Pagespeedfy-Guia-do-Usuario-v0.2.0.pdf",
+      "sha256": "cdf67eb4e1013ad0e71fa7a029b32fd897042b884e9a246fbc2588c289f9d00f"
     },
     "epub": {
-      "file": "Pagespeedfy-Guia-do-Usuario-v0.1.0.epub",
-      "sha256": "a04176de3047714c1c086318563661727d538cb54cf896b263b6a6b5b7e39e9d"
+      "file": "Pagespeedfy-Guia-do-Usuario-v0.2.0.epub",
+      "sha256": "2a41f347189c3f0486807b8730a089b4fa454390ece59ca8e1d3a83c48aa3dbd"
     }
   }
 }

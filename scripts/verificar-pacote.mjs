@@ -18,7 +18,7 @@ const saida = execFileSync(bin, ["--version"], { encoding: "utf8" }).trim();
 if (saida !== versao) throw new Error(`pagespeedfy --version imprimiu ${saida}, esperado ${versao}.`);
 const ajuda = execFileSync(bin, ["run", "--help"], { encoding: "utf8" });
 if (!ajuda.includes("--strategy")) throw new Error("ajuda de run incompleta no pacote instalado.");
-for (const arquivo of [".codex/skills/pagespeedfy-otimizar-pagina/SKILL.md", "ebook/ebook-pagespeedfy.pdf", "docs/user/README.md"]) {
+for (const arquivo of ["skills/pagespeedfy-otimizar-pagina/SKILL.md", "ebook/ebook-pagespeedfy.pdf", "docs/user/README.md"]) {
   readFileSync(join(pasta, "node_modules", "@promovaweb", "pagespeedfy", arquivo));
 }
 console.log(`OK: pacote ${versao} instalado e executado em isolamento.`);

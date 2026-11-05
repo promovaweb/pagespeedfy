@@ -6,14 +6,14 @@ agente.
 
 ## Instalação
 
-Copie a pasta da skill para o projeto Astro:
+Na raiz do projeto Astro, instale a skill direto do repositório no GitHub:
 
 ```bash
-cp -R "$(npm root -g)/@promovaweb/pagespeedfy/.codex/skills/pagespeedfy-otimizar-pagina" <projeto>/.codex/skills/
+npx skills add https://github.com/promovaweb/pagespeedfy
 ```
 
-Use `.claude/skills/` no Claude Code ou `.agents/skills/` quando o projeto
-adotar essa pasta. A skill precisa do CLI instalado e de uma chave gravada
+O `npx skills` lê a pasta `skills/` do repositório e instala a skill nos
+agentes escolhidos. A skill precisa do CLI instalado e de uma chave gravada
 com `pagespeedfy auth login`.
 
 ## Acionamento

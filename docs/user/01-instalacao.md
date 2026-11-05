@@ -31,18 +31,20 @@ O comando imprime a versão, por exemplo `0.1.0`.
 
 ## Instalar a skill no projeto
 
-A skill vem dentro do pacote npm, em
-`$(npm root -g)/@promovaweb/pagespeedfy/.codex/skills/`. Copie a pasta para o
-projeto Astro. O destino depende do agente:
-
-| Agente | Pasta |
-| --- | --- |
-| Codex | `.codex/skills/` |
-| Claude Code | `.claude/skills/` |
-| Projetos com `npx skills` | `.agents/skills/` |
+A skill fica na pasta `skills/` do repositório
+[promovaweb/pagespeedfy](https://github.com/promovaweb/pagespeedfy), no formato
+lido pelo `npx skills`. Na raiz do projeto Astro, rode:
 
 ```bash
-cp -R "$(npm root -g)/@promovaweb/pagespeedfy/.codex/skills/pagespeedfy-otimizar-pagina" meu-site/.claude/skills/
+npx skills add https://github.com/promovaweb/pagespeedfy
+```
+
+O comando baixa a skill `pagespeedfy-otimizar-pagina` do GitHub, pergunta para
+quais agentes instalar (Codex, Claude Code e outros) e registra a origem no
+`skills-lock.json` do projeto. Para conferir:
+
+```bash
+npx skills list
 ```
 
 ## Ignorar os relatórios no Git
@@ -62,5 +64,8 @@ A skill faz essa conferência sozinha na primeira execução.
 npm install -g @promovaweb/pagespeedfy@latest
 ```
 
-Copie a skill de novo
-para os projetos quando o CHANGELOG indicar mudança nela.
+Para atualizar a skill no projeto, rode de novo:
+
+```bash
+npx skills add https://github.com/promovaweb/pagespeedfy
+```

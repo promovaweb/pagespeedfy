@@ -20,7 +20,7 @@ Fonte do ebook, em [`docs/user/`](user/README.md), na ordem de
 
 - [Arquitetura](arquitetura.md): módulos, fluxo de dados, escolhas de projeto
   e testes.
-- [Skill](../.codex/skills/pagespeedfy-otimizar-pagina/SKILL.md): instruções
+- [Skill](../skills/pagespeedfy-otimizar-pagina/SKILL.md): instruções
   lidas pelo agente, com as referências `leitura-relatorio.md` e
   `astro-correcoes.md`.
 

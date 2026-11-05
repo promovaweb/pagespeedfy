@@ -32,9 +32,14 @@ npm install -g @promovaweb/pagespeedfy
 
 Depois, `pagespeedfy --version` deve imprimir a versão instalada.
 
-Para instalar a skill em um projeto Astro, copie
-`$(npm root -g)/@promovaweb/pagespeedfy/.codex/skills/pagespeedfy-otimizar-pagina/` para a pasta de skills do agente
-usado no projeto (`.codex/skills/`, `.claude/skills/` ou `.agents/skills/`).
+Para instalar a skill em um projeto Astro, rode na raiz do projeto:
+
+```bash
+npx skills add https://github.com/promovaweb/pagespeedfy
+```
+
+A skill fica em `skills/pagespeedfy-otimizar-pagina/`, no formato lido pelo
+`npx skills`.
 
 ## Criar a API key
 
@@ -94,7 +99,7 @@ Só então aplica as linhas autorizadas, roda o build e entrega um relatório
 com o antes e o depois.
 
 O fluxo completo está em
-[`.codex/skills/pagespeedfy-otimizar-pagina/SKILL.md`](.codex/skills/pagespeedfy-otimizar-pagina/SKILL.md).
+[`skills/pagespeedfy-otimizar-pagina/SKILL.md`](skills/pagespeedfy-otimizar-pagina/SKILL.md).
 
 ## Documentação
 
