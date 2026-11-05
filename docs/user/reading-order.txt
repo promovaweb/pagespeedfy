@@ -1,0 +1,9 @@
+docs/user/README.md
+docs/user/00-visao-geral.md
+docs/user/01-instalacao.md
+docs/user/02-api-key-e-credencial.md
+docs/user/03-primeira-medicao.md
+docs/user/04-otimizando-com-a-skill.md
+docs/user/05-lendo-o-relatorio.md
+docs/user/06-referencia-cli.md
+docs/user/07-solucao-de-problemas.md

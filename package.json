@@ -1,0 +1,67 @@
+{
+  "name": "@promovaweb/pagespeedfy",
+  "version": "0.0.0",
+  "description": "CLI e skill da Promovaweb para consultar o PageSpeed Insights e otimizar páginas de sites Astro.",
+  "type": "module",
+  "bin": {
+    "pagespeedfy": "bin/pagespeedfy.js"
+  },
+  "files": [
+    ".codex/skills",
+    "CHANGELOG.md",
+    "README.md",
+    "RELEASING.md",
+    "bin",
+    "dist",
+    "docs",
+    "ebook"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx src/cli.ts",
+    "prepack": "npm run build",
+    "start": "node dist/cli.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.tests.json --noEmit",
+    "validar": "npm run typecheck && npm run test && npm run build",
+    "ebook": "node .ebook/build-ebook.mjs",
+    "ebook:verify": "node .ebook/build-ebook.mjs --check",
+    "release:check": "node scripts/validar-release.mjs",
+    "package:verify": "node scripts/verificar-pacote.mjs",
+    "publish:npm": "node scripts/publicar-npm.mjs"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "keywords": [
+    "pagespeed",
+    "lighthouse",
+    "core-web-vitals",
+    "astro",
+    "cli"
+  ],
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/promovaweb/pagespeedfy.git"
+  },
+  "dependencies": {
+    "commander": "^15.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.0",
+    "tsx": "^4.20.6",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.0",
+    "@fontsource/inter": "5.3.0",
+    "@fontsource/manrope": "5.3.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://github.com/promovaweb/pagespeedfy#readme",
+  "bugs": {
+    "url": "https://github.com/promovaweb/pagespeedfy/issues"
+  }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Otimizar página com o Pagespeedfy"
+  short_description: "Mede uma página no PageSpeed Insights e corrige o projeto Astro"
+  default_prompt: "Use $pagespeedfy-otimizar-pagina para medir esta página no PageSpeed Insights e aplicar as correções no projeto Astro: <url>"

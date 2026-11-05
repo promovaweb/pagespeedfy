@@ -1,0 +1,16 @@
+---
+title: "Pagespeedfy: guia do usuário"
+subtitle: "Da medição no PageSpeed Insights à correção no site Astro"
+author:
+  - "Pagespeedfy"
+publisher: "Promovaweb"
+lang: "pt-BR"
+rights: "Documentação oficial do projeto Pagespeedfy"
+description: "Manual para medir uma página no PageSpeed Insights com o CLI do Pagespeedfy e aplicar as correções em projetos Astro com a skill."
+subject:
+  - "PageSpeed Insights"
+  - "Core Web Vitals"
+  - "Astro"
+  - "documentação"
+identifier: "https://github.com/promovaweb/pagespeedfy"
+---

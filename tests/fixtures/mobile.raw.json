@@ -1,0 +1,71 @@
+{
+  "id": "https://exemplo.com.br/blog/post/",
+  "loadingExperience": {
+    "overall_category": "AVERAGE",
+    "metrics": {
+      "LARGEST_CONTENTFUL_PAINT_MS": { "percentile": 3100, "category": "AVERAGE" },
+      "CUMULATIVE_LAYOUT_SHIFT_SCORE": { "percentile": 4, "category": "FAST" },
+      "INTERACTION_TO_NEXT_PAINT": { "percentile": 180, "category": "FAST" }
+    }
+  },
+  "originLoadingExperience": {},
+  "lighthouseResult": {
+    "requestedUrl": "https://exemplo.com.br/blog/post/",
+    "finalDisplayedUrl": "https://exemplo.com.br/blog/post/",
+    "fetchTime": "2026-11-05T12:00:00.000Z",
+    "lighthouseVersion": "13.0.0",
+    "environment": { "networkUserAgent": "Mozilla/5.0 Moto G Power" },
+    "runWarnings": ["A página carregou devagar."],
+    "categories": {
+      "performance": {
+        "score": 0.62,
+        "auditRefs": [
+          { "id": "largest-contentful-paint", "weight": 25, "group": "metrics" },
+          { "id": "cumulative-layout-shift", "weight": 25, "group": "metrics" },
+          { "id": "render-blocking-insight", "weight": 0, "group": "insights" },
+          { "id": "image-delivery-insight", "weight": 0, "group": "insights" },
+          { "id": "unused-javascript", "weight": 0, "group": "diagnostics" },
+          { "id": "font-display-insight", "weight": 0, "group": "insights" }
+        ]
+      },
+      "accessibility": {
+        "score": 0.88,
+        "auditRefs": [
+          { "id": "color-contrast", "weight": 7, "group": "a11y-color-contrast" },
+          { "id": "image-alt", "weight": 10, "group": "a11y-names-labels" },
+          { "id": "focus-traps", "weight": 0, "group": "a11y-manual" }
+        ]
+      },
+      "seo": {
+        "score": 0.92,
+        "auditRefs": [
+          { "id": "meta-description", "weight": 1, "group": "seo-content" },
+          { "id": "document-title", "weight": 1, "group": "seo-content" }
+        ]
+      }
+    },
+    "audits": {
+      "largest-contentful-paint": { "id": "largest-contentful-paint", "title": "Largest Contentful Paint", "score": 0.3, "scoreDisplayMode": "numeric", "numericValue": 4200, "displayValue": "4,2 s" },
+      "cumulative-layout-shift": { "id": "cumulative-layout-shift", "title": "Cumulative Layout Shift", "score": 0.95, "scoreDisplayMode": "numeric", "numericValue": 0.04, "displayValue": "0,04" },
+      "render-blocking-insight": {
+        "id": "render-blocking-insight", "title": "Solicitações que bloqueiam a renderização", "description": "Veja [como](https://developer.chrome.com).", "score": 0, "scoreDisplayMode": "metricSavings", "displayValue": "Economia estimada de 600 ms",
+        "metricSavings": { "FCP": 600, "LCP": 600 },
+        "details": { "type": "table", "headings": [{ "key": "url", "label": "URL" }, { "key": "wastedMs", "label": "Economia" }], "items": [{ "url": "https://exemplo.com.br/_astro/index.css", "wastedMs": 420, "totalBytes": 30000 }, { "url": "https://fonts.googleapis.com/css2?family=Inter", "wastedMs": 180 }] }
+      },
+      "image-delivery-insight": {
+        "id": "image-delivery-insight", "title": "Melhorar a entrega de imagens", "score": 0.5, "scoreDisplayMode": "metricSavings", "metricSavings": { "LCP": 300 },
+        "details": { "type": "table", "items": [{ "url": "https://exemplo.com.br/cover.png", "wastedBytes": 204800, "node": { "selector": "main > img.cover", "snippet": "<img src=\"/cover.png\">", "boundingRect": { "top": 1 }, "lhId": "x" } }, { "url": "https://exemplo.com.br/a.png", "wastedBytes": 1024 }, { "url": "https://exemplo.com.br/b.png", "wastedBytes": 1024 }] }
+      },
+      "unused-javascript": { "id": "unused-javascript", "title": "Reduzir JavaScript não usado", "score": 1, "scoreDisplayMode": "metricSavings" },
+      "font-display-insight": { "id": "font-display-insight", "title": "Exibição de fonte", "score": null, "scoreDisplayMode": "notApplicable" },
+      "color-contrast": {
+        "id": "color-contrast", "title": "As cores de fundo e de primeiro plano não têm contraste suficiente", "score": 0, "scoreDisplayMode": "binary",
+        "details": { "type": "table", "items": [{ "node": { "selector": ".hero p", "snippet": "<p class=\"muted\">", "nodeLabel": "Texto", "path": "1,HTML" } }] }
+      },
+      "image-alt": { "id": "image-alt", "title": "Imagens têm alt", "score": 1, "scoreDisplayMode": "binary" },
+      "focus-traps": { "id": "focus-traps", "title": "O usuário não fica preso em uma região", "score": null, "scoreDisplayMode": "manual" },
+      "meta-description": { "id": "meta-description", "title": "O documento não tem meta description", "score": 0, "scoreDisplayMode": "binary" },
+      "document-title": { "id": "document-title", "title": "Documento tem title", "score": 1, "scoreDisplayMode": "binary" }
+    }
+  }
+}
