@@ -1,6 +1,6 @@
 {
   "name": "@promovaweb/pagespeedfy",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "CLI e skill da Promovaweb para consultar o PageSpeed Insights e otimizar páginas de sites Astro.",
   "type": "module",
   "bin": {
