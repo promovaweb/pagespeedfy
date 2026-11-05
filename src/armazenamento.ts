@@ -10,7 +10,7 @@ import { CliError } from "./errors.js";
 import type { Relatorio } from "./relatorio.js";
 
 /** Pasta padrão dos relatórios, relativa ao diretório atual. */
-export const SAIDA_PADRAO = ".pagespeedfy/reports";
+export const SAIDA_PADRAO = "pagespeedfy-reports";
 
 /**
  * Valida a URL informada: absoluta, http ou https e acessível pela internet.

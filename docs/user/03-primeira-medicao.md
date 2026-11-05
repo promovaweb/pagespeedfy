@@ -16,14 +16,14 @@ Consultando mobile: https://promovaweb.com/
 Consultando desktop: https://promovaweb.com/
 mobile: performance 71 · accessibility 96 · best-practices 100 · seo 100 · 6 auditorias pendentes
 desktop: performance 94 · accessibility 96 · best-practices 100 · seo 100 · 3 auditorias pendentes
-Relatório: .pagespeedfy/reports/promovaweb.com/home/20261105-103012/report.json
-Resumo: .pagespeedfy/reports/promovaweb.com/home/20261105-103012/report.md
+Relatório: pagespeedfy-reports/promovaweb.com/home/20261105-103012/report.json
+Resumo: pagespeedfy-reports/promovaweb.com/home/20261105-103012/report.md
 ```
 
 ## Ler o resumo
 
 ```bash
-pagespeedfy report .pagespeedfy/reports/promovaweb.com/home/20261105-103012
+pagespeedfy report pagespeedfy-reports/promovaweb.com/home/20261105-103012
 ```
 
 O resumo mostra, por estratégia:
@@ -49,8 +49,8 @@ Depois de publicar uma mudança, meça de novo e compare as duas pastas:
 
 ```bash
 pagespeedfy compare \
-  .pagespeedfy/reports/promovaweb.com/home/20261105-103012 \
-  .pagespeedfy/reports/promovaweb.com/home/20261106-091544
+  pagespeedfy-reports/promovaweb.com/home/20261105-103012 \
+  pagespeedfy-reports/promovaweb.com/home/20261106-091544
 ```
 
 A comparação mostra a diferença de notas e métricas e lista as auditorias

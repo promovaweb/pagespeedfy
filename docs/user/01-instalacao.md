@@ -51,7 +51,7 @@ Os relatórios trazem URLs e trechos de HTML que não pertencem ao repositório.
 No projeto Astro:
 
 ```bash
-echo ".pagespeedfy/" >> .gitignore
+echo "pagespeedfy-reports/" >> .gitignore
 ```
 
 A skill faz essa conferência sozinha na primeira execução.

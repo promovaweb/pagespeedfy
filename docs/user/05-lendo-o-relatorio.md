@@ -16,7 +16,7 @@ medições da mesma página ficam lado a lado e podem ser comparadas com
 
 | Parte | Regra |
 | --- | --- |
-| `<output>` | `--output`, padrão `.pagespeedfy/reports` no diretório atual |
+| `<output>` | `--output`, padrão `pagespeedfy-reports` no diretório atual |
 | `<host>` | Host da URL; `:` da porta vira `_` |
 | `<rota>` | Segmentos do caminho unidos por `--`, sem acentos; `/` vira `home`; query string vira sufixo `--q-...` |
 | `<AAAAMMDD-HHMMSS>` | Data e hora locais do início da execução |

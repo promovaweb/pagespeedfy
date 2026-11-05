@@ -154,7 +154,7 @@ Consulta o PageSpeed Insights para **uma** página e salva o relatório.
 | `-s`, `--strategy` | `mobile`, `desktop`, `all` | não | `all` | Estratégias consultadas, em sequência |
 | `-c`, `--category` | lista | não | as quatro | `performance`, `accessibility`, `best-practices`, `seo`. Repita a opção ou separe por vírgula |
 | `-l`, `--locale` | texto | não | `pt-BR` | Idioma dos títulos e descrições das auditorias |
-| `-o`, `--output` | caminho | não | `.pagespeedfy/reports` | Pasta base dos relatórios, relativa ao diretório atual |
+| `-o`, `--output` | caminho | não | `pagespeedfy-reports` | Pasta base dos relatórios, relativa ao diretório atual |
 | `--max-items` | inteiro > 0 | não | `50` | Itens de detalhe preservados por auditoria no `report.json` |
 | `--timeout` | segundos > 0 | não | `180` | Tempo máximo de cada consulta |
 | `--retries` | inteiro > 0 | não | `3` | Tentativas por estratégia em HTTP 429 e 5xx |
@@ -230,10 +230,10 @@ Markdown.
 
 ```bash
 # 1. Pela pasta da execução
-pagespeedfy report .pagespeedfy/reports/promovaweb.com/home/20261105-103012
+pagespeedfy report pagespeedfy-reports/promovaweb.com/home/20261105-103012
 
 # 2. Pelo arquivo
-pagespeedfy report .pagespeedfy/reports/promovaweb.com/home/20261105-103012/report.json
+pagespeedfy report pagespeedfy-reports/promovaweb.com/home/20261105-103012/report.json
 
 # 3. Lista os IDs reprovados no mobile
 pagespeedfy --json report "$REPORT" | jq -r '.runs[] | select(.strategy=="mobile") | .failedAudits[].id'
@@ -242,7 +242,7 @@ pagespeedfy --json report "$REPORT" | jq -r '.runs[] | select(.strategy=="mobile
 pagespeedfy report "$REPORT" > auditoria-home.md
 
 # 5. Última execução de uma rota
-pagespeedfy report "$(ls -d .pagespeedfy/reports/promovaweb.com/blog/* | tail -1)"
+pagespeedfy report "$(ls -d pagespeedfy-reports/promovaweb.com/blog/* | tail -1)"
 ```
 
 ## `pagespeedfy compare <antes> <depois>`
@@ -270,8 +270,8 @@ produção com preview. Estratégias presentes em só um relatório ficam de for
 
 ```bash
 # 1. Antes e depois de uma correção
-pagespeedfy compare .pagespeedfy/reports/promovaweb.com/home/20261105-103012 \
-  .pagespeedfy/reports/promovaweb.com/home/20261106-091544
+pagespeedfy compare pagespeedfy-reports/promovaweb.com/home/20261105-103012 \
+  pagespeedfy-reports/promovaweb.com/home/20261106-091544
 
 # 2. Produção contra preview
 pagespeedfy compare "$REPORT_PRODUCAO" "$REPORT_PREVIEW"
@@ -283,6 +283,6 @@ pagespeedfy --json compare "$A" "$B" | jq '.strategies[] | select(.strategy=="mo
 test "$(pagespeedfy --json compare "$A" "$B" | jq '[.strategies[].newAudits[]] | length')" -eq 0
 
 # 5. As duas últimas execuções de uma rota
-set -- $(ls -d .pagespeedfy/reports/promovaweb.com/home/* | tail -2)
+set -- $(ls -d pagespeedfy-reports/promovaweb.com/home/* | tail -2)
 pagespeedfy compare "$1" "$2"
 ```

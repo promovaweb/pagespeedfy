@@ -63,8 +63,8 @@ Saída:
 ```text
 mobile: performance 71 · accessibility 96 · best-practices 100 · seo 100 · 6 auditorias pendentes
 desktop: performance 94 · accessibility 96 · best-practices 100 · seo 100 · 3 auditorias pendentes
-Relatório: .pagespeedfy/reports/promovaweb.com/home/20261105-103012/report.json
-Resumo: .pagespeedfy/reports/promovaweb.com/home/20261105-103012/report.md
+Relatório: pagespeedfy-reports/promovaweb.com/home/20261105-103012/report.json
+Resumo: pagespeedfy-reports/promovaweb.com/home/20261105-103012/report.md
 ```
 
 Depois de publicar as correções:
@@ -72,11 +72,11 @@ Depois de publicar as correções:
 ```bash
 pagespeedfy run https://promovaweb.com/
 pagespeedfy compare \
-  .pagespeedfy/reports/promovaweb.com/home/20261105-103012 \
-  .pagespeedfy/reports/promovaweb.com/home/20261106-091544
+  pagespeedfy-reports/promovaweb.com/home/20261105-103012 \
+  pagespeedfy-reports/promovaweb.com/home/20261106-091544
 ```
 
-Adicione `.pagespeedfy/` ao `.gitignore` do projeto.
+Adicione `pagespeedfy-reports/` ao `.gitignore` do projeto.
 
 ## Uso com a skill
 

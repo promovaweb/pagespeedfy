@@ -28,7 +28,7 @@ outras para depois.
 ## O que a skill faz
 
 1. Confere o CLI, a chave, o projeto Astro e o estado do Git.
-2. Coloca `.pagespeedfy/` no `.gitignore`.
+2. Coloca `pagespeedfy-reports/` no `.gitignore`.
 3. Mede a página com `pagespeedfy run <url> --print path`.
 4. Lê o `report.json` inteiro e o JSON bruto das auditorias truncadas.
 5. Acha a rota em `src/pages/`, o layout, os componentes e os arquivos de

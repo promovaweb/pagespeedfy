@@ -1,0 +1,1912 @@
+{
+  "formatVersion": 1,
+  "tool": "pagespeedfy",
+  "toolVersion": "0.0.0",
+  "generatedAt": "2026-11-05T14:49:34.961Z",
+  "url": "https://promovaweb.com/",
+  "locale": "pt-BR",
+  "categories": [
+    "performance",
+    "accessibility",
+    "best-practices",
+    "seo"
+  ],
+  "maxItems": 50,
+  "runs": [
+    {
+      "strategy": "mobile",
+      "requestedUrl": "https://promovaweb.com/",
+      "finalUrl": "https://promovaweb.com/",
+      "fetchTime": "2026-11-05T14:49:39.261Z",
+      "lighthouseVersion": "13.6.0",
+      "userAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Mobile Safari/537.36",
+      "runWarnings": [],
+      "runtimeError": null,
+      "scores": {
+        "performance": 100,
+        "accessibility": 93,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "labMetrics": {
+        "first-contentful-paint": {
+          "title": "First Contentful Paint",
+          "displayValue": "1.4 s",
+          "numericValue": 1351,
+          "score": 0.98
+        },
+        "largest-contentful-paint": {
+          "title": "Largest Contentful Paint",
+          "displayValue": "1.4 s",
+          "numericValue": 1351,
+          "score": 1
+        },
+        "total-blocking-time": {
+          "title": "Total Blocking Time",
+          "displayValue": "0 ms",
+          "numericValue": 0,
+          "score": 1
+        },
+        "cumulative-layout-shift": {
+          "title": "Cumulative Layout Shift",
+          "displayValue": "0",
+          "numericValue": 0,
+          "score": 1
+        },
+        "speed-index": {
+          "title": "Speed Index",
+          "displayValue": "1.4 s",
+          "numericValue": 1431.831612533919,
+          "score": 1
+        },
+        "interactive": {
+          "title": "Time to Interactive",
+          "displayValue": "1.4 s",
+          "numericValue": 1351,
+          "score": 1
+        }
+      },
+      "field": {
+        "page": {
+          "overallCategory": "FAST",
+          "metrics": {
+            "CUMULATIVE_LAYOUT_SHIFT_SCORE": {
+              "percentile": 0,
+              "category": "FAST"
+            },
+            "EXPERIMENTAL_TIME_TO_FIRST_BYTE": {
+              "percentile": 733,
+              "category": "FAST"
+            },
+            "FIRST_CONTENTFUL_PAINT_MS": {
+              "percentile": 1562,
+              "category": "FAST"
+            },
+            "INTERACTION_TO_NEXT_PAINT": {
+              "percentile": 126,
+              "category": "FAST"
+            },
+            "LARGEST_CONTENTFUL_PAINT_MS": {
+              "percentile": 1620,
+              "category": "FAST"
+            }
+          }
+        },
+        "origin": {
+          "overallCategory": "FAST",
+          "metrics": {
+            "CUMULATIVE_LAYOUT_SHIFT_SCORE": {
+              "percentile": 0,
+              "category": "FAST"
+            },
+            "EXPERIMENTAL_TIME_TO_FIRST_BYTE": {
+              "percentile": 733,
+              "category": "FAST"
+            },
+            "FIRST_CONTENTFUL_PAINT_MS": {
+              "percentile": 1562,
+              "category": "FAST"
+            },
+            "INTERACTION_TO_NEXT_PAINT": {
+              "percentile": 126,
+              "category": "FAST"
+            },
+            "LARGEST_CONTENTFUL_PAINT_MS": {
+              "percentile": 1620,
+              "category": "FAST"
+            }
+          }
+        }
+      },
+      "failedAudits": [
+        {
+          "id": "color-contrast",
+          "categories": [
+            "accessibility"
+          ],
+          "group": "a11y-color-contrast",
+          "weight": 7,
+          "title": "Background and foreground colors do not have a sufficient contrast ratio.",
+          "description": "Low-contrast text is difficult or impossible for many users to read. [Learn how to provide sufficient color contrast](https://dequeuniversity.com/rules/axe/4.14/color-contrast).",
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null,
+          "numericValue": null,
+          "metricSavings": {},
+          "detailsType": "table",
+          "headings": [
+            {
+              "key": "node",
+              "label": "Failing Elements"
+            }
+          ],
+          "items": [
+            {
+              "node": {
+                "snippet": "<span class=\"home-pratica__numero\" aria-hidden=\"true\" data-astro-cid-5yclbk7l=\"\">",
+                "type": "node",
+                "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #869ea8, background color: #ffffff, font size: 10.5pt (14px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "nodeLabel": "02",
+                "selector": "div.row > div.col > article.home-pratica__card > span.home-pratica__numero"
+              },
+              "subItems": {
+                "items": [
+                  {
+                    "relatedNode": {
+                      "selector": "div.container > div.row > div.col > article.home-pratica__card",
+                      "nodeLabel": "02\n\nENCONTROS AO VIVO\n\nAgenda por plano\n\nCada trilha tem uma rotina própria par…",
+                      "snippet": "<article class=\"home-pratica__card\" data-astro-cid-5yclbk7l=\"\">",
+                      "type": "node"
+                    }
+                  }
+                ],
+                "type": "subitems"
+              }
+            },
+            {
+              "node": {
+                "snippet": "<span class=\"home-pratica__linha-numero\" aria-hidden=\"true\" data-astro-cid-5yclbk7l=\"\">",
+                "selector": "div.col > ol.home-pratica__linhas > li.home-pratica__linha > span.home-pratica__linha-numero",
+                "type": "node",
+                "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 4.22 (foreground color: #1c8986, background color: #ffffff, font size: 10.5pt (14px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "nodeLabel": "03"
+              },
+              "subItems": {
+                "items": [
+                  {
+                    "relatedNode": {
+                      "type": "node",
+                      "snippet": "<ol class=\"home-pratica__linhas\" data-astro-cid-5yclbk7l=\"\">",
+                      "nodeLabel": "03\nFórum com SLA\n\nDescreva o ambiente, a tentativa e o resultado observado. Dep…",
+                      "selector": "div.container > div.row > div.col > ol.home-pratica__linhas"
+                    }
+                  }
+                ],
+                "type": "subitems"
+              }
+            },
+            {
+              "subItems": {
+                "items": [
+                  {
+                    "relatedNode": {
+                      "nodeLabel": "03\nFórum com SLA\n\nDescreva o ambiente, a tentativa e o resultado observado. Dep…",
+                      "selector": "div.container > div.row > div.col > ol.home-pratica__linhas",
+                      "type": "node",
+                      "snippet": "<ol class=\"home-pratica__linhas\" data-astro-cid-5yclbk7l=\"\">"
+                    }
+                  }
+                ],
+                "type": "subitems"
+              },
+              "node": {
+                "nodeLabel": "04",
+                "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 4.22 (foreground color: #1c8986, background color: #ffffff, font size: 10.5pt (14px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "snippet": "<span class=\"home-pratica__linha-numero\" aria-hidden=\"true\" data-astro-cid-5yclbk7l=\"\">",
+                "type": "node",
+                "selector": "div.col > ol.home-pratica__linhas > li.home-pratica__linha > span.home-pratica__linha-numero"
+              }
+            },
+            {
+              "subItems": {
+                "type": "subitems",
+                "items": [
+                  {
+                    "relatedNode": {
+                      "snippet": "<ol class=\"home-pratica__linhas\" data-astro-cid-5yclbk7l=\"\">",
+                      "nodeLabel": "03\nFórum com SLA\n\nDescreva o ambiente, a tentativa e o resultado observado. Dep…",
+                      "type": "node",
+                      "selector": "div.container > div.row > div.col > ol.home-pratica__linhas"
+                    }
+                  }
+                ]
+              },
+              "node": {
+                "snippet": "<span class=\"home-pratica__linha-numero\" aria-hidden=\"true\" data-astro-cid-5yclbk7l=\"\">",
+                "nodeLabel": "05",
+                "type": "node",
+                "selector": "div.col > ol.home-pratica__linhas > li.home-pratica__linha > span.home-pratica__linha-numero",
+                "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 4.22 (foreground color: #1c8986, background color: #ffffff, font size: 10.5pt (14px), font weight: bold). Expected contrast ratio of 4.5:1"
+              }
+            }
+          ],
+          "totalItems": 4,
+          "truncated": false
+        },
+        {
+          "id": "target-size",
+          "categories": [
+            "accessibility"
+          ],
+          "group": "a11y-best-practices",
+          "weight": 7,
+          "title": "Touch targets do not have sufficient size or spacing.",
+          "description": "Touch targets with sufficient size and spacing help users who may have difficulty targeting small controls to activate the targets. [Learn more about touch targets](https://dequeuniversity.com/rules/axe/4.14/target-size).",
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null,
+          "numericValue": null,
+          "metricSavings": {},
+          "detailsType": "table",
+          "headings": [
+            {
+              "key": "node",
+              "label": "Failing Elements"
+            }
+          ],
+          "items": [
+            {
+              "subItems": {
+                "type": "subitems",
+                "items": [
+                  {
+                    "relatedNode": {
+                      "nodeLabel": "O que eu gostei e o que eu não gostei na beta do n8n 3.0?",
+                      "snippet": "<a href=\"/blog/gostei-nao-gostei-n8n-3-0/\" draggable=\"false\" class=\"blog-coverflow__link group flex h-full flex-col overflow-hidden rounded-3x…\" data-astro-cid-sobuzokn=\"\">",
+                      "selector": "div.blog-coverflow > ul.blog-coverflow__track > li.blog-coverflow__item > a.blog-coverflow__link",
+                      "type": "node"
+                    }
+                  },
+                  {
+                    "relatedNode": {
+                      "selector": "div.blog-coverflow > ul.blog-coverflow__track > li.blog-coverflow__item > a.blog-coverflow__link",
+                      "type": "node",
+                      "nodeLabel": "O que muda no n8n 3.0 e quando vale migrar a produção?",
+                      "snippet": "<a href=\"/blog/quando-migrar-n8n-3-0/\" draggable=\"false\" class=\"blog-coverflow__link group flex h-full flex-col overflow-hidden rounded-3x…\" data-astro-cid-sobuzokn=\"\">"
+                    }
+                  },
+                  {
+                    "relatedNode": {
+                      "type": "node",
+                      "selector": "div.blog-coverflow > ul.blog-coverflow__track > li.blog-coverflow__item > a.blog-coverflow__link",
+                      "snippet": "<a href=\"/blog/como-reportar-vulnerabilidade-cve-empresa/\" draggable=\"false\" class=\"blog-coverflow__link group flex h-full flex-col overflow-hidden rounded-3x…\" data-astro-cid-sobuzokn=\"\">",
+                      "nodeLabel": "Como reportar uma vulnerabilidade CVE para a empresa?"
+                    }
+                  }
+                ]
+              },
+              "node": {
+                "nodeLabel": "O que muda no n8n 3.0 para instâncias em queue mode?",
+                "explanation": "Fix any of the following:\n  Target has insufficient size because it is partially obscured (smallest space is 8.2px by 252.6px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 0px instead of at least 24px.",
+                "snippet": "<a href=\"/blog/n8n-3-0-queue-mode/\" draggable=\"false\" class=\"blog-coverflow__link group flex h-full flex-col overflow-hidden rounded-3x…\" data-astro-cid-sobuzokn=\"\">",
+                "selector": "div.blog-coverflow > ul.blog-coverflow__track > li.blog-coverflow__item > a.blog-coverflow__link",
+                "type": "node"
+              }
+            },
+            {
+              "node": {
+                "nodeLabel": "O que eu gostei e o que eu não gostei na beta do n8n 3.0?",
+                "explanation": "Fix any of the following:\n  Target has insufficient size because it is partially obscured (smallest space is 8.2px by 263.2px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 0px instead of at least 24px.",
+                "selector": "div.blog-coverflow > ul.blog-coverflow__track > li.blog-coverflow__item > a.blog-coverflow__link",
+                "snippet": "<a href=\"/blog/gostei-nao-gostei-n8n-3-0/\" draggable=\"false\" class=\"blog-coverflow__link group flex h-full flex-col overflow-hidden rounded-3x…\" data-astro-cid-sobuzokn=\"\">",
+                "type": "node"
+              },
+              "subItems": {
+                "items": [
+                  {
+                    "relatedNode": {
+                      "nodeLabel": "O que muda no n8n 3.0 e quando vale migrar a produção?",
+                      "selector": "div.blog-coverflow > ul.blog-coverflow__track > li.blog-coverflow__item > a.blog-coverflow__link",
+                      "snippet": "<a href=\"/blog/quando-migrar-n8n-3-0/\" draggable=\"false\" class=\"blog-coverflow__link group flex h-full flex-col overflow-hidden rounded-3x…\" data-astro-cid-sobuzokn=\"\">",
+                      "type": "node"
+                    }
+                  },
+                  {
+                    "relatedNode": {
+                      "selector": "div.blog-coverflow > ul.blog-coverflow__track > li.blog-coverflow__item > a.blog-coverflow__link",
+                      "nodeLabel": "Como reportar uma vulnerabilidade CVE para a empresa?",
+                      "type": "node",
+                      "snippet": "<a href=\"/blog/como-reportar-vulnerabilidade-cve-empresa/\" draggable=\"false\" class=\"blog-coverflow__link group flex h-full flex-col overflow-hidden rounded-3x…\" data-astro-cid-sobuzokn=\"\">"
+                    }
+                  },
+                  {
+                    "relatedNode": {
+                      "type": "node",
+                      "nodeLabel": "Tudo sobre as vulnerabilidades do Tailscale: Tailworm",
+                      "selector": "div.blog-coverflow > ul.blog-coverflow__track > li.blog-coverflow__item > a.blog-coverflow__link",
+                      "snippet": "<a href=\"/blog/tudo-sobre-vulnerabilidades-tailscale-tailworm/\" draggable=\"false\" class=\"blog-coverflow__link group flex h-full flex-col overflow-hidden rounded-3x…\" data-astro-cid-sobuzokn=\"\">"
+                    }
+                  }
+                ],
+                "type": "subitems"
+              }
+            },
+            {
+              "subItems": {
+                "type": "subitems",
+                "items": [
+                  {
+                    "relatedNode": {
+                      "type": "node",
+                      "nodeLabel": "Como reportar uma vulnerabilidade CVE para a empresa?",
+                      "selector": "div.blog-coverflow > ul.blog-coverflow__track > li.blog-coverflow__item > a.blog-coverflow__link",
+                      "snippet": "<a href=\"/blog/como-reportar-vulnerabilidade-cve-empresa/\" draggable=\"false\" class=\"blog-coverflow__link group flex h-full flex-col overflow-hidden rounded-3x…\" data-astro-cid-sobuzokn=\"\">"
+                    }
+                  },
+                  {
+                    "relatedNode": {
+                      "snippet": "<a href=\"/blog/tudo-sobre-vulnerabilidades-tailscale-tailworm/\" draggable=\"false\" class=\"blog-coverflow__link group flex h-full flex-col overflow-hidden rounded-3x…\" data-astro-cid-sobuzokn=\"\">",
+                      "type": "node",
+                      "selector": "div.blog-coverflow > ul.blog-coverflow__track > li.blog-coverflow__item > a.blog-coverflow__link",
+                      "nodeLabel": "Tudo sobre as vulnerabilidades do Tailscale: Tailworm"
+                    }
+                  },
+                  {
+                    "relatedNode": {
+                      "selector": "div.blog-coverflow > ul.blog-coverflow__track > li.blog-coverflow__item > a.blog-coverflow__link",
+                      "type": "node",
+                      "nodeLabel": "O que muda no n8n 3.0 para instâncias em queue mode?",
+                      "snippet": "<a href=\"/blog/n8n-3-0-queue-mode/\" draggable=\"false\" class=\"blog-coverflow__link group flex h-full flex-col overflow-hidden rounded-3x…\" data-astro-cid-sobuzokn=\"\">"
+                    }
+                  }
+                ]
+              },
+              "node": {
+                "explanation": "Fix any of the following:\n  Target has insufficient size because it is partially obscured (smallest space is 8.2px by 273.7px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 0px instead of at least 24px.",
+                "snippet": "<a href=\"/blog/quando-migrar-n8n-3-0/\" draggable=\"false\" class=\"blog-coverflow__link group flex h-full flex-col overflow-hidden rounded-3x…\" data-astro-cid-sobuzokn=\"\">",
+                "nodeLabel": "O que muda no n8n 3.0 e quando vale migrar a produção?",
+                "type": "node",
+                "selector": "div.blog-coverflow > ul.blog-coverflow__track > li.blog-coverflow__item > a.blog-coverflow__link"
+              }
+            },
+            {
+              "node": {
+                "type": "node",
+                "snippet": "<a href=\"/blog/waf-cloudflare-tunnel-php/\" draggable=\"false\" class=\"blog-coverflow__link group flex h-full flex-col overflow-hidden rounded-3x…\" data-astro-cid-sobuzokn=\"\">",
+                "selector": "div.blog-coverflow > ul.blog-coverflow__track > li.blog-coverflow__item > a.blog-coverflow__link",
+                "explanation": "Fix any of the following:\n  Target has insufficient size because it is partially obscured (smallest space is 8.2px by 273.7px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 0px instead of at least 24px.",
+                "nodeLabel": "O WAF da Cloudflare já protege seu PHP contra o php2shell?"
+              },
+              "subItems": {
+                "type": "subitems",
+                "items": [
+                  {
+                    "relatedNode": {
+                      "selector": "div.blog-coverflow > ul.blog-coverflow__track > li.blog-coverflow__item > a.blog-coverflow__link",
+                      "nodeLabel": "Tudo sobre as vulnerabilidades do Tailscale: Tailworm",
+                      "snippet": "<a href=\"/blog/tudo-sobre-vulnerabilidades-tailscale-tailworm/\" draggable=\"false\" class=\"blog-coverflow__link group flex h-full flex-col overflow-hidden rounded-3x…\" data-astro-cid-sobuzokn=\"\">",
+                      "type": "node"
+                    }
+                  },
+                  {
+                    "relatedNode": {
+                      "nodeLabel": "Por que atualizar o NGINX e acompanhar a manutenção?",
+                      "snippet": "<a href=\"/blog/nginx-atualizacao-responsabilidade/\" draggable=\"false\" class=\"blog-coverflow__link group flex h-full flex-col overflow-hidden rounded-3x…\" data-astro-cid-sobuzokn=\"\">",
+                      "selector": "div.blog-coverflow > ul.blog-coverflow__track > li.blog-coverflow__item > a.blog-coverflow__link",
+                      "type": "node"
+                    }
+                  },
+                  {
+                    "relatedNode": {
+                      "selector": "div.blog-coverflow > ul.blog-coverflow__track > li.blog-coverflow__item > a.blog-coverflow__link",
+                      "type": "node",
+                      "snippet": "<a href=\"/blog/vulnerabilidade-php-laravel/\" draggable=\"false\" class=\"blog-coverflow__link group flex h-full flex-col overflow-hidden rounded-3x…\" data-astro-cid-sobuzokn=\"\">",
+                      "nodeLabel": "Como as falhas do PHP afetam Laravel, Octane e Swoole?"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "node": {
+                "nodeLabel": "Como as falhas do PHP afetam Laravel, Octane e Swoole?",
+                "type": "node",
+                "selector": "div.blog-coverflow > ul.blog-coverflow__track > li.blog-coverflow__item > a.blog-coverflow__link",
+                "snippet": "<a href=\"/blog/vulnerabilidade-php-laravel/\" draggable=\"false\" class=\"blog-coverflow__link group flex h-full flex-col overflow-hidden rounded-3x…\" data-astro-cid-sobuzokn=\"\">",
+                "explanation": "Fix any of the following:\n  Target has insufficient size because it is partially obscured (smallest space is 8.2px by 263.2px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 0px instead of at least 24px."
+              },
+              "subItems": {
+                "type": "subitems",
+                "items": [
+                  {
+                    "relatedNode": {
+                      "type": "node",
+                      "selector": "div.blog-coverflow > ul.blog-coverflow__track > li.blog-coverflow__item > a.blog-coverflow__link",
+                      "snippet": "<a href=\"/blog/tudo-sobre-vulnerabilidades-tailscale-tailworm/\" draggable=\"false\" class=\"blog-coverflow__link group flex h-full flex-col overflow-hidden rounded-3x…\" data-astro-cid-sobuzokn=\"\">",
+                      "nodeLabel": "Tudo sobre as vulnerabilidades do Tailscale: Tailworm"
+                    }
+                  },
+                  {
+                    "relatedNode": {
+                      "snippet": "<a href=\"/blog/nginx-atualizacao-responsabilidade/\" draggable=\"false\" class=\"blog-coverflow__link group flex h-full flex-col overflow-hidden rounded-3x…\" data-astro-cid-sobuzokn=\"\">",
+                      "selector": "div.blog-coverflow > ul.blog-coverflow__track > li.blog-coverflow__item > a.blog-coverflow__link",
+                      "nodeLabel": "Por que atualizar o NGINX e acompanhar a manutenção?",
+                      "type": "node"
+                    }
+                  },
+                  {
+                    "relatedNode": {
+                      "selector": "div.blog-coverflow > ul.blog-coverflow__track > li.blog-coverflow__item > a.blog-coverflow__link",
+                      "type": "node",
+                      "nodeLabel": "O WAF da Cloudflare já protege seu PHP contra o php2shell?",
+                      "snippet": "<a href=\"/blog/waf-cloudflare-tunnel-php/\" draggable=\"false\" class=\"blog-coverflow__link group flex h-full flex-col overflow-hidden rounded-3x…\" data-astro-cid-sobuzokn=\"\">"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "subItems": {
+                "items": [
+                  {
+                    "relatedNode": {
+                      "selector": "div.blog-coverflow > ul.blog-coverflow__track > li.blog-coverflow__item > a.blog-coverflow__link",
+                      "type": "node",
+                      "nodeLabel": "Tudo sobre as vulnerabilidades do Tailscale: Tailworm",
+                      "snippet": "<a href=\"/blog/tudo-sobre-vulnerabilidades-tailscale-tailworm/\" draggable=\"false\" class=\"blog-coverflow__link group flex h-full flex-col overflow-hidden rounded-3x…\" data-astro-cid-sobuzokn=\"\">"
+                    }
+                  },
+                  {
+                    "relatedNode": {
+                      "snippet": "<a href=\"/blog/nginx-atualizacao-responsabilidade/\" draggable=\"false\" class=\"blog-coverflow__link group flex h-full flex-col overflow-hidden rounded-3x…\" data-astro-cid-sobuzokn=\"\">",
+                      "type": "node",
+                      "nodeLabel": "Por que atualizar o NGINX e acompanhar a manutenção?",
+                      "selector": "div.blog-coverflow > ul.blog-coverflow__track > li.blog-coverflow__item > a.blog-coverflow__link"
+                    }
+                  },
+                  {
+                    "relatedNode": {
+                      "nodeLabel": "O WAF da Cloudflare já protege seu PHP contra o php2shell?",
+                      "snippet": "<a href=\"/blog/waf-cloudflare-tunnel-php/\" draggable=\"false\" class=\"blog-coverflow__link group flex h-full flex-col overflow-hidden rounded-3x…\" data-astro-cid-sobuzokn=\"\">",
+                      "type": "node",
+                      "selector": "div.blog-coverflow > ul.blog-coverflow__track > li.blog-coverflow__item > a.blog-coverflow__link"
+                    }
+                  }
+                ],
+                "type": "subitems"
+              },
+              "node": {
+                "selector": "div.blog-coverflow > ul.blog-coverflow__track > li.blog-coverflow__item > a.blog-coverflow__link",
+                "nodeLabel": "Como as falhas do PHP afetam o Mautic 4, 5, 6 e 7?",
+                "type": "node",
+                "explanation": "Fix any of the following:\n  Target has insufficient size because it is partially obscured (smallest space is 8.2px by 252.6px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 0px instead of at least 24px.",
+                "snippet": "<a href=\"/blog/vulnerabilidade-php-mautic/\" draggable=\"false\" class=\"blog-coverflow__link group flex h-full flex-col overflow-hidden rounded-3x…\" data-astro-cid-sobuzokn=\"\">"
+              }
+            }
+          ],
+          "totalItems": 6,
+          "truncated": false
+        },
+        {
+          "id": "render-blocking-insight",
+          "categories": [
+            "performance"
+          ],
+          "group": "insights",
+          "weight": 0,
+          "title": "Render-blocking requests",
+          "description": "Requests are blocking the page’s initial render, which may delay LCP. [Deferring or inlining](https://developer.chrome.com/docs/performance/insights/render-blocking) can move these network requests out of the critical path.",
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 1,210 ms",
+          "numericValue": 1211,
+          "metricSavings": {
+            "LCP": 1200,
+            "FCP": 1200
+          },
+          "detailsType": "table",
+          "headings": [
+            {
+              "key": "url",
+              "label": "URL"
+            },
+            {
+              "key": "totalBytes",
+              "label": "Transfer Size"
+            },
+            {
+              "key": "wastedMs",
+              "label": "Duration"
+            }
+          ],
+          "items": [
+            {
+              "wastedMs": 1285,
+              "url": "https://promovaweb.com/_astro/global.B6C5i5GV.css",
+              "totalBytes": 59643
+            },
+            {
+              "url": "https://promovaweb.com/_astro/Footer.BEmfrqH0.css",
+              "totalBytes": 2894,
+              "wastedMs": 162
+            },
+            {
+              "totalBytes": 4575,
+              "url": "https://promovaweb.com/_astro/PricingThreeColumns.BqUc6Jl6.css",
+              "wastedMs": 322
+            },
+            {
+              "url": "https://promovaweb.com/_astro/index.B7s_j6mY.css",
+              "wastedMs": 483,
+              "totalBytes": 3818
+            },
+            {
+              "wastedMs": 483,
+              "totalBytes": 3436,
+              "url": "https://promovaweb.com/_astro/WhatsAppFab.BKKVsN82.css"
+            },
+            {
+              "totalBytes": 2857,
+              "wastedMs": 162,
+              "url": "https://promovaweb.com/_astro/GlobalTestimonials.jE3mN5Js.css"
+            },
+            {
+              "url": "https://promovaweb.com/_astro/Button.DK82mNyA.css",
+              "wastedMs": 643,
+              "totalBytes": 4481
+            },
+            {
+              "url": "https://promovaweb.com/_astro/MentorSplit.DvHwHM0Y.css",
+              "wastedMs": 162,
+              "totalBytes": 3173
+            },
+            {
+              "url": "https://promovaweb.com/_astro/Layout.DA3F0zVC.css",
+              "wastedMs": 643,
+              "totalBytes": 5043
+            },
+            {
+              "wastedMs": 162,
+              "url": "https://promovaweb.com/_astro/LinksBento.CdbZyFkr.css",
+              "totalBytes": 3419
+            }
+          ],
+          "totalItems": 10,
+          "truncated": false
+        },
+        {
+          "id": "unused-css-rules",
+          "categories": [
+            "performance"
+          ],
+          "group": "diagnostics",
+          "weight": 0,
+          "title": "Reduce unused CSS",
+          "description": "Reduce unused rules from stylesheets and defer CSS not used for above-the-fold content to decrease bytes consumed by network activity. [Learn how to reduce unused CSS](https://developer.chrome.com/docs/lighthouse/performance/unused-css-rules/).",
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 56 KiB",
+          "numericValue": 300,
+          "metricSavings": {
+            "LCP": 300,
+            "FCP": 300
+          },
+          "detailsType": "opportunity",
+          "headings": [
+            {
+              "key": "url",
+              "label": "URL"
+            },
+            {
+              "key": "totalBytes",
+              "label": "Transfer Size"
+            },
+            {
+              "key": "wastedBytes",
+              "label": "Est Savings"
+            }
+          ],
+          "items": [
+            {
+              "totalBytes": 57732,
+              "wastedPercent": 98.47930247256572,
+              "url": "https://promovaweb.com/_astro/global.B6C5i5GV.css",
+              "wastedBytes": 56854
+            }
+          ],
+          "totalItems": 1,
+          "truncated": false
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "categories": [
+            "performance"
+          ],
+          "group": "insights",
+          "weight": 0,
+          "title": "Network dependency tree",
+          "description": "[Avoid chaining critical requests](https://developer.chrome.com/docs/performance/insights/network-dependency-tree) by reducing the length of chains, reducing the download size of resources, or deferring the download of unnecessary resources to improve page load",
+          "score": 0,
+          "scoreDisplayMode": "numeric",
+          "displayValue": null,
+          "numericValue": null,
+          "metricSavings": {},
+          "detailsType": "list",
+          "headings": [],
+          "items": [
+            {
+              "value": {
+                "longestChain": {
+                  "duration": 594
+                },
+                "type": "network-tree",
+                "chains": {
+                  "0096A30491FDEABC4011E34AF6BB8873": {
+                    "transferSize": 34913,
+                    "url": "https://promovaweb.com/",
+                    "isLongest": true,
+                    "navStartToEndTime": 286,
+                    "children": {
+                      "34176.6": {
+                        "transferSize": 5043,
+                        "children": {},
+                        "url": "https://promovaweb.com/_astro/Layout.DA3F0zVC.css",
+                        "navStartToEndTime": 325
+                      },
+                      "34176.21": {
+                        "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+                        "children": {},
+                        "transferSize": 10615,
+                        "navStartToEndTime": 295
+                      },
+                      "34176.3": {
+                        "navStartToEndTime": 341,
+                        "url": "https://promovaweb.com/_astro/MauticTracking.astro_astro_type_script_index_0_lang.BjNCZJxu.js",
+                        "children": {
+                          "34176.70": {
+                            "transferSize": 2660,
+                            "url": "https://promovaweb.com/_astro/mautic.CEBG1rGL.js",
+                            "children": {},
+                            "navStartToEndTime": 480
+                          }
+                        },
+                        "transferSize": 2034
+                      },
+                      "34176.4": {
+                        "children": {},
+                        "transferSize": 6686,
+                        "url": "https://promovaweb.com/_astro/ClientRouter.astro_astro_type_script_index_0_lang.Ckbx0Etl.js",
+                        "navStartToEndTime": 351
+                      },
+                      "34176.16": {
+                        "isLongest": true,
+                        "transferSize": 2085,
+                        "navStartToEndTime": 338,
+                        "children": {
+                          "34176.69": {
+                            "isLongest": true,
+                            "navStartToEndTime": 368,
+                            "url": "https://promovaweb.com/_astro/omarchy-motion.Dl4_Qi5C.js",
+                            "children": {
+                              "34176.81": {
+                                "navStartToEndTime": 594,
+                                "url": "https://promovaweb.com/cdn-cgi/rum?",
+                                "transferSize": 668,
+                                "children": {},
+                                "isLongest": true
+                              }
+                            },
+                            "transferSize": 3372
+                          }
+                        },
+                        "url": "https://promovaweb.com/_astro/PixelStage.astro_astro_type_script_index_0_lang.BlLQJgi-.js"
+                      },
+                      "34176.7": {
+                        "transferSize": 3818,
+                        "url": "https://promovaweb.com/_astro/index.B7s_j6mY.css",
+                        "children": {},
+                        "navStartToEndTime": 355
+                      },
+                      "34176.11": {
+                        "navStartToEndTime": 325,
+                        "children": {},
+                        "transferSize": 3173,
+                        "url": "https://promovaweb.com/_astro/MentorSplit.DvHwHM0Y.css"
+                      },
+                      "34176.13": {
+                        "children": {},
+                        "url": "https://promovaweb.com/_astro/PricingThreeColumns.BqUc6Jl6.css",
+                        "transferSize": 4575,
+                        "navStartToEndTime": 356
+                      },
+                      "34176.9": {
+                        "url": "https://promovaweb.com/_astro/Button.DK82mNyA.css",
+                        "navStartToEndTime": 326,
+                        "transferSize": 4481,
+                        "children": {}
+                      },
+                      "34176.14": {
+                        "navStartToEndTime": 353,
+                        "transferSize": 2857,
+                        "children": {},
+                        "url": "https://promovaweb.com/_astro/GlobalTestimonials.jE3mN5Js.css"
+                      },
+                      "34176.5": {
+                        "navStartToEndTime": 358,
+                        "url": "https://promovaweb.com/_astro/Footer.BEmfrqH0.css",
+                        "transferSize": 2894,
+                        "children": {}
+                      },
+                      "34176.12": {
+                        "navStartToEndTime": 324,
+                        "children": {},
+                        "transferSize": 3419,
+                        "url": "https://promovaweb.com/_astro/LinksBento.CdbZyFkr.css"
+                      },
+                      "34176.8": {
+                        "transferSize": 3436,
+                        "url": "https://promovaweb.com/_astro/WhatsAppFab.BKKVsN82.css",
+                        "navStartToEndTime": 354,
+                        "children": {}
+                      },
+                      "34176.10": {
+                        "children": {},
+                        "url": "https://promovaweb.com/_astro/global.B6C5i5GV.css",
+                        "transferSize": 59643,
+                        "navStartToEndTime": 395
+                      }
+                    }
+                  }
+                }
+              },
+              "type": "list-section"
+            },
+            {
+              "description": "[preconnect](https://developer.chrome.com/docs/lighthouse/performance/uses-rel-preconnect/) hints help the browser establish a connection earlier in the page load, saving time when the first request for that origin is made. The following are the origins that the page preconnected to.",
+              "title": "Preconnected origins",
+              "value": {
+                "type": "text",
+                "value": "No origins were preconnected"
+              },
+              "type": "list-section"
+            },
+            {
+              "type": "list-section",
+              "value": {
+                "type": "text",
+                "value": "No additional origins are good candidates for preconnecting"
+              },
+              "title": "Preconnect candidates",
+              "description": "Add [preconnect](https://developer.chrome.com/docs/lighthouse/performance/uses-rel-preconnect/) hints to your most important origins, but try to use no more than 4"
+            }
+          ],
+          "totalItems": 3,
+          "truncated": false
+        },
+        {
+          "id": "cache-insight",
+          "categories": [
+            "performance"
+          ],
+          "group": "insights",
+          "weight": 0,
+          "title": "Use efficient cache lifetimes",
+          "description": "A long cache lifetime can speed up repeat visits to your page. [Learn more about caching](https://developer.chrome.com/docs/performance/insights/cache).",
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 4 KiB",
+          "numericValue": 4246,
+          "metricSavings": {},
+          "detailsType": "table",
+          "headings": [
+            {
+              "key": "url",
+              "label": "Request"
+            },
+            {
+              "key": "cacheLifetimeMs",
+              "label": "Cache TTL"
+            },
+            {
+              "key": "totalBytes",
+              "label": "Transfer Size"
+            }
+          ],
+          "items": [
+            {
+              "cacheLifetimeMs": 86400000,
+              "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+              "totalBytes": 10615,
+              "wastedBytes": 4246
+            }
+          ],
+          "totalItems": 1,
+          "truncated": false
+        },
+        {
+          "id": "image-delivery-insight",
+          "categories": [
+            "performance"
+          ],
+          "group": "insights",
+          "weight": 0,
+          "title": "Improve image delivery",
+          "description": "Reducing the download time of images can improve the perceived load time of the page and LCP. [Learn more about optimizing image size](https://developer.chrome.com/docs/performance/insights/image-delivery).",
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 7 KiB",
+          "numericValue": 7258,
+          "metricSavings": {},
+          "detailsType": "table",
+          "headings": [
+            {
+              "key": "node",
+              "label": "node"
+            },
+            {
+              "key": "url",
+              "label": "URL"
+            },
+            {
+              "key": "totalBytes",
+              "label": "Resource Size"
+            },
+            {
+              "key": "wastedBytes",
+              "label": "Est Savings"
+            }
+          ],
+          "items": [
+            {
+              "node": {
+                "snippet": "<img src=\"https://promovaweb.com/_imagens/b2c12dad07d53a7559ea-384.webp\" alt=\"Logotipo Promovaweb.\" width=\"226\" height=\"24\" sizes=\"(min-width: 640px) 227px, 189px\" class=\"brand-logo-text__img h-5 w-auto max-w-none shrink-0 object-contain sm:h-6\" data-astro-cid-tbdrqfx5=\"\" srcset=\"/_imagens/b2c12dad07d53a7559ea-64.webp 64w, /_imagens/b2c12dad07d53a7559ea…\" decoding=\"async\">",
+                "type": "node",
+                "nodeLabel": "Logotipo Promovaweb.",
+                "selector": "nav.header__nav > a.brand-logo-text > picture > img.brand-logo-text__img"
+              },
+              "totalBytes": 9882,
+              "wastedBytes": 7258,
+              "subItems": {
+                "type": "subitems",
+                "items": [
+                  {
+                    "wastedBytes": 7258,
+                    "reason": "Increasing the image compression factor could improve this image’s download size"
+                  }
+                ]
+              },
+              "url": "https://promovaweb.com/_imagens/b2c12dad07d53a7559ea-384.webp"
+            }
+          ],
+          "totalItems": 1,
+          "truncated": false
+        },
+        {
+          "id": "legacy-javascript-insight",
+          "categories": [
+            "performance"
+          ],
+          "group": "insights",
+          "weight": 0,
+          "title": "Legacy JavaScript",
+          "description": "Polyfills and transforms enable older browsers to use new JavaScript features. However, many aren’t necessary for modern browsers. Consider modifying your JavaScript build process to not transpile [Baseline](https://web.dev/articles/baseline-and-polyfills) features, unless you know you must support older browsers. [Learn why most sites can deploy ES6+ code without transpiling](https://developer.chrome.com/docs/performance/insights/legacy-javascript).",
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 10 KiB",
+          "numericValue": 10620,
+          "metricSavings": {},
+          "detailsType": "table",
+          "headings": [
+            {
+              "key": "url",
+              "label": "URL"
+            },
+            {
+              "key": "wastedBytes",
+              "label": "Wasted bytes"
+            }
+          ],
+          "items": [
+            {
+              "subItems": {
+                "type": "subitems",
+                "items": [
+                  {
+                    "signal": "Array.prototype.at",
+                    "location": {
+                      "line": 0,
+                      "urlProvider": "network",
+                      "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+                      "column": 1118,
+                      "type": "source-location"
+                    }
+                  },
+                  {
+                    "location": {
+                      "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+                      "line": 0,
+                      "column": 888,
+                      "type": "source-location",
+                      "urlProvider": "network"
+                    },
+                    "signal": "Array.prototype.findLast"
+                  }
+                ]
+              },
+              "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+              "wastedBytes": 10620
+            }
+          ],
+          "totalItems": 1,
+          "truncated": false
+        },
+        {
+          "id": "unused-javascript",
+          "categories": [
+            "performance"
+          ],
+          "group": "diagnostics",
+          "weight": 0,
+          "title": "Reduce unused JavaScript",
+          "description": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/).",
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 141 KiB",
+          "numericValue": 0,
+          "metricSavings": {},
+          "detailsType": "opportunity",
+          "headings": [
+            {
+              "key": "url",
+              "label": "URL"
+            },
+            {
+              "key": "totalBytes",
+              "label": "Transfer Size"
+            },
+            {
+              "key": "wastedBytes",
+              "label": "Est Savings"
+            }
+          ],
+          "items": [
+            {
+              "url": "https://www.googletagmanager.com/gtag/js?id=G-WY6VVS1DW4&cx=c&gtm=4e6b31",
+              "wastedPercent": 41.44283438612092,
+              "wastedBytes": 81818,
+              "totalBytes": 197423
+            },
+            {
+              "url": "https://www.googletagmanager.com/gtm.js?id=GTM-5D24GSW",
+              "wastedBytes": 62619,
+              "totalBytes": 119146,
+              "wastedPercent": 52.55657819298766
+            }
+          ],
+          "totalItems": 2,
+          "truncated": false
+        }
+      ],
+      "manualAudits": [
+        {
+          "id": "custom-controls-labels",
+          "category": "accessibility",
+          "title": "Custom controls have associated labels"
+        },
+        {
+          "id": "custom-controls-roles",
+          "category": "accessibility",
+          "title": "Custom controls have ARIA roles"
+        },
+        {
+          "id": "focus-traps",
+          "category": "accessibility",
+          "title": "User focus is not accidentally trapped in a region"
+        },
+        {
+          "id": "focusable-controls",
+          "category": "accessibility",
+          "title": "Interactive controls are keyboard focusable"
+        },
+        {
+          "id": "interactive-element-affordance",
+          "category": "accessibility",
+          "title": "Interactive elements indicate their purpose and state"
+        },
+        {
+          "id": "logical-tab-order",
+          "category": "accessibility",
+          "title": "The page has a logical tab order"
+        },
+        {
+          "id": "managed-focus",
+          "category": "accessibility",
+          "title": "The user's focus is directed to new content added to the page"
+        },
+        {
+          "id": "offscreen-content-hidden",
+          "category": "accessibility",
+          "title": "Offscreen content is hidden from assistive technology"
+        },
+        {
+          "id": "structured-data",
+          "category": "seo",
+          "title": "Structured data is valid"
+        },
+        {
+          "id": "use-landmarks",
+          "category": "accessibility",
+          "title": "HTML5 landmark elements are used to improve navigation"
+        },
+        {
+          "id": "visual-order-follows-dom",
+          "category": "accessibility",
+          "title": "Visual order on the page follows DOM order"
+        }
+      ],
+      "passedAuditIds": [
+        "aria-allowed-attr",
+        "aria-conditional-attr",
+        "aria-deprecated-role",
+        "aria-hidden-body",
+        "aria-hidden-focus",
+        "aria-prohibited-attr",
+        "aria-required-attr",
+        "aria-required-children",
+        "aria-roles",
+        "aria-valid-attr",
+        "aria-valid-attr-value",
+        "bootup-time",
+        "button-name",
+        "canonical",
+        "charset",
+        "cls-culprits-insight",
+        "crawlable-anchors",
+        "definition-list",
+        "deprecations",
+        "dlitem",
+        "doctype",
+        "document-latency-insight",
+        "document-title",
+        "dom-size-insight",
+        "duplicated-javascript-insight",
+        "errors-in-console",
+        "font-display-insight",
+        "forced-reflow-insight",
+        "geolocation-on-start",
+        "heading-order",
+        "hreflang",
+        "html-has-lang",
+        "html-lang-valid",
+        "http-status-code",
+        "image-alt",
+        "image-aspect-ratio",
+        "image-size-responsive",
+        "inspector-issues",
+        "interactive",
+        "is-crawlable",
+        "is-on-https",
+        "label",
+        "label-content-name-mismatch",
+        "landmark-one-main",
+        "link-name",
+        "link-text",
+        "list",
+        "listitem",
+        "mainthread-work-breakdown",
+        "max-potential-fid",
+        "meta-description",
+        "meta-viewport",
+        "notification-on-start",
+        "paste-preventing-inputs",
+        "redirects",
+        "robots-txt",
+        "server-response-time",
+        "third-party-cookies",
+        "total-byte-weight",
+        "unminified-css",
+        "unminified-javascript",
+        "unsized-images",
+        "valid-source-maps",
+        "viewport-insight"
+      ],
+      "rawFile": "mobile.raw.json"
+    },
+    {
+      "strategy": "desktop",
+      "requestedUrl": "https://promovaweb.com/",
+      "finalUrl": "https://promovaweb.com/",
+      "fetchTime": "2026-11-05T14:49:58.918Z",
+      "lighthouseVersion": "13.6.0",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+      "runWarnings": [],
+      "runtimeError": null,
+      "scores": {
+        "performance": 100,
+        "accessibility": 97,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "labMetrics": {
+        "first-contentful-paint": {
+          "title": "First Contentful Paint",
+          "displayValue": "0.3 s",
+          "numericValue": 330,
+          "score": 1
+        },
+        "largest-contentful-paint": {
+          "title": "Largest Contentful Paint",
+          "displayValue": "0.3 s",
+          "numericValue": 330,
+          "score": 1
+        },
+        "total-blocking-time": {
+          "title": "Total Blocking Time",
+          "displayValue": "0 ms",
+          "numericValue": 0,
+          "score": 1
+        },
+        "cumulative-layout-shift": {
+          "title": "Cumulative Layout Shift",
+          "displayValue": "0",
+          "numericValue": 0,
+          "score": 1
+        },
+        "speed-index": {
+          "title": "Speed Index",
+          "displayValue": "0.7 s",
+          "numericValue": 659.0056829056384,
+          "score": 1
+        },
+        "interactive": {
+          "title": "Time to Interactive",
+          "displayValue": "0.4 s",
+          "numericValue": 365.30000000000007,
+          "score": 1
+        }
+      },
+      "field": {
+        "page": {
+          "overallCategory": "FAST",
+          "metrics": {
+            "CUMULATIVE_LAYOUT_SHIFT_SCORE": {
+              "percentile": 0,
+              "category": "FAST"
+            },
+            "FIRST_CONTENTFUL_PAINT_MS": {
+              "percentile": 1001,
+              "category": "FAST"
+            },
+            "INTERACTION_TO_NEXT_PAINT": {
+              "percentile": 77,
+              "category": "FAST"
+            },
+            "LARGEST_CONTENTFUL_PAINT_MS": {
+              "percentile": 1018,
+              "category": "FAST"
+            }
+          }
+        },
+        "origin": {
+          "overallCategory": "FAST",
+          "metrics": {
+            "CUMULATIVE_LAYOUT_SHIFT_SCORE": {
+              "percentile": 0,
+              "category": "FAST"
+            },
+            "EXPERIMENTAL_TIME_TO_FIRST_BYTE": {
+              "percentile": 437,
+              "category": "FAST"
+            },
+            "FIRST_CONTENTFUL_PAINT_MS": {
+              "percentile": 898,
+              "category": "FAST"
+            },
+            "INTERACTION_TO_NEXT_PAINT": {
+              "percentile": 66,
+              "category": "FAST"
+            },
+            "LARGEST_CONTENTFUL_PAINT_MS": {
+              "percentile": 955,
+              "category": "FAST"
+            }
+          }
+        }
+      },
+      "failedAudits": [
+        {
+          "id": "color-contrast",
+          "categories": [
+            "accessibility"
+          ],
+          "group": "a11y-color-contrast",
+          "weight": 7,
+          "title": "Background and foreground colors do not have a sufficient contrast ratio.",
+          "description": "Low-contrast text is difficult or impossible for many users to read. [Learn how to provide sufficient color contrast](https://dequeuniversity.com/rules/axe/4.14/color-contrast).",
+          "score": 0,
+          "scoreDisplayMode": "binary",
+          "displayValue": null,
+          "numericValue": null,
+          "metricSavings": {},
+          "detailsType": "table",
+          "headings": [
+            {
+              "key": "node",
+              "label": "Failing Elements"
+            }
+          ],
+          "items": [
+            {
+              "subItems": {
+                "type": "subitems",
+                "items": [
+                  {
+                    "relatedNode": {
+                      "selector": "div.container > div.row > div.col > article.home-pratica__card",
+                      "type": "node",
+                      "snippet": "<article class=\"home-pratica__card\" data-astro-cid-5yclbk7l=\"\">",
+                      "nodeLabel": "02\n\nENCONTROS AO VIVO\n\nAgenda por plano\n\nCada trilha tem uma rotina própria par…"
+                    }
+                  }
+                ]
+              },
+              "node": {
+                "snippet": "<span class=\"home-pratica__numero\" aria-hidden=\"true\" data-astro-cid-5yclbk7l=\"\">",
+                "nodeLabel": "02",
+                "type": "node",
+                "selector": "div.row > div.col > article.home-pratica__card > span.home-pratica__numero",
+                "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #869ea8, background color: #ffffff, font size: 10.5pt (14px), font weight: bold). Expected contrast ratio of 4.5:1"
+              }
+            },
+            {
+              "node": {
+                "selector": "div.col > ol.home-pratica__linhas > li.home-pratica__linha > span.home-pratica__linha-numero",
+                "snippet": "<span class=\"home-pratica__linha-numero\" aria-hidden=\"true\" data-astro-cid-5yclbk7l=\"\">",
+                "nodeLabel": "03",
+                "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 4.22 (foreground color: #1c8986, background color: #ffffff, font size: 10.5pt (14px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "type": "node"
+              },
+              "subItems": {
+                "type": "subitems",
+                "items": [
+                  {
+                    "relatedNode": {
+                      "snippet": "<ol class=\"home-pratica__linhas\" data-astro-cid-5yclbk7l=\"\">",
+                      "selector": "div.container > div.row > div.col > ol.home-pratica__linhas",
+                      "type": "node",
+                      "nodeLabel": "03\nFórum com SLA\n\nDescreva o ambiente, a tentativa e o resultado observado. Dep…"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "node": {
+                "type": "node",
+                "snippet": "<span class=\"home-pratica__linha-numero\" aria-hidden=\"true\" data-astro-cid-5yclbk7l=\"\">",
+                "nodeLabel": "04",
+                "selector": "div.col > ol.home-pratica__linhas > li.home-pratica__linha > span.home-pratica__linha-numero",
+                "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 4.22 (foreground color: #1c8986, background color: #ffffff, font size: 10.5pt (14px), font weight: bold). Expected contrast ratio of 4.5:1"
+              },
+              "subItems": {
+                "type": "subitems",
+                "items": [
+                  {
+                    "relatedNode": {
+                      "selector": "div.container > div.row > div.col > ol.home-pratica__linhas",
+                      "nodeLabel": "03\nFórum com SLA\n\nDescreva o ambiente, a tentativa e o resultado observado. Dep…",
+                      "snippet": "<ol class=\"home-pratica__linhas\" data-astro-cid-5yclbk7l=\"\">",
+                      "type": "node"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "node": {
+                "snippet": "<span class=\"home-pratica__linha-numero\" aria-hidden=\"true\" data-astro-cid-5yclbk7l=\"\">",
+                "type": "node",
+                "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 4.22 (foreground color: #1c8986, background color: #ffffff, font size: 10.5pt (14px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "selector": "div.col > ol.home-pratica__linhas > li.home-pratica__linha > span.home-pratica__linha-numero",
+                "nodeLabel": "05"
+              },
+              "subItems": {
+                "items": [
+                  {
+                    "relatedNode": {
+                      "selector": "div.container > div.row > div.col > ol.home-pratica__linhas",
+                      "snippet": "<ol class=\"home-pratica__linhas\" data-astro-cid-5yclbk7l=\"\">",
+                      "type": "node",
+                      "nodeLabel": "03\nFórum com SLA\n\nDescreva o ambiente, a tentativa e o resultado observado. Dep…"
+                    }
+                  }
+                ],
+                "type": "subitems"
+              }
+            }
+          ],
+          "totalItems": 4,
+          "truncated": false
+        },
+        {
+          "id": "render-blocking-insight",
+          "categories": [
+            "performance"
+          ],
+          "group": "insights",
+          "weight": 0,
+          "title": "Render-blocking requests",
+          "description": "Requests are blocking the page’s initial render, which may delay LCP. [Deferring or inlining](https://developer.chrome.com/docs/performance/insights/render-blocking) can move these network requests out of the critical path.",
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 250 ms",
+          "numericValue": 251,
+          "metricSavings": {
+            "LCP": 250,
+            "FCP": 250
+          },
+          "detailsType": "table",
+          "headings": [
+            {
+              "key": "url",
+              "label": "URL"
+            },
+            {
+              "key": "totalBytes",
+              "label": "Transfer Size"
+            },
+            {
+              "key": "wastedMs",
+              "label": "Duration"
+            }
+          ],
+          "items": [
+            {
+              "totalBytes": 59645,
+              "url": "https://promovaweb.com/_astro/global.B6C5i5GV.css",
+              "wastedMs": 340
+            },
+            {
+              "totalBytes": 5049,
+              "url": "https://promovaweb.com/_astro/Layout.DA3F0zVC.css",
+              "wastedMs": 171
+            },
+            {
+              "totalBytes": 3432,
+              "wastedMs": 171,
+              "url": "https://promovaweb.com/_astro/WhatsAppFab.BKKVsN82.css"
+            },
+            {
+              "url": "https://promovaweb.com/_astro/index.B7s_j6mY.css",
+              "wastedMs": 171,
+              "totalBytes": 3829
+            },
+            {
+              "wastedMs": 58,
+              "url": "https://promovaweb.com/_astro/PricingThreeColumns.BqUc6Jl6.css",
+              "totalBytes": 4604
+            },
+            {
+              "wastedMs": 171,
+              "totalBytes": 4467,
+              "url": "https://promovaweb.com/_astro/Button.DK82mNyA.css"
+            },
+            {
+              "wastedMs": 58,
+              "totalBytes": 3423,
+              "url": "https://promovaweb.com/_astro/LinksBento.CdbZyFkr.css"
+            },
+            {
+              "wastedMs": 58,
+              "totalBytes": 3171,
+              "url": "https://promovaweb.com/_astro/MentorSplit.DvHwHM0Y.css"
+            },
+            {
+              "url": "https://promovaweb.com/_astro/Footer.BEmfrqH0.css",
+              "wastedMs": 58,
+              "totalBytes": 2894
+            },
+            {
+              "totalBytes": 2861,
+              "url": "https://promovaweb.com/_astro/GlobalTestimonials.jE3mN5Js.css",
+              "wastedMs": 58
+            }
+          ],
+          "totalItems": 10,
+          "truncated": false
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "categories": [
+            "performance"
+          ],
+          "group": "insights",
+          "weight": 0,
+          "title": "Network dependency tree",
+          "description": "[Avoid chaining critical requests](https://developer.chrome.com/docs/performance/insights/network-dependency-tree) by reducing the length of chains, reducing the download size of resources, or deferring the download of unnecessary resources to improve page load",
+          "score": 0,
+          "scoreDisplayMode": "numeric",
+          "displayValue": null,
+          "numericValue": null,
+          "metricSavings": {},
+          "detailsType": "list",
+          "headings": [],
+          "items": [
+            {
+              "value": {
+                "type": "network-tree",
+                "chains": {
+                  "B7EEFCE9AF01CC9AEA6E381ED61476C9": {
+                    "transferSize": 34913,
+                    "isLongest": true,
+                    "children": {
+                      "2342.14": {
+                        "url": "https://promovaweb.com/_astro/GlobalTestimonials.jE3mN5Js.css",
+                        "children": {},
+                        "transferSize": 2861,
+                        "navStartToEndTime": 290
+                      },
+                      "2342.9": {
+                        "transferSize": 4467,
+                        "navStartToEndTime": 305,
+                        "children": {},
+                        "url": "https://promovaweb.com/_astro/Button.DK82mNyA.css"
+                      },
+                      "2342.13": {
+                        "url": "https://promovaweb.com/_astro/PricingThreeColumns.BqUc6Jl6.css",
+                        "children": {},
+                        "navStartToEndTime": 322,
+                        "transferSize": 4604
+                      },
+                      "2342.10": {
+                        "transferSize": 59645,
+                        "url": "https://promovaweb.com/_astro/global.B6C5i5GV.css",
+                        "navStartToEndTime": 426,
+                        "children": {}
+                      },
+                      "2342.16": {
+                        "isLongest": true,
+                        "url": "https://promovaweb.com/_astro/PixelStage.astro_astro_type_script_index_0_lang.BlLQJgi-.js",
+                        "transferSize": 2089,
+                        "children": {
+                          "2342.70": {
+                            "children": {
+                              "2342.82": {
+                                "navStartToEndTime": 788,
+                                "transferSize": 676,
+                                "children": {},
+                                "url": "https://promovaweb.com/cdn-cgi/rum?",
+                                "isLongest": true
+                              }
+                            },
+                            "isLongest": true,
+                            "transferSize": 3370,
+                            "navStartToEndTime": 569,
+                            "url": "https://promovaweb.com/_astro/omarchy-motion.Dl4_Qi5C.js"
+                          }
+                        },
+                        "navStartToEndTime": 387
+                      },
+                      "2342.4": {
+                        "navStartToEndTime": 338,
+                        "url": "https://promovaweb.com/_astro/ClientRouter.astro_astro_type_script_index_0_lang.Ckbx0Etl.js",
+                        "transferSize": 6686,
+                        "children": {}
+                      },
+                      "2342.6": {
+                        "transferSize": 5049,
+                        "children": {},
+                        "navStartToEndTime": 352,
+                        "url": "https://promovaweb.com/_astro/Layout.DA3F0zVC.css"
+                      },
+                      "2342.7": {
+                        "navStartToEndTime": 339,
+                        "url": "https://promovaweb.com/_astro/index.B7s_j6mY.css",
+                        "transferSize": 3829,
+                        "children": {}
+                      },
+                      "2342.8": {
+                        "url": "https://promovaweb.com/_astro/WhatsAppFab.BKKVsN82.css",
+                        "children": {},
+                        "transferSize": 3432,
+                        "navStartToEndTime": 342
+                      },
+                      "2342.12": {
+                        "transferSize": 3423,
+                        "children": {},
+                        "url": "https://promovaweb.com/_astro/LinksBento.CdbZyFkr.css",
+                        "navStartToEndTime": 306
+                      },
+                      "2342.21": {
+                        "children": {},
+                        "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+                        "transferSize": 10615,
+                        "navStartToEndTime": 261
+                      },
+                      "2342.5": {
+                        "navStartToEndTime": 289,
+                        "transferSize": 2894,
+                        "url": "https://promovaweb.com/_astro/Footer.BEmfrqH0.css",
+                        "children": {}
+                      },
+                      "2342.11": {
+                        "navStartToEndTime": 297,
+                        "url": "https://promovaweb.com/_astro/MentorSplit.DvHwHM0Y.css",
+                        "transferSize": 3171,
+                        "children": {}
+                      },
+                      "2342.3": {
+                        "url": "https://promovaweb.com/_astro/MauticTracking.astro_astro_type_script_index_0_lang.BjNCZJxu.js",
+                        "navStartToEndTime": 386,
+                        "transferSize": 2042,
+                        "children": {
+                          "2342.69": {
+                            "navStartToEndTime": 570,
+                            "url": "https://promovaweb.com/_astro/mautic.CEBG1rGL.js",
+                            "transferSize": 2660,
+                            "children": {}
+                          }
+                        }
+                      }
+                    },
+                    "navStartToEndTime": 249,
+                    "url": "https://promovaweb.com/"
+                  }
+                },
+                "longestChain": {
+                  "duration": 788
+                }
+              },
+              "type": "list-section"
+            },
+            {
+              "description": "[preconnect](https://developer.chrome.com/docs/lighthouse/performance/uses-rel-preconnect/) hints help the browser establish a connection earlier in the page load, saving time when the first request for that origin is made. The following are the origins that the page preconnected to.",
+              "title": "Preconnected origins",
+              "type": "list-section",
+              "value": {
+                "type": "text",
+                "value": "No origins were preconnected"
+              }
+            },
+            {
+              "title": "Preconnect candidates",
+              "type": "list-section",
+              "value": {
+                "type": "text",
+                "value": "No additional origins are good candidates for preconnecting"
+              },
+              "description": "Add [preconnect](https://developer.chrome.com/docs/lighthouse/performance/uses-rel-preconnect/) hints to your most important origins, but try to use no more than 4"
+            }
+          ],
+          "totalItems": 3,
+          "truncated": false
+        },
+        {
+          "id": "cache-insight",
+          "categories": [
+            "performance"
+          ],
+          "group": "insights",
+          "weight": 0,
+          "title": "Use efficient cache lifetimes",
+          "description": "A long cache lifetime can speed up repeat visits to your page. [Learn more about caching](https://developer.chrome.com/docs/performance/insights/cache).",
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 4 KiB",
+          "numericValue": 4246,
+          "metricSavings": {},
+          "detailsType": "table",
+          "headings": [
+            {
+              "key": "url",
+              "label": "Request"
+            },
+            {
+              "key": "cacheLifetimeMs",
+              "label": "Cache TTL"
+            },
+            {
+              "key": "totalBytes",
+              "label": "Transfer Size"
+            }
+          ],
+          "items": [
+            {
+              "wastedBytes": 4246,
+              "cacheLifetimeMs": 86400000,
+              "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+              "totalBytes": 10615
+            }
+          ],
+          "totalItems": 1,
+          "truncated": false
+        },
+        {
+          "id": "image-delivery-insight",
+          "categories": [
+            "performance"
+          ],
+          "group": "insights",
+          "weight": 0,
+          "title": "Improve image delivery",
+          "description": "Reducing the download time of images can improve the perceived load time of the page and LCP. [Learn more about optimizing image size](https://developer.chrome.com/docs/performance/insights/image-delivery).",
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 5 KiB",
+          "numericValue": 4678,
+          "metricSavings": {},
+          "detailsType": "table",
+          "headings": [
+            {
+              "key": "node",
+              "label": "node"
+            },
+            {
+              "key": "url",
+              "label": "URL"
+            },
+            {
+              "key": "totalBytes",
+              "label": "Resource Size"
+            },
+            {
+              "key": "wastedBytes",
+              "label": "Est Savings"
+            }
+          ],
+          "items": [
+            {
+              "totalBytes": 5830,
+              "url": "https://promovaweb.com/_imagens/b2c12dad07d53a7559ea-256.webp",
+              "subItems": {
+                "type": "subitems",
+                "items": [
+                  {
+                    "reason": "Increasing the image compression factor could improve this image’s download size",
+                    "wastedBytes": 4678
+                  }
+                ]
+              },
+              "wastedBytes": 4678,
+              "node": {
+                "selector": "nav.header__nav > a.brand-logo-text > picture > img.brand-logo-text__img",
+                "type": "node",
+                "snippet": "<img src=\"/_imagens/b2c12dad07d53a7559ea-256.webp\" alt=\"Logotipo Promovaweb.\" width=\"226\" height=\"24\" sizes=\"(min-width: 640px) 227px, 189px\" class=\"brand-logo-text__img h-5 w-auto max-w-none shrink-0 object-contain sm:h-6\" data-astro-cid-tbdrqfx5=\"\" srcset=\"/_imagens/b2c12dad07d53a7559ea-64.webp 64w, /_imagens/b2c12dad07d53a7559ea…\" decoding=\"async\">",
+                "nodeLabel": "Logotipo Promovaweb."
+              }
+            }
+          ],
+          "totalItems": 1,
+          "truncated": false
+        },
+        {
+          "id": "legacy-javascript-insight",
+          "categories": [
+            "performance"
+          ],
+          "group": "insights",
+          "weight": 0,
+          "title": "Legacy JavaScript",
+          "description": "Polyfills and transforms enable older browsers to use new JavaScript features. However, many aren’t necessary for modern browsers. Consider modifying your JavaScript build process to not transpile [Baseline](https://web.dev/articles/baseline-and-polyfills) features, unless you know you must support older browsers. [Learn why most sites can deploy ES6+ code without transpiling](https://developer.chrome.com/docs/performance/insights/legacy-javascript).",
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 10 KiB",
+          "numericValue": 10620,
+          "metricSavings": {},
+          "detailsType": "table",
+          "headings": [
+            {
+              "key": "url",
+              "label": "URL"
+            },
+            {
+              "key": "wastedBytes",
+              "label": "Wasted bytes"
+            }
+          ],
+          "items": [
+            {
+              "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+              "subItems": {
+                "items": [
+                  {
+                    "location": {
+                      "type": "source-location",
+                      "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+                      "column": 1118,
+                      "urlProvider": "network",
+                      "line": 0
+                    },
+                    "signal": "Array.prototype.at"
+                  },
+                  {
+                    "location": {
+                      "urlProvider": "network",
+                      "type": "source-location",
+                      "line": 0,
+                      "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+                      "column": 888
+                    },
+                    "signal": "Array.prototype.findLast"
+                  }
+                ],
+                "type": "subitems"
+              },
+              "wastedBytes": 10620
+            }
+          ],
+          "totalItems": 1,
+          "truncated": false
+        },
+        {
+          "id": "unused-css-rules",
+          "categories": [
+            "performance"
+          ],
+          "group": "diagnostics",
+          "weight": 0,
+          "title": "Reduce unused CSS",
+          "description": "Reduce unused rules from stylesheets and defer CSS not used for above-the-fold content to decrease bytes consumed by network activity. [Learn how to reduce unused CSS](https://developer.chrome.com/docs/lighthouse/performance/unused-css-rules/).",
+          "score": 0.5,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 55 KiB",
+          "numericValue": 0,
+          "metricSavings": {},
+          "detailsType": "opportunity",
+          "headings": [
+            {
+              "key": "url",
+              "label": "URL"
+            },
+            {
+              "key": "totalBytes",
+              "label": "Transfer Size"
+            },
+            {
+              "key": "wastedBytes",
+              "label": "Est Savings"
+            }
+          ],
+          "items": [
+            {
+              "url": "https://promovaweb.com/_astro/global.B6C5i5GV.css",
+              "wastedBytes": 56728,
+              "wastedPercent": 98.27922041921133,
+              "totalBytes": 57721
+            }
+          ],
+          "totalItems": 1,
+          "truncated": false
+        }
+      ],
+      "manualAudits": [
+        {
+          "id": "custom-controls-labels",
+          "category": "accessibility",
+          "title": "Custom controls have associated labels"
+        },
+        {
+          "id": "custom-controls-roles",
+          "category": "accessibility",
+          "title": "Custom controls have ARIA roles"
+        },
+        {
+          "id": "focus-traps",
+          "category": "accessibility",
+          "title": "User focus is not accidentally trapped in a region"
+        },
+        {
+          "id": "focusable-controls",
+          "category": "accessibility",
+          "title": "Interactive controls are keyboard focusable"
+        },
+        {
+          "id": "interactive-element-affordance",
+          "category": "accessibility",
+          "title": "Interactive elements indicate their purpose and state"
+        },
+        {
+          "id": "logical-tab-order",
+          "category": "accessibility",
+          "title": "The page has a logical tab order"
+        },
+        {
+          "id": "managed-focus",
+          "category": "accessibility",
+          "title": "The user's focus is directed to new content added to the page"
+        },
+        {
+          "id": "offscreen-content-hidden",
+          "category": "accessibility",
+          "title": "Offscreen content is hidden from assistive technology"
+        },
+        {
+          "id": "structured-data",
+          "category": "seo",
+          "title": "Structured data is valid"
+        },
+        {
+          "id": "use-landmarks",
+          "category": "accessibility",
+          "title": "HTML5 landmark elements are used to improve navigation"
+        },
+        {
+          "id": "visual-order-follows-dom",
+          "category": "accessibility",
+          "title": "Visual order on the page follows DOM order"
+        }
+      ],
+      "passedAuditIds": [
+        "aria-allowed-attr",
+        "aria-command-name",
+        "aria-conditional-attr",
+        "aria-deprecated-role",
+        "aria-hidden-body",
+        "aria-hidden-focus",
+        "aria-prohibited-attr",
+        "aria-required-attr",
+        "aria-required-children",
+        "aria-required-parent",
+        "aria-roles",
+        "aria-valid-attr",
+        "aria-valid-attr-value",
+        "bootup-time",
+        "button-name",
+        "canonical",
+        "charset",
+        "cls-culprits-insight",
+        "crawlable-anchors",
+        "definition-list",
+        "deprecations",
+        "dlitem",
+        "doctype",
+        "document-latency-insight",
+        "document-title",
+        "duplicated-javascript-insight",
+        "errors-in-console",
+        "font-display-insight",
+        "forced-reflow-insight",
+        "geolocation-on-start",
+        "heading-order",
+        "hreflang",
+        "html-has-lang",
+        "html-lang-valid",
+        "http-status-code",
+        "image-alt",
+        "image-aspect-ratio",
+        "image-size-responsive",
+        "inspector-issues",
+        "interactive",
+        "is-crawlable",
+        "is-on-https",
+        "label",
+        "label-content-name-mismatch",
+        "landmark-one-main",
+        "link-name",
+        "link-text",
+        "list",
+        "listitem",
+        "mainthread-work-breakdown",
+        "max-potential-fid",
+        "meta-description",
+        "meta-viewport",
+        "notification-on-start",
+        "paste-preventing-inputs",
+        "presentation-role-conflict",
+        "redirects",
+        "robots-txt",
+        "server-response-time",
+        "target-size",
+        "third-party-cookies",
+        "total-byte-weight",
+        "unminified-css",
+        "unminified-javascript",
+        "unsized-images",
+        "unused-javascript",
+        "valid-source-maps",
+        "viewport-insight"
+      ],
+      "rawFile": "desktop.raw.json"
+    }
+  ]
+}

@@ -3,7 +3,7 @@
 O comando `pagespeedfy run` grava uma pasta por execução:
 
 ```text
-.pagespeedfy/reports/<host>/<rota>/<AAAAMMDD-HHMMSS>/
+pagespeedfy-reports/<host>/<rota>/<AAAAMMDD-HHMMSS>/
 ├── mobile.raw.json    resposta completa da API para mobile
 ├── desktop.raw.json   resposta completa da API para desktop
 ├── report.json        relatório normalizado (formatVersion 1)

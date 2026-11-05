@@ -2,8 +2,8 @@
   "schema_version": 1,
   "version": "0.1.0",
   "edition": "v0.1.0",
-  "generated_at": "2026-11-05T14:48:53Z",
-  "source_sha256": "a71e557c13f51e3a01cb56a12e0068ca9c16e2ad08ae3dd03950cf5c3a2d12d8",
+  "generated_at": "2026-11-05T14:55:21Z",
+  "source_sha256": "22a9981a385f9db2a973353ec5be02b3639fb54a32263b51874d7657f4f6e343",
   "sources": [
     ".ebook/assets/logo.svg",
     ".ebook/build-ebook.mjs",
@@ -26,11 +26,11 @@
   "artifacts": {
     "pdf": {
       "file": "Pagespeedfy-Guia-do-Usuario-v0.1.0.pdf",
-      "sha256": "fd37996dbd74ed50b4049bbdbc84303b2d2435329d4d5425d77b9dbfd93461b9"
+      "sha256": "b857f2524876bbb2521c593f662989033283c269fef2cd1b3c8df60e0b910691"
     },
     "epub": {
       "file": "Pagespeedfy-Guia-do-Usuario-v0.1.0.epub",
-      "sha256": "69ddfb03e81a4dec61c8d45190be60470eec69d5b49118168973bc731646a5fb"
+      "sha256": "7bc63a24ab0f606b49f9e92787c6f2e92e17268344dda9bc7cdf81a35cbd6262"
     }
   }
 }
