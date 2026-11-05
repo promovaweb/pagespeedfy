@@ -24,6 +24,28 @@ Release e o pacote `@promovaweb/pagespeedfy` no npm.
 A publicação no npm é idempotente: se a versão já existir no registry, o passo
 é ignorado e o job pode ser reexecutado.
 
+## Publicação manual enquanto faltam os segredos
+
+O repositório ainda não tem `RELEASE_PLEASE_TOKEN` nem `NPM_TOKEN`. Sem o
+primeiro, o job `release-please` usa o `GITHUB_TOKEN`, que este repositório não
+autoriza a abrir pull requests, e a Release PR não nasce. Sem o segundo, o job
+`publicar` falha no passo do npm. As versões 0.1.1 e 0.2.0 saíram desta
+máquina, nesta ordem:
+
+1. Atualize `package.json`, `package-lock.json`,
+   `.release-please-manifest.json` e o `CHANGELOG.md`.
+2. Rode `npm run validar`, `npm run ebook:verify` e
+   `npm run release:check -- vX.Y.Z`.
+3. Empacote com `npm pack` e confira com `npm run package:verify -- <tgz>`.
+4. Faça o commit, crie a tag `vX.Y.Z` e envie com `git push origin main vX.Y.Z`.
+5. Crie a GitHub Release com o tarball, o PDF, o EPUB e `SHA256SUMS.txt`.
+6. Publique o mesmo tarball com `npm publish <tgz> --access public`. A conta
+   do npm exige 2FA a cada publicação, então rode o comando num terminal
+   interativo e confirme no navegador.
+
+A 0.1.0 ficou retida no staging de publicação do npm e não pode ser
+reutilizada. Por isso a primeira versão no npm é a 0.1.1.
+
 ## Segredos do repositório
 
 | Segredo | Uso |

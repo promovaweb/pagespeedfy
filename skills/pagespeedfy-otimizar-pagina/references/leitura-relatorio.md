@@ -35,7 +35,7 @@ devolveu e servem para consultar um campo que a normalização resumiu.
 | `finalUrl` | URL após redirecionamentos. Se for diferente da pedida, há redirect a corrigir |
 | `runtimeError` | Mensagem de falha do Lighthouse. Preenchido significa medição inválida |
 | `runWarnings` | Avisos que reduzem a confiança na medição |
-| `scores` | Notas de 0 a 100 por categoria |
+| `scores` | Notas de 0 a 100 por categoria, ou `null` quando a categoria não tem nota |
 | `labMetrics` | FCP, LCP, TBT, CLS, Speed Index e TTI em laboratório, com `numericValue` em ms (CLS sem unidade) |
 | `field.page` | CrUX da URL: p75 de LCP, CLS, INP, FCP e TTFB de usuários reais nos últimos 28 dias |
 | `field.origin` | CrUX do domínio inteiro. Usado quando a página não tem tráfego suficiente |
@@ -44,8 +44,9 @@ devolveu e servem para consultar um campo que a normalização resumiu.
 | `passedAuditIds` | IDs aprovados. Útil para confirmar que uma correção não quebrou outra |
 | `rawFile` | Nome do JSON bruto da estratégia, na mesma pasta |
 
-`field` com valor `null` indica que o CrUX não tem dados. Nesse caso, trabalhe
-só com laboratório.
+`field` é sempre um objeto. Quando `field.page` e `field.origin` são `null`, o
+CrUX não tem dados da página nem do domínio. Nesse caso, trabalhe só com
+laboratório.
 
 ## Campos de cada `failedAudits[]`
 
@@ -55,7 +56,7 @@ só com laboratório.
 | `categories` | Categorias afetadas pela auditoria |
 | `group` | Grupo do Lighthouse (`insights`, `diagnostics`, `a11y-*`, `seo-*`) |
 | `weight` | Peso na nota. Auditorias de Performance costumam ter peso 0 e agir pelas métricas |
-| `score` | Nota de 0 a 1 |
+| `score` | Nota de 0 a 1, ou `null` quando não há nota numérica |
 | `displayValue` | Resumo do Lighthouse, como "Economia estimada de 600 ms" |
 | `metricSavings` | Ganho estimado por métrica (`LCP`, `FCP`, `TBT`, `CLS`, `INP`) |
 | `description` | Orientação do Lighthouse no idioma pedido |

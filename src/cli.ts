@@ -12,7 +12,7 @@
 import { writeFile } from "node:fs/promises";
 import { join, relative } from "node:path";
 import { createInterface } from "node:readline";
-import { Command, InvalidArgumentError, Option } from "commander";
+import { Command, CommanderError, InvalidArgumentError, Option } from "commander";
 import { CATEGORIAS, ESTRATEGIAS, consultar, type Categoria, type Estrategia } from "./api.js";
 import {
   SAIDA_PADRAO,
@@ -93,7 +93,8 @@ export function criarPrograma(): Command {
     .description("Consulta o PageSpeed Insights e gera relatórios para otimizar uma página por vez.")
     .version(VERSAO)
     .option("--json", "imprime a saída em JSON")
-    .showHelpAfterError();
+    .showHelpAfterError()
+    .exitOverride();
 
   const auth = programa.command("auth").description("gerencia a API key do PageSpeed Insights");
 
@@ -270,7 +271,10 @@ export function criarPrograma(): Command {
   return programa;
 }
 
-/** Executa o CLI e converte `CliError` em mensagem e exit code. */
+/**
+ * Executa o CLI e converte `CliError` e erros de uso do Commander em mensagem
+ * e exit code.
+ */
 export async function executar(argv = process.argv): Promise<void> {
   try {
     await criarPrograma().parseAsync(argv);
@@ -278,6 +282,12 @@ export async function executar(argv = process.argv): Promise<void> {
     if (erro instanceof CliError) {
       process.stderr.write(`Erro: ${erro.message}\n`);
       process.exitCode = erro.codigoSaida;
+      return;
+    }
+    // O Commander já imprimiu a mensagem. Ajuda e versão saem com 0; argumento
+    // ou opção inválida saem com 2, como documenta a referência do CLI.
+    if (erro instanceof CommanderError) {
+      process.exitCode = ["commander.helpDisplayed", "commander.version", "commander.help"].includes(erro.code) ? 0 : 2;
       return;
     }
     throw erro;

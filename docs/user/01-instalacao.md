@@ -27,7 +27,7 @@ Confira:
 pagespeedfy --version
 ```
 
-O comando imprime a versão, por exemplo `0.1.0`.
+O comando imprime a versão, por exemplo `0.2.0`.
 
 ## Instalar a skill no projeto
 

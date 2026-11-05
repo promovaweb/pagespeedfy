@@ -1,8 +1,9 @@
 # API key e credencial
 
 A API do PageSpeed Insights aceita consultas sem chave, mas a cota anônima é
-compartilhada entre todos os usuários e costuma acabar cedo. Com uma chave
-própria, a cota é do seu projeto no Google Cloud.
+compartilhada entre todos os usuários e costuma acabar cedo. Por isso o
+Pagespeedfy exige uma chave própria: a cota passa a ser do seu projeto no
+Google Cloud.
 
 ## Criar a chave
 

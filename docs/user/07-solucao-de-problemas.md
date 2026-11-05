@@ -17,9 +17,10 @@ Depois, grave de novo com `pagespeedfy auth login --validar`.
 
 ## `A cota diária da API acabou`
 
-A cota do projeto do Google Cloud (ou a anônima, sem chave) chegou ao limite
-do dia. O CLI não repete, porque a resposta não muda até a renovação. Use uma
-chave própria ou espere o dia seguinte no fuso do Pacífico.
+A cota do projeto do Google Cloud ligado à chave em uso chegou ao limite do
+dia. O CLI não repete, porque a resposta não muda até a renovação. Peça mais
+cota no Google Cloud Console, use a chave de outro projeto ou espere o dia
+seguinte no fuso do Pacífico.
 
 ## `A API recusou a consulta (HTTP 400)`
 

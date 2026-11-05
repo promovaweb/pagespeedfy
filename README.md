@@ -9,37 +9,65 @@ Ele tem duas partes:
 - **CLI `pagespeedfy`**: consulta a API PageSpeed Insights v5, guarda a API
   key em `~/.pagespeedfy/credentials` e salva cada medição como JSON bruto,
   `report.json` normalizado e `report.md`.
-- **Skill `pagespeedfy-otimizar-pagina`**: um agente executa o CLI, lê o
-  relatório inteiro, localiza a rota e os componentes no projeto Astro, aplica
-  as correções, roda o build e compara a medição de antes com a de depois.
+- **Skill `pagespeedfy-otimizar-pagina`**: um agente executa o CLI, lê todos
+  os relatórios da página, localiza a rota e os componentes no projeto Astro,
+  mostra um plano de correções e só altera o código depois da sua
+  autorização. Ao fim, roda o build e compara a medição de antes com a de
+  depois.
 
 O trabalho acontece **uma página por vez**. Cada `run` aceita uma única URL, e
 a skill recusa seguir com várias páginas na mesma execução.
 
+## Instalação rápida
+
+1. Instale o CLI:
+
+   ```bash
+   npm install -g @promovaweb/pagespeedfy
+   ```
+
+2. Na raiz do projeto Astro, instale a skill direto do repositório
+   [promovaweb/pagespeedfy](https://github.com/promovaweb/pagespeedfy):
+
+   ```bash
+   npx skills add https://github.com/promovaweb/pagespeedfy
+   ```
+
+   O `npx skills` lê a pasta `skills/` do repositório e instala a skill
+   `pagespeedfy-otimizar-pagina` nos agentes que você escolher, como Codex e
+   Claude Code.
+
+3. Grave a API key do PageSpeed Insights:
+
+   ```bash
+   pagespeedfy auth login
+   ```
+
+Depois, peça ao agente: `Use $pagespeedfy-otimizar-pagina para otimizar
+https://seusite.com/`.
+
 ## Requisitos
 
 - Node.js 22.12 ou superior.
-- Uma API key do Google Cloud com a **PageSpeed Insights API** ativada. Sem
-  chave, a API usa uma cota anônima compartilhada que costuma acabar cedo.
+- Uma API key do Google Cloud com a **PageSpeed Insights API** ativada. O CLI
+  não consulta a API sem chave, porque a cota anônima é compartilhada e
+  costuma acabar cedo.
 - Página publicada em URL pública. O PageSpeed Insights roda nos servidores do
   Google e não alcança `localhost`.
 
 ## Instalação
 
+O CLI vem do npm e a skill vem do GitHub:
+
 ```bash
 npm install -g @promovaweb/pagespeedfy
-```
-
-Depois, `pagespeedfy --version` deve imprimir a versão instalada.
-
-Para instalar a skill em um projeto Astro, rode na raiz do projeto:
-
-```bash
 npx skills add https://github.com/promovaweb/pagespeedfy
 ```
 
-A skill fica em `skills/pagespeedfy-otimizar-pagina/`, no formato lido pelo
-`npx skills`.
+Depois, `pagespeedfy --version` deve imprimir a versão instalada e
+`npx skills list` deve mostrar `pagespeedfy-otimizar-pagina`. A skill fica em
+`skills/pagespeedfy-otimizar-pagina/` no repositório, no formato lido pelo
+`npx skills`. Para atualizar a skill, rode o mesmo `npx skills add` de novo.
 
 ## Criar a API key
 
@@ -111,7 +139,7 @@ O fluxo completo está em
 | [Arquitetura](docs/arquitetura.md) | Módulos, fluxo de dados, escolhas de projeto e testes |
 | [Ebook](ebook/README.md) | Guia do usuário em PDF e EPUB (`ebook/ebook-pagespeedfy.pdf`) |
 | [CHANGELOG](CHANGELOG.md) | Histórico de versões |
-| [RELEASING](RELEASING.md) | Como compilar e publicar uma versão desta máquina |
+| [RELEASING](RELEASING.md) | Versão, GitHub Release e publicação no npm |
 
 ## Desenvolvimento
 

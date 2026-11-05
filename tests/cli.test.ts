@@ -52,4 +52,19 @@ describe("pagespeedfy run", () => {
     await executar(["node", "pagespeedfy", "run", "http://localhost:4321/"]);
     expect(process.exitCode).toBe(2);
   });
+
+  it("sai com código 2 para opção com valor inválido", async () => {
+    vi.spyOn(process.stderr, "write").mockImplementation(() => true);
+    await executar(["node", "pagespeedfy", "run", "https://exemplo.com.br/", "--timeout", "0"]);
+    expect(process.exitCode).toBe(2);
+    process.exitCode = undefined;
+    await executar(["node", "pagespeedfy", "run", "https://exemplo.com.br/", "--strategy", "tablet"]);
+    expect(process.exitCode).toBe(2);
+  });
+
+  it("sai com código 0 na ajuda", async () => {
+    vi.spyOn(process.stdout, "write").mockImplementation(() => true);
+    await executar(["node", "pagespeedfy", "--help"]);
+    expect(process.exitCode ?? 0).toBe(0);
+  });
 });

@@ -2,7 +2,8 @@
 
 Cada `pagespeedfy run` cria uma pasta própria. Nada é sobrescrito: duas
 medições da mesma página ficam lado a lado e podem ser comparadas com
-`pagespeedfy compare`.
+`pagespeedfy compare`. Se duas execuções começarem no mesmo segundo, a
+segunda pasta recebe o sufixo `-2`.
 
 ## Pasta de saída
 
@@ -36,7 +37,7 @@ medições da mesma página ficam lado a lado e podem ser comparadas com
 {
   "formatVersion": 1,
   "tool": "pagespeedfy",
-  "toolVersion": "0.1.0",
+  "toolVersion": "0.2.0",
   "generatedAt": "2026-11-05T13:30:12.000Z",
   "url": "https://promovaweb.com/",
   "locale": "pt-BR",

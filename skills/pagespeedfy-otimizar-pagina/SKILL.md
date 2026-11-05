@@ -35,8 +35,9 @@ outras páginas, e isso entra no relatório final.
    e `astro` em `package.json`. Leia `AGENTS.md`, `CLAUDE.md` ou o README do
    projeto e siga as regras locais de código, design e documentação.
 4. Rode `git status --short` e preserve mudanças que já existiam.
-5. Garanta que `pagespeedfy-reports/` esteja no `.gitignore` do projeto. Os
+5. Confira se `pagespeedfy-reports/` está no `.gitignore` do projeto. Os
    relatórios trazem URLs e trechos de HTML que não pertencem ao repositório.
+   Se a linha faltar, não edite agora: inclua a mudança no plano do passo 4.
 
 ## Fluxo
 

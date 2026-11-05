@@ -4,6 +4,19 @@ Todas as mudanças relevantes do Pagespeedfy são registradas neste arquivo. O
 projeto segue versionamento semântico e usa commits convencionais para preparar
 as próximas versões com o Release Please.
 
+## [0.2.1](https://github.com/promovaweb/pagespeedfy/compare/v0.2.0...v0.2.1) (2026-11-05)
+
+### Correções
+
+- Opção ou argumento inválido, como `--timeout 0` ou `--strategy tablet`, passa a sair com código 2, como a referência documenta. Ajuda e versão saem com 0.
+- Duas execuções da mesma página no mesmo segundo deixam de reaproveitar a pasta: a segunda recebe o sufixo `-2`.
+- A skill só confere o `.gitignore` antes do plano; a inclusão de `pagespeedfy-reports/` entra no plano e espera a autorização como as demais mudanças.
+
+### Documentação
+
+- README do npm e guia do usuário com instalação rápida em três passos: CLI pelo npm, skill pelo `npx skills add https://github.com/promovaweb/pagespeedfy` e `pagespeedfy auth login`.
+- Revisão geral: campos que podem ser `null` no `report.json`, cota diária ligada à chave, publicação manual em `RELEASING.md` e exemplos de versão atualizados. Ebook na edição 0.2.1.
+
 ## [0.2.0](https://github.com/promovaweb/pagespeedfy/compare/v0.1.1...v0.2.0) (2026-11-05)
 
 ### Funcionalidades

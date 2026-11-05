@@ -66,6 +66,6 @@ minuto da API e para que uma falha no mobile não gaste a consulta do desktop.
 | `tests/credenciais.test.ts` | Caminho, permissões, `createdAt`, prioridade da variável, arquivo corrompido, logout |
 | `tests/api.test.ts` | Parâmetros da URL, repetição em 500, 403 sem repetição e com chave oculta, 429 por minuto e cota diária |
 | `tests/relatorio.test.ts` | Notas, métricas, ordem, manuais, `notApplicable`, truncamento, limpeza de itens e CrUX |
-| `tests/armazenamento-comparar.test.ts` | URLs aceitas e recusadas, slug, carimbo e comparação |
-| `tests/cli.test.ts` | Fluxo `run` → `compare` → `report` com arquivos reais em pasta temporária |
+| `tests/armazenamento-comparar.test.ts` | URLs aceitas e recusadas, slug, carimbo, pasta única por execução e comparação |
+| `tests/cli.test.ts` | Fluxo `run` → `compare` → `report` com arquivos reais em pasta temporária e exit codes de uso inválido e ajuda |
 | `tests/docs.test.ts` | Todo subcomando implementado tem seção e cinco exemplos em `docs/user/06-referencia-cli.md` |

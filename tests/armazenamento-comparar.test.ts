@@ -1,7 +1,10 @@
 /** Caminhos de saída, validação de URL e comparação de relatórios. */
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { carimbo, slugRota, validarUrl } from "../src/armazenamento.js";
+import { mkdtempSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { basename, join } from "node:path";
+import { carimbo, criarPastaExecucao, slugRota, validarUrl } from "../src/armazenamento.js";
 import { comparar } from "../src/comparar.js";
 import { normalizarExecucao, type Relatorio } from "../src/relatorio.js";
 
@@ -16,6 +19,18 @@ describe("validarUrl e slugRota", () => {
     expect(slugRota(new URL("https://x.com/"))).toBe("home");
     expect(slugRota(new URL("https://x.com/blog/ação/"))).toBe("blog--acao");
     expect(carimbo(new Date(2026, 10, 5, 9, 3, 7))).toBe("20261105-090307");
+  });
+});
+
+describe("criarPastaExecucao", () => {
+  it("não reaproveita a pasta de outra execução no mesmo segundo", async () => {
+    const saida = mkdtempSync(join(tmpdir(), "psf-pasta-"));
+    const data = new Date(2026, 10, 5, 9, 3, 7);
+    const url = new URL("https://x.com/");
+    const primeira = await criarPastaExecucao(saida, url, data);
+    const segunda = await criarPastaExecucao(saida, url, data);
+    expect(basename(primeira)).toBe("20261105-090307");
+    expect(basename(segunda)).toBe("20261105-090307-2");
   });
 });
 

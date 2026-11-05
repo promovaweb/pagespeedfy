@@ -15,8 +15,9 @@ O comando `pagespeedfy run` consulta a API para uma URL, nas duas estratégias,
 e salva três coisas numa pasta datada:
 
 - o JSON bruto de cada estratégia, sem nenhuma alteração;
-- um `report.json` com as notas, as métricas, os dados de campo e só as
-  auditorias reprovadas, já ordenadas por impacto;
+- um `report.json` com as notas, as métricas, os dados de campo, as
+  auditorias reprovadas ordenadas por impacto, as verificações manuais e a
+  lista das auditorias aprovadas;
 - um `report.md` com o mesmo conteúdo em formato de leitura.
 
 A API key fica em `~/.pagespeedfy/credentials`, fora de qualquer projeto.

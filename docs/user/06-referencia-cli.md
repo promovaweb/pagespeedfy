@@ -156,7 +156,7 @@ Consulta o PageSpeed Insights para **uma** página e salva o relatório.
 | `-l`, `--locale` | texto | não | `pt-BR` | Idioma dos títulos e descrições das auditorias |
 | `-o`, `--output` | caminho | não | `pagespeedfy-reports` | Pasta base dos relatórios, relativa ao diretório atual |
 | `--max-items` | inteiro > 0 | não | `50` | Itens de detalhe preservados por auditoria no `report.json` |
-| `--timeout` | segundos > 0 | não | `180` | Tempo máximo de cada consulta |
+| `--timeout` | segundos inteiros > 0 | não | `180` | Tempo máximo de cada consulta |
 | `--retries` | inteiro > 0 | não | `3` | Tentativas por estratégia em HTTP 429 e 5xx |
 | `--print` | `summary`, `markdown`, `path` | não | `summary` | O que imprimir ao fim |
 

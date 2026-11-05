@@ -64,11 +64,24 @@ export function carimbo(data = new Date()): string {
   return `${data.getFullYear()}${d(data.getMonth() + 1)}${d(data.getDate())}-${d(data.getHours())}${d(data.getMinutes())}${d(data.getSeconds())}`;
 }
 
-/** Cria e devolve a pasta absoluta da execução. */
+/**
+ * Cria e devolve a pasta absoluta da execução. Quando já existe uma pasta com
+ * o mesmo carimbo (duas execuções no mesmo segundo), acrescenta `-2`, `-3` e
+ * assim por diante, para nunca sobrescrever uma medição.
+ */
 export async function criarPastaExecucao(saida: string, url: URL, data = new Date()): Promise<string> {
-  const pasta = resolve(saida, url.host.replace(/:/g, "_"), slugRota(url), carimbo(data));
-  await mkdir(pasta, { recursive: true });
-  return pasta;
+  const base = resolve(saida, url.host.replace(/:/g, "_"), slugRota(url));
+  await mkdir(base, { recursive: true });
+  const nome = carimbo(data);
+  for (let n = 1; ; n += 1) {
+    const pasta = join(base, n === 1 ? nome : `${nome}-${n}`);
+    try {
+      await mkdir(pasta);
+      return pasta;
+    } catch (erro) {
+      if (!(erro instanceof Error && "code" in erro && erro.code === "EEXIST")) throw erro;
+    }
+  }
 }
 
 /** Grava um JSON formatado. */
