@@ -4,6 +4,14 @@ Todas as mudanças relevantes do Pagespeedfy são registradas neste arquivo. O
 projeto segue versionamento semântico e usa commits convencionais para preparar
 as próximas versões com o Release Please.
 
+## [0.2.2](https://github.com/promovaweb/pagespeedfy/compare/v0.2.1...v0.2.2) (2026-11-13)
+
+### Documentação
+
+- README reorganizado para quem usa: cabeçalho com o logo da Promovaweb, badges, banner do Discord e links para a documentação publicada, os planos da Promovaweb e o changelog. Novas seções Feito com, Comunidade e suporte, Contribuir e Promovaweb, com os repositórios usados.
+- `CONTRIBUTING.md` novo para quem contribui, com ambiente, organização do código, regras, validação, commits e releases. As instruções de desenvolvimento saem do README.
+- `.markdownlint.json` libera os elementos HTML do cabeçalho.
+
 ## [0.2.1](https://github.com/promovaweb/pagespeedfy/compare/v0.2.0...v0.2.1) (2026-11-05)
 
 ### Correções
