@@ -178,3 +178,8 @@ tarball, o PDF, o EPUB, o `SHA256SUMS.txt` e o pacote
 
 O passo a passo, os segredos do repositório e a publicação manual estão em
 [RELEASING.md](RELEASING.md).
+
+## Licença
+
+Ao enviar uma contribuição, você concorda que ela entra sob a mesma licença
+do projeto, a [GNU AGPL 3.0](LICENSE).

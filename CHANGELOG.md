@@ -4,6 +4,14 @@ Todas as mudanças relevantes do Pagespeedfy são registradas neste arquivo. O
 projeto segue versionamento semântico e usa commits convencionais para preparar
 as próximas versões com o Release Please.
 
+## [0.3.0](https://github.com/promovaweb/pagespeedfy/compare/v0.2.2...v0.3.0) (2026-11-13)
+
+### Licença
+
+- A partir desta versão, o projeto é distribuído sob a GNU AGPL 3.0 (SPDX `AGPL-3.0-only`); versões anteriores continuam sob a licença com que foram publicadas.
+- `LICENSE` novo na raiz com o texto oficial e integral da AGPL 3.0. O campo `license` do `package.json` deixa de ser `UNLICENSED`.
+- README com badge e seção Licença, que registra que a licença não concede o uso do nome e do logo do Pagespeedfy nem da marca Promovaweb. `CONTRIBUTING.md` informa que as contribuições entram sob a mesma licença.
+
 ## [0.2.2](https://github.com/promovaweb/pagespeedfy/compare/v0.2.1...v0.2.2) (2026-11-13)
 
 ### Documentação
