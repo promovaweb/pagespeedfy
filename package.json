@@ -1,6 +1,6 @@
 {
   "name": "@promovaweb/pagespeedfy",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "CLI e skill da Promovaweb para consultar o PageSpeed Insights e otimizar páginas de sites Astro.",
   "type": "module",
   "bin": {
@@ -28,8 +28,7 @@
     "ebook": "node .ebook/build-ebook.mjs",
     "ebook:verify": "node .ebook/build-ebook.mjs --check",
     "release:check": "node scripts/validar-release.mjs",
-    "package:verify": "node scripts/verificar-pacote.mjs",
-    "publish:npm": "node scripts/publicar-npm.mjs"
+    "package:verify": "node scripts/verificar-pacote.mjs"
   },
   "engines": {
     "node": ">=22.12.0"

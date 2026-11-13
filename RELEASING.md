@@ -1,75 +1,98 @@
 # Publicação de versões
 
-O Pagespeedfy é publicado pelo GitHub Actions, no mesmo modelo do ClickUpfy:
-Release Please prepara a versão e o workflow `Release` publica a GitHub
-Release e o pacote `@promovaweb/pagespeedfy` no npm.
+O Pagespeedfy é publicado desta máquina, do começo ao fim. O GitHub Actions
+roda só a CI (`.github/workflows/ci.yml`), que valida o código e o ebook a
+cada pull request e push na `main`. Nenhum workflow cria versão, release ou
+pacote no npm.
 
-## Como uma versão nasce
+A versão vem do `package.json` e o histórico fica no `CHANGELOG.md`. A
+publicação no npm é sempre local, com a conta `contatopromovaweb`, como
+manda a regra da Promovaweb para todos os pacotes.
 
-1. Commits na `main` seguem Conventional Commits (`feat:`, `fix:`, `docs:`).
-2. A cada push, o job `release-please` abre ou atualiza a **Release PR**, que
-   avança `package.json`, `package-lock.json`, `.release-please-manifest.json`
-   e escreve a seção nova do `CHANGELOG.md`.
-3. Revise a Release PR. Ajuste o texto do CHANGELOG no próprio branch da PR,
-   quando for preciso, antes do merge.
-4. O merge cria a tag `vX.Y.Z` e a GitHub Release. Na mesma execução, o job
-   `publicar`:
-   - roda `npm run validar`, `npm run ebook:verify` e `npm run release:check`;
-   - empacota com `npm pack` e instala o tarball em isolamento
-     (`npm run package:verify`);
-   - anexa o tarball, o PDF, o EPUB e `SHA256SUMS.txt` à release;
-   - publica no npm com `npm run publish:npm`, com `--provenance` porque o
-     repositório é público.
+## Passo a passo
 
-A publicação no npm é idempotente: se a versão já existir no registry, o passo
-é ignorado e o job pode ser reexecutado.
+Os exemplos usam `X.Y.Z` para a versão nova.
 
-## Publicação manual enquanto faltam os segredos
+1. Confira que a `main` local está limpa e igual à remota:
 
-O repositório ainda não tem `RELEASE_PLEASE_TOKEN` nem `NPM_TOKEN`. Sem o
-primeiro, o job `release-please` usa o `GITHUB_TOKEN`, que este repositório não
-autoriza a abrir pull requests, e a Release PR não nasce. Sem o segundo, o job
-`publicar` falha no passo do npm. As versões 0.1.1 e 0.2.0 saíram desta
-máquina, nesta ordem:
+   ```bash
+   git status --short
+   git fetch origin && git status -sb
+   ```
 
-1. Atualize `package.json`, `package-lock.json`,
-   `.release-please-manifest.json` e o `CHANGELOG.md`.
-2. Rode `npm run validar`, `npm run ebook:verify` e
-   `npm run release:check -- vX.Y.Z`.
-3. Empacote com `npm pack` e confira com `npm run package:verify -- <tgz>`.
-4. Faça o commit, crie a tag `vX.Y.Z` e envie com `git push origin main vX.Y.Z`.
-5. Crie a GitHub Release com o tarball, o PDF, o EPUB e `SHA256SUMS.txt`.
-6. Publique o mesmo tarball com `npm publish <tgz> --access public`. A conta
-   do npm exige 2FA a cada publicação, então rode o comando num terminal
-   interativo e confirme no navegador.
+2. Avance a versão no `package.json` e no `package-lock.json`:
 
-A 0.1.0 ficou retida no staging de publicação do npm e não pode ser
-reutilizada. Por isso a primeira versão no npm é a 0.1.1.
+   ```bash
+   npm version X.Y.Z --no-git-tag-version
+   ```
 
-## Segredos do repositório
+3. Escreva a seção `## [X.Y.Z](https://github.com/promovaweb/pagespeedfy/compare/vA.B.C...vX.Y.Z) (AAAA-MM-DD)`
+   no topo do `CHANGELOG.md`.
+4. Quando `docs/user/` mudar, avance `ebook/VERSION` e rode `npm run ebook`
+   para gerar o PDF e o EPUB novos.
+5. Valide:
 
-| Segredo | Uso |
-| --- | --- |
-| `NPM_TOKEN` | Token de automação do npm com permissão de publicação no escopo `@promovaweb` |
-| `RELEASE_PLEASE_TOKEN` | Opcional. Token que dispara a CI nas Release PRs; sem ele, o `GITHUB_TOKEN` é usado |
+   ```bash
+   npm run validar
+   npm run ebook:verify
+   npm run release:check -- vX.Y.Z
+   ```
 
-Cadastre com:
+6. Empacote e instale o tarball em isolamento:
 
-```bash
-gh secret set NPM_TOKEN -R promovaweb/pagespeedfy
-```
+   ```bash
+   mkdir -p release-assets
+   npm pack --pack-destination release-assets
+   npm run package:verify -- release-assets/promovaweb-pagespeedfy-X.Y.Z.tgz
+   ```
 
-## Ebook
+7. Reúna o ebook e os checksums:
 
-O ebook tem versão própria em `ebook/VERSION`. Quando `docs/user/` mudar,
-avance essa versão, rode `npm run ebook` e faça o commit dos artefatos junto
-com a documentação. A CI e o job de publicação rodam `npm run ebook:verify`.
+   ```bash
+   cp ebook/ebook-pagespeedfy.pdf release-assets/Pagespeedfy-Guia-do-Usuario.pdf
+   cp ebook/ebook-pagespeedfy.epub release-assets/Pagespeedfy-Guia-do-Usuario.epub
+   (cd release-assets && sha256sum * > SHA256SUMS.txt)
+   ```
+
+8. Faça o commit, crie a tag e envie os dois juntos:
+
+   ```bash
+   git add -A
+   git commit -m "chore: publica X.Y.Z"
+   git tag -a vX.Y.Z -m "vX.Y.Z"
+   git push --atomic origin HEAD:main vX.Y.Z
+   ```
+
+9. Crie a GitHub Release com os anexos:
+
+   ```bash
+   gh release create vX.Y.Z -R promovaweb/pagespeedfy \
+     --title "vX.Y.Z" --notes "<seção X.Y.Z do CHANGELOG>" \
+     release-assets/*
+   ```
+
+10. Publique no npm o mesmo tarball anexado à release:
+
+    ```bash
+    npm whoami   # contatopromovaweb
+    npm publish release-assets/promovaweb-pagespeedfy-X.Y.Z.tgz --access public
+    ```
+
+    A conta pode pedir confirmação no navegador. Quando isso acontecer, rode
+    o comando num terminal interativo e conclua a confirmação.
+
+A pasta `release-assets/` fica fora do Git (`.gitignore`).
 
 ## Conferência
 
 ```bash
 gh release view vX.Y.Z -R promovaweb/pagespeedfy
-npm view @promovaweb/pagespeedfy version
+npm view @promovaweb/pagespeedfy version license
 ```
 
+O npm pode levar alguns minutos para mostrar a versão nova. A release só está
+completa quando o npm mostra a mesma versão da tag.
+
 Uma tag publicada não é movida nem reutilizada. Correções saem em versão nova.
+A 0.1.0 ficou retida no staging de publicação do npm e não pode ser
+reutilizada. Por isso a primeira versão no npm é a 0.1.1.

@@ -69,7 +69,7 @@ docs/user/              fonte do ebook, em oito capítulos
 skills/                 skill pagespeedfy-otimizar-pagina e referências
 ebook/                  build.json e artefatos PDF e EPUB
 .ebook/                 script, templates e CSS do ebook
-scripts/                validar-release, verificar-pacote e publicar-npm
+scripts/                validar-release e verificar-pacote
 tests/                  vitest, com fixtures da API
 dist/                   build do TypeScript, gerado por npm run build
 ```
@@ -156,8 +156,7 @@ documentação.
 ## Commits e pull requests
 
 Os commits seguem Conventional Commits (`feat:`, `fix:`, `docs:`, `test:`,
-`build:`). O Release Please usa esses prefixos para preparar a próxima versão e
-o `CHANGELOG.md`.
+`build:`). Os prefixos orientam a seção da próxima versão no `CHANGELOG.md`.
 
 Um pull request deve trazer:
 
@@ -171,13 +170,12 @@ pull request.
 
 ## Releases
 
-A versão vem do `package.json` e o histórico fica no `CHANGELOG.md`. O fluxo
-usa Release Please e o workflow `Release`, que publica a GitHub Release, o
-tarball, o PDF, o EPUB, o `SHA256SUMS.txt` e o pacote
-`@promovaweb/pagespeedfy` no npm.
+A versão vem do `package.json` e o histórico fica no `CHANGELOG.md`. A
+publicação é manual e sai desta máquina: bump, validação, tag, GitHub Release
+com o tarball, o PDF, o EPUB e o `SHA256SUMS.txt`, e `npm publish` local do
+mesmo tarball. Nenhum workflow publica no npm.
 
-O passo a passo, os segredos do repositório e a publicação manual estão em
-[RELEASING.md](RELEASING.md).
+O passo a passo está em [RELEASING.md](RELEASING.md).
 
 ## Licença
 

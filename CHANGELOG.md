@@ -1,8 +1,15 @@
 # Changelog
 
 Todas as mudanças relevantes do Pagespeedfy são registradas neste arquivo. O
-projeto segue versionamento semântico e usa commits convencionais para preparar
-as próximas versões com o Release Please.
+projeto segue versionamento semântico e commits convencionais.
+
+## [0.3.1](https://github.com/promovaweb/pagespeedfy/compare/v0.3.0...v0.3.1) (2026-11-13)
+
+### Build
+
+- A publicação no npm passa a ser feita só pela máquina local; o workflow de release não publica mais no npm.
+- O workflow `Release`, o Release Please (`release-please-config.json` e `.release-please-manifest.json`), o script `publicar-npm.mjs` e o comando `npm run publish:npm` saem do repositório. Sem token, o Release Please não abria a Release PR, e as versões já saíam desta máquina.
+- `RELEASING.md` reescrito com o fluxo real: bump, validação, empacotamento, tag, GitHub Release com anexos e `npm publish` local.
 
 ## [0.3.0](https://github.com/promovaweb/pagespeedfy/compare/v0.2.2...v0.3.0) (2026-11-13)
 
