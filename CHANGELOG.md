@@ -3,6 +3,15 @@
 Todas as mudanças relevantes do Pagespeedfy são registradas neste arquivo. O
 projeto segue versionamento semântico e commits convencionais.
 
+## [0.3.2](https://github.com/promovaweb/pagespeedfy/compare/v0.3.1...v0.3.2) (2026-11-13)
+
+### Marca
+
+- Nova identidade visual: ícone, logotipo e kit de marca em `brand/`. O conceito é uma página veloz, a folha do site com um raio verde recortado, que mostra a página mais rápida depois das correções.
+- `brand/` traz logo em SVG e PNG para fundo claro e escuro, favicons, paleta com petróleo e turquesa da Promovaweb e verde próprio (`#22C55E` e `#15803D`), tokens, CSS, tema Tailwind, fontes, relatório de contraste, manifesto com hashes e guia visual.
+- O README abre com o logo do Pagespeedfy e a linha "Um projeto da Promovaweb".
+- O ebook passa à edição 0.2.2, com o ícone novo na capa no lugar do medidor antigo.
+
 ## [0.3.1](https://github.com/promovaweb/pagespeedfy/compare/v0.3.0...v0.3.1) (2026-11-13)
 
 ### Build

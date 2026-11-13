@@ -69,6 +69,7 @@ docs/user/              fonte do ebook, em oito capítulos
 skills/                 skill pagespeedfy-otimizar-pagina e referências
 ebook/                  build.json e artefatos PDF e EPUB
 .ebook/                 script, templates e CSS do ebook
+brand/                  logo, paleta, tokens e fontes da marca
 scripts/                validar-release e verificar-pacote
 tests/                  vitest, com fixtures da API
 dist/                   build do TypeScript, gerado por npm run build
@@ -147,11 +148,16 @@ A CI em `.github/workflows/ci.yml` roda `npm ci`, `npm run validar` e
 | `docs/arquitetura.md` | módulos, fluxo de dados e testes |
 | `skills/pagespeedfy-otimizar-pagina/` | instruções lidas pelo agente e referências |
 | `RELEASING.md` | publicação de versões |
+| `brand/README.md` | logo, paleta e regras de uso da marca |
 
 O manual é publicado em
 <https://promovaweb.com/docs/pagespeedfy/>. Quando `docs/user/` mudar, avance
 `ebook/VERSION`, rode `npm run ebook` e faça o commit dos artefatos junto com a
 documentação.
+
+O ícone da capa do ebook, `.ebook/assets/logo.svg`, é cópia de
+`brand/logo/icon.svg`. Ao trocar o ícone, copie o arquivo de novo, avance
+`ebook/VERSION` e rode `npm run ebook`.
 
 ## Commits e pull requests
 

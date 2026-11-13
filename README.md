@@ -1,8 +1,8 @@
 <p align="center">
-  <a href="https://promovaweb.com">
+  <a href="https://github.com/promovaweb/pagespeedfy">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://promovaweb.com/promovaweb-logo-dark-586.png">
-      <img alt="Promovaweb" src="https://promovaweb.com/promovaweb-logo-light-586.png" width="240">
+      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/promovaweb/pagespeedfy/main/brand/logo/logo-dark.png">
+      <img alt="Pagespeedfy" src="https://raw.githubusercontent.com/promovaweb/pagespeedfy/main/brand/logo/logo-light.png" width="360">
     </picture>
   </a>
 </p>
@@ -12,6 +12,8 @@
 <p align="center">
   Meça uma página no PageSpeed Insights e corrija o site Astro a partir do relatório.
 </p>
+
+<p align="center">Um projeto da <a href="https://promovaweb.com">Promovaweb</a></p>
 
 <p align="center">
   <a href="https://github.com/promovaweb/pagespeedfy/releases/latest"><img alt="GitHub Release" src="https://img.shields.io/github/v/release/promovaweb/pagespeedfy"></a>
