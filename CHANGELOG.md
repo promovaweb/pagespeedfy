@@ -3,6 +3,14 @@
 Todas as mudanças relevantes do Pagespeedfy são registradas neste arquivo. O
 projeto segue versionamento semântico e commits convencionais.
 
+## [0.3.3](https://github.com/promovaweb/pagespeedfy/compare/v0.3.2...v0.3.3) (2026-11-13)
+
+### Correções
+
+- Aplica os tokens da marca ao PDF e EPUB, com a assinatura oficial na capa e áreas separadas para logo e texto.
+- Substitui o renderizador de PDF por Playwright/Chromium, controlado por Node.js, e gera a capa do EPUB pela mesma composição.
+- Sincroniza a edição do ebook com a versão do pacote e inclui tokens e logo na verificação de integridade.
+
 ## [0.3.2](https://github.com/promovaweb/pagespeedfy/compare/v0.3.1...v0.3.2) (2026-11-13)
 
 ### Marca

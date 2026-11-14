@@ -1,16 +1,17 @@
 {
   "schema_version": 1,
-  "version": "0.2.2",
-  "edition": "v0.2.2",
-  "generated_at": "2026-11-13T23:15:14Z",
-  "source_sha256": "bc8028f9af6e1b9eb921dc3b3ace1bd9dd2eb34e5d31d915cc32ef658b42468f",
+  "version": "0.3.3",
+  "edition": "v0.3.3",
+  "generated_at": "2026-11-14T01:10:56Z",
+  "source_sha256": "b9f4c8e1f42cd80f7470212738066d85e64bf08f162bc4685081a7fc02398ff3",
   "sources": [
-    ".ebook/assets/logo.svg",
     ".ebook/build-ebook.mjs",
     ".ebook/epub.css",
     ".ebook/metadata.yaml",
     ".ebook/pdf.css",
     ".ebook/template.html",
+    "brand/logo/logo-light.png",
+    "brand/tokens.json",
     "docs/user/00-visao-geral.md",
     "docs/user/01-instalacao.md",
     "docs/user/02-api-key-e-credencial.md",
@@ -21,16 +22,17 @@
     "docs/user/07-solucao-de-problemas.md",
     "docs/user/README.md",
     "docs/user/reading-order.txt",
-    "ebook/VERSION"
+    "ebook/VERSION",
+    "package.json"
   ],
   "artifacts": {
     "pdf": {
-      "file": "Pagespeedfy-Guia-do-Usuario-v0.2.2.pdf",
-      "sha256": "9c315c80a06db51f3b8083dcf85c684f386f03a0cfea3e4f3116e680b2d5ce80"
+      "file": "Pagespeedfy-Guia-do-Usuario-v0.3.3.pdf",
+      "sha256": "cb9d8cf263d509be5c61dfb7b387d1e3033b820879ffbf14cc7ab976430e3438"
     },
     "epub": {
-      "file": "Pagespeedfy-Guia-do-Usuario-v0.2.2.epub",
-      "sha256": "845a7bdec3d690506601d7a70722f481120c4afe0895d817fdfafa7f0b63825c"
+      "file": "Pagespeedfy-Guia-do-Usuario-v0.3.3.epub",
+      "sha256": "c8f0730c3f6bcb10cbef2c82ceb060f9e136a2fb33858d7207ffcf85a2983893"
     }
   }
 }

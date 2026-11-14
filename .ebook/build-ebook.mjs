@@ -4,10 +4,9 @@
  * Fonte: `docs/user/`, na ordem de `docs/user/reading-order.txt`.
  * Saída: `ebook/Pagespeedfy-Guia-do-Usuario-v<versão>.{pdf,epub}`, os aliases
  * `ebook/ebook-pagespeedfy.{pdf,epub}` e o manifesto `ebook/build.json`.
- * A versão do ebook vem de `ebook/VERSION` e é independente da versão do
- * pacote, que o Release Please atualiza.
+ * A versão do ebook espelha a versão do pacote em `ebook/VERSION`.
  * `--check` só confere versão, hashes, XML, links internos, seções e fontes.
- * Requer Pandoc, WeasyPrint, ImageMagick, xmllint, poppler-utils e unzip.
+ * Requer Pandoc, Playwright/Chromium, xmllint, poppler-utils e unzip.
  */
 
 import { createHash } from "node:crypto";
@@ -17,7 +16,7 @@ import { dirname, join, relative, resolve } from "node:path";
 import { posix } from "node:path";
 import { createRequire } from "node:module";
 import { spawnSync } from "node:child_process";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(SCRIPT_DIR, "..");
@@ -31,7 +30,9 @@ const PDF_STYLE = join(SCRIPT_DIR, "pdf.css");
 const EPUB_STYLE = join(SCRIPT_DIR, "epub.css");
 const TEMPLATE = join(SCRIPT_DIR, "template.html");
 const METADATA = join(SCRIPT_DIR, "metadata.yaml");
-const LOGO = join(SCRIPT_DIR, "assets", "logo.svg");
+const LOGO = join(ROOT, "brand", "logo", "logo-light.png");
+const TOKENS = join(ROOT, "brand", "tokens.json");
+const PACKAGE = join(ROOT, "package.json");
 const SCRIPT = fileURLToPath(import.meta.url);
 const REQUIRE = createRequire(import.meta.url);
 const FONT_FILES = [
@@ -62,6 +63,7 @@ async function filesIn(directory) {
 function version() {
   const value = readFileSync(VERSION_FILE, "utf8").trim();
   if (!/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/.test(value)) fail("ebook/VERSION deve conter SemVer estável.");
+  if (value !== JSON.parse(readFileSync(PACKAGE, "utf8")).version) fail("ebook/VERSION diverge de package.json.");
   return value;
 }
 async function pages() {
@@ -191,11 +193,34 @@ async function build(value, sources, pagePaths) {
   const paths = outputs(value);
   const html = join(BUILD_ROOT, `${paths.stem}.html`);
   const cover = join(BUILD_ROOT, `${paths.stem}-cover.png`);
-  run("magick", [LOGO, "-background", "white", "-gravity", "center", "-extent", "1600x2560", cover]);
+
   const common = ["--from=markdown", "--standalone", "--file-scope", "--toc", "--toc-depth=2", `--metadata-file=${METADATA}`, "--metadata", `version=${value}`];
   run("pandoc", [...prepared.inputs, "--to=html5", ...common, `--template=${TEMPLATE}`, "--metadata", `date=${datePtBr()}`, "--output", html], { cwd: prepared.directory });
-  run("weasyprint", [html, paths.pdf, "--base-url", SCRIPT_DIR, "--stylesheet", PDF_STYLE]);
-  run("pandoc", [...prepared.inputs, "--to=epub3", ...common, `--css=${EPUB_STYLE}`, `--epub-cover-image=${cover}`, ...FONT_FILES.flatMap((font) => [`--epub-embed-font=${font}`]), "--output", paths.epub], { cwd: prepared.directory });
+  // A mesma composição HTML fornece o PDF e a capa raster do EPUB.
+  const { chromium } = await import("playwright");
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage({ deviceScaleFactor: 2 });
+    await page.goto(pathToFileURL(html).href);
+    await page.addStyleTag({ path: PDF_STYLE });
+    const tokens = JSON.parse(await readFile(TOKENS, "utf8")).light;
+    const css = ":root { " + Object.entries(tokens).map(([key, value]) => "--brand-" + key + ": " + value + ";").join(" ") + " }";
+    await page.addStyleTag({ content: css });
+    await page.evaluate(async () => {
+      await document.fonts.ready;
+      for (const image of document.images) await image.decode();
+      const mark = document.querySelector(".cover-mark").getBoundingClientRect();
+      const title = document.querySelector(".cover-title").getBoundingClientRect();
+      const meta = document.querySelector(".cover-meta").getBoundingClientRect();
+      if (mark.bottom > title.top || title.bottom > meta.top) throw new Error("Elementos sobrepostos na capa.");
+    });
+    await page.locator(".cover").screenshot({ path: cover });
+    await page.pdf({ path: paths.pdf, preferCSSPageSize: true, printBackground: true, outline: true, tagged: true });
+    await writeFile(join(BUILD_ROOT, "epub.css"), css + "\n" + await readFile(EPUB_STYLE, "utf8"));
+  } finally {
+    await browser.close();
+  }
+  run("pandoc", [...prepared.inputs, "--to=epub3", ...common, `--css=${join(BUILD_ROOT, "epub.css")}`, `--epub-cover-image=${cover}`, ...FONT_FILES.flatMap((font) => [`--epub-embed-font=${font}`]), "--output", paths.epub], { cwd: prepared.directory });
   const manifest = {
     schema_version: 1,
     version: value,
@@ -218,7 +243,7 @@ async function main() {
   if (process.argv.length > (onlyCheck ? 3 : 2)) fail("uso: node .ebook/build-ebook.mjs [--check]");
   const value = version();
   const pagePaths = await pages();
-  const sources = [...await filesIn(DOCS_ROOT), VERSION_FILE, PDF_STYLE, EPUB_STYLE, TEMPLATE, METADATA, LOGO, SCRIPT].sort();
+  const sources = [...await filesIn(DOCS_ROOT), VERSION_FILE, PDF_STYLE, EPUB_STYLE, TEMPLATE, METADATA, LOGO, TOKENS, PACKAGE, SCRIPT].sort();
   if (onlyCheck) await check(value, sources);
   else await build(value, sources, pagePaths);
 }

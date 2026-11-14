@@ -28,8 +28,8 @@ Os exemplos usam `X.Y.Z` para a versão nova.
 
 3. Escreva a seção `## [X.Y.Z](https://github.com/promovaweb/pagespeedfy/compare/vA.B.C...vX.Y.Z) (AAAA-MM-DD)`
    no topo do `CHANGELOG.md`.
-4. Quando `docs/user/` mudar, avance `ebook/VERSION` e rode `npm run ebook`
-   para gerar o PDF e o EPUB novos.
+4. Copie a versão do pacote para `ebook/VERSION` e rode `npm run ebook`
+   para gerar o PDF e o EPUB novos em cada release.
 5. Valide:
 
    ```bash

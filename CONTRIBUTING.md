@@ -86,8 +86,8 @@ A arquitetura completa, o fluxo de `run` e as escolhas de projeto estão em
 4. Se a mudança alterar a superfície do CLI, atualize
    `docs/user/06-referencia-cli.md`. O teste `tests/docs.test.ts` confere que
    cada subcomando tem seção e pelo menos cinco exemplos.
-5. Se a mudança alterar `docs/user/`, avance `ebook/VERSION` e rode
-   `npm run ebook`.
+5. Ao publicar uma versão, sincronize `ebook/VERSION` com `package.json` e
+   rode `npm run ebook`.
 6. Rode `npm run validar` e, quando o ebook mudar, `npm run ebook:verify`.
 7. Abra o pull request com a issue relacionada e a validação executada.
 
@@ -155,9 +155,17 @@ O manual é publicado em
 `ebook/VERSION`, rode `npm run ebook` e faça o commit dos artefatos junto com a
 documentação.
 
-O ícone da capa do ebook, `.ebook/assets/logo.svg`, é cópia de
-`brand/logo/icon.svg`. Ao trocar o ícone, copie o arquivo de novo, avance
-`ebook/VERSION` e rode `npm run ebook`.
+O gerador Node.js em `.ebook/build-ebook.mjs` usa diretamente
+`brand/logo/logo-light.png` e `brand/tokens.json`. O PDF e a capa do EPUB
+compartilham o template `.ebook/template.html`; os estilos ficam em
+`.ebook/pdf.css` e `.ebook/epub.css`. A versão em `ebook/VERSION` deve ser
+igual à de `package.json`.
+
+Para gerar, instale Pandoc, xmllint, poppler-utils e unzip, rode `npm ci` e
+`npx playwright install chromium`. O PDF é renderizado pelo Chromium via
+Playwright em Node.js. O sumário permanece navegável, sem números de página.
+A conferência `npm run ebook:verify` valida hashes das fontes e artefatos,
+aliases, XML, links internos, seções e fontes incorporadas, sem abrir o navegador.
 
 ## Commits e pull requests
 
