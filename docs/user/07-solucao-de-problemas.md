@@ -2,8 +2,8 @@
 
 ## `Nenhuma API key configurada`
 
-Nenhuma chave no arquivo nem na variável. Rode `pagespeedfy auth login` ou
-defina `PAGESPEEDFY_API_KEY`.
+O CLI não encontrou chave no arquivo nem na variável. Rode
+`pagespeedfy auth login` ou defina `PAGESPEEDFY_API_KEY`.
 
 ## `A API key foi recusada`
 
@@ -28,15 +28,15 @@ O Google não conseguiu carregar a página. Causas comuns:
 
 - a URL exige login ou está atrás de autenticação básica;
 - a página responde 404, 500 ou redireciona em laço;
-- o firewall ou a proteção contra bots bloqueia o Lighthouse.
+- o firewall ou a proteção contra bots recusa as requisições do Lighthouse.
 
-Abra a URL numa janela anônima. Se ela não carregar ali, o Google também não
-carrega.
+Abra a URL numa janela anônima: se ela não carregar ali, o Google também não
+consegue carregá-la.
 
 ## `O PageSpeed Insights não alcança localhost`
 
-O CLI recusa `localhost`, IPs privados e `.local`. Publique um preview e meça
-a URL pública.
+O CLI recusa `localhost`, IPs privados e `.local`, então publique um preview e
+meça a URL pública.
 
 ## `a API não respondeu em 180 s`
 
@@ -46,14 +46,16 @@ Páginas pesadas podem passar do tempo padrão. Aumente com
 ## `runtimeError` preenchido no relatório
 
 O Lighthouse rodou, mas falhou ao medir. A mensagem fica no topo da seção da
-estratégia no `report.md`. Exemplos: `NO_FCP` (a página não pintou nada) e
-`ERRORED_DOCUMENT_REQUEST`. Corrija o carregamento da página e meça de novo.
+estratégia no `report.md`, com códigos como `NO_FCP` (a página não pintou
+nada) e `ERRORED_DOCUMENT_REQUEST`. Corrija o carregamento da página e meça de
+novo.
 
 ## Notas muito diferentes entre duas medições
 
-Variação de até 5 pontos em Performance é comum. Rode duas ou três medições e
-compare as métricas. Mudança grande sem alteração no código costuma vir de
-terceiros (anúncios, chat, analytics) ou de cache frio na CDN.
+O Lighthouse simula rede e CPU, por isso a nota de Performance varia alguns
+pontos entre medições. Rode duas ou três medições e compare as métricas. Uma
+mudança grande sem alteração no código aponta para scripts de terceiros
+(anúncios, chat, analytics) ou para cache frio na CDN.
 
 ## O relatório não mostra todos os itens
 

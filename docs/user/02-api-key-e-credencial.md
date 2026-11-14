@@ -2,7 +2,7 @@
 
 A API do PageSpeed Insights aceita consultas sem chave, mas a cota anônima é
 compartilhada entre todos os usuários e costuma acabar cedo. Por isso o
-Pagespeedfy exige uma chave própria: a cota passa a ser do seu projeto no
+Pagespeedfy exige uma chave própria, com a cota vinculada ao seu projeto no
 Google Cloud.
 
 ## Criar a chave
@@ -24,7 +24,7 @@ A chave começa com `AIza` e tem 39 caracteres.
 pagespeedfy auth login
 ```
 
-O terminal pede a chave e não mostra o que você digita. Para conferir se ela
+O terminal solicita a chave e não mostra o que você digita. Para conferir se ela
 funciona antes de gravar:
 
 ```bash
@@ -72,8 +72,8 @@ PAGESPEEDFY_API_KEY="$PSI_KEY" pagespeedfy run https://promovaweb.com/
 
 ## Cuidados
 
-- Não passe a chave como argumento de comando. Ela ficaria no histórico do
-  shell.
+- Não informe a chave como argumento de comando, porque ela ficaria no
+  histórico do shell.
 - Não grave a chave no projeto Astro nem em `.env` versionado.
-- Não envie a chave no chat do agente. A skill pede que você rode
+- Não envie a chave no chat do agente. A skill orienta você a rodar
   `pagespeedfy auth login` no seu terminal.

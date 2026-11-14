@@ -44,7 +44,7 @@ Grava a API key do PageSpeed Insights em `~/.pagespeedfy/credentials`.
 **Efeito persistente:** cria `~/.pagespeedfy/` com permissão `0700` e grava
 `credentials` com `0600`, de forma atômica. Ao regravar, preserva `createdAt`.
 
-**Permissões:** escrita na pasta pessoal. Nenhuma alteração no projeto.
+**Permissões:** escrita na pasta pessoal, sem alteração no projeto.
 
 **Recusas:** sem terminal interativo e sem `--stdin` (código 2); chave vazia
 (código 2); com `--validar`, chave recusada pela API (código 1, nada é
@@ -87,7 +87,7 @@ origem em uso. Com `--json`: `{ path, file, env, active }`. O campo `active` val
 **Recusas:** arquivo corrompido (código 1). Sem chave configurada, imprime a
 orientação e sai com código 1.
 
-**Limites:** não testa a chave na API. Use `auth login --validar` para isso.
+**Limites:** não testa a chave na API, tarefa do `auth login --validar`.
 
 **Exemplos:**
 
@@ -117,8 +117,8 @@ Sem opções próprias.
 **Saída:** `Removido: <caminho>.` ou `Nenhuma credencial gravada.` Com
 `--json`: `{ path, removed }`.
 
-**Efeito persistente:** apaga `~/.pagespeedfy/credentials`. A pasta e os
-relatórios ficam.
+**Efeito persistente:** apaga `~/.pagespeedfy/credentials` e mantém a pasta e
+os relatórios.
 
 **Recusas:** nenhuma; sem arquivo, sai com código 0.
 
@@ -146,7 +146,7 @@ pagespeedfy auth logout && pagespeedfy auth status
 
 ## `pagespeedfy run <url>`
 
-Consulta o PageSpeed Insights para **uma** página e salva o relatório.
+Consulta o PageSpeed Insights para **uma** página e grava o relatório.
 
 | Argumento ou opção | Tipo | Obrigatório | Padrão | Efeito |
 | --- | --- | --- | --- | --- |
@@ -183,10 +183,10 @@ progresso vai para o stderr.
   desativada): código 1, sem nova tentativa.
 - HTTP 429 de cota diária esgotada: código 1, sem nova tentativa.
 - 429 por minuto, 5xx e tempo esgotado: repete com espera de 2 s, 4 s e
-  assim por diante, e falha após `--retries` tentativas.
+  assim por diante, até falhar depois de `--retries` tentativas.
 
 **Limites:** uma URL por execução. A API pode levar de 20 a 90 segundos por
-estratégia. A chave nunca aparece em mensagens: o CLI troca o valor por `***`.
+estratégia. O CLI troca o valor da chave por `***` em todas as mensagens.
 
 **Exemplos:**
 
@@ -223,7 +223,7 @@ Com `--json`, o `report.json` inteiro.
 **Recusas:** caminho sem `report.json` ou JSON que não foi gerado pelo
 Pagespeedfy (código 1).
 
-**Limites:** não consulta a API. Mostra até cinco itens por auditoria no
+**Limites:** não consulta a API e mostra até cinco itens por auditoria no
 Markdown.
 
 **Exemplos:**
@@ -238,7 +238,7 @@ pagespeedfy report pagespeedfy-reports/promovaweb.com/home/20261105-103012/repor
 # 3. Lista os IDs reprovados no mobile
 pagespeedfy --json report "$REPORT" | jq -r '.runs[] | select(.strategy=="mobile") | .failedAudits[].id'
 
-# 4. Salva o Markdown em outro lugar
+# 4. Grava o Markdown em outro lugar
 pagespeedfy report "$REPORT" > auditoria-home.md
 
 # 5. Última execução de uma rota

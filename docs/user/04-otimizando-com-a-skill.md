@@ -22,8 +22,8 @@ com `pagespeedfy auth login`.
 Use $pagespeedfy-otimizar-pagina para otimizar https://promovaweb.com/blog/
 ```
 
-Informe uma URL. Com várias, a skill pede que você escolha uma e lista as
-outras para depois.
+Informe uma URL. Se você enviar várias, a skill pergunta qual medir agora e
+lista as outras para depois.
 
 ## O que a skill faz
 
@@ -46,17 +46,17 @@ outras para depois.
 
 ## O plano de correções
 
-O plano é o ponto de controle da skill. Nenhum arquivo do projeto muda antes
+O plano é o ponto de controle da skill: nenhum arquivo do projeto muda antes
 da sua resposta. Você pode:
 
 - autorizar o plano inteiro;
 - autorizar só algumas linhas, por número, ou só alguns escopos;
-- pedir ajustes. A skill atualiza o `plano.md`, mostra a nova versão e
-  pergunta de novo.
+- indicar ajustes, para que a skill atualize o `plano.md`, mostre a nova
+  versão e pergunte de novo.
 
 A resposta fica registrada na seção "Autorização" do `plano.md`. Se durante a
 correção aparecer uma mudança que não estava no plano, a skill acrescenta a
-linha e pede autorização outra vez.
+linha e aguarda sua autorização outra vez.
 
 Cada linha recebe um de quatro escopos:
 
@@ -70,7 +70,7 @@ Cada linha recebe um de quatro escopos:
 ## O que a skill não faz
 
 - Não mede mais de uma página por execução.
-- Não pede nem mostra a API key.
+- Não solicita nem mostra a API key.
 - Não altera o projeto antes de você autorizar o plano.
 - Não faz deploy, commit nem push.
 - Não altera hospedagem, CDN ou DNS.

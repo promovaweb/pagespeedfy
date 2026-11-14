@@ -15,7 +15,7 @@ segunda pasta recebe o sufixo `-2`.
 └── report.md
 ```
 
-| Parte | Regra |
+| Parte | Formação |
 | --- | --- |
 | `<output>` | `--output`, padrão `pagespeedfy-reports` no diretório atual |
 | `<host>` | Host da URL; `:` da porta vira `_` |
@@ -29,7 +29,8 @@ segunda pasta recebe o sufixo `-2`.
   carregamento em base64 e o mapa de entidades.
 - **`report.json`**: relatório normalizado, descrito abaixo.
 - **`report.md`**: o mesmo relatório em Markdown, com até cinco itens por
-  auditoria. Pode ser gerado de novo com `pagespeedfy report`.
+  auditoria, que o comando `pagespeedfy report` gera de novo a partir do
+  `report.json`.
 
 ## `report.json` (formatVersion 1)
 
@@ -89,7 +90,7 @@ segunda pasta recebe o sufixo `-2`.
 }
 ```
 
-## Regras da normalização
+## Como a normalização funciona
 
 - **Notas:** `score` da categoria multiplicado por 100 e arredondado.
   Categoria sem nota fica `null`.
@@ -98,16 +99,16 @@ segunda pasta recebe o sufixo `-2`.
 - **Auditoria reprovada:** pertence a uma categoria consultada, tem
   `scoreDisplayMode` igual a `binary`, `numeric` ou `metricSavings` e nota
   menor que 0,9 (ou nula).
-- **Ignoradas:** `notApplicable`, `informative` e `error` não entram em
-  nenhuma lista. Continuam no JSON bruto.
+- **Ignoradas:** `notApplicable`, `informative` e `error` ficam só no JSON
+  bruto, fora de todas as listas.
 - **Manuais:** `scoreDisplayMode` igual a `manual` vai para `manualAudits`.
 - **Ordem:** peso na categoria (maior primeiro), soma de `metricSavings`
   (maior primeiro), nota (menor primeiro) e ID.
 - **Itens:** os primeiros `maxItems`, sem as chaves internas `boundingRect`,
-  `lhId` e `path`. `totalItems` guarda a contagem original.
+  `lhId` e `path`, com o total original em `totalItems`.
 - **Dados de campo:** `loadingExperience` vira `field.page` e
-  `originLoadingExperience` vira `field.origin`. Bloco sem métricas vira
-  `null`.
+  `originLoadingExperience` vira `field.origin`, com `null` no bloco sem
+  métricas.
 
 ## Compatibilidade
 

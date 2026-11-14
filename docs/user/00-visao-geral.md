@@ -2,17 +2,17 @@
 
 O PageSpeed Insights avalia uma página em quatro categorias: Performance,
 Acessibilidade, Boas práticas e SEO. Ele roda o Lighthouse nos servidores do
-Google, em um celular simulado e em um desktop simulado, e junta os dados de
+Google, em um celular simulado e em um desktop simulado. Depois junta os dados de
 usuários reais do Chrome UX Report quando a página tem tráfego suficiente.
 
 O resultado chega como um JSON de vários megabytes. Ler esse JSON à mão para
 descobrir qual componente atrasa o carregamento toma tempo. O Pagespeedfy
 divide esse trabalho em duas partes.
 
-## O CLI mede e organiza
+## O CLI mede e grava o relatório
 
-O comando `pagespeedfy run` consulta a API para uma URL, nas duas estratégias,
-e salva três coisas numa pasta datada:
+O comando `pagespeedfy run` consulta a API para uma URL nas duas estratégias
+e grava três arquivos numa pasta datada:
 
 - o JSON bruto de cada estratégia, sem nenhuma alteração;
 - um `report.json` com as notas, as métricas, os dados de campo, as
@@ -39,7 +39,7 @@ Cada auditoria recebe um escopo:
 | --- | --- | --- |
 | Página | Imagem de capa sem `<Image>` | Propõe a correção na rota |
 | Componente | Botão do header sem nome acessível | Propõe e lista as páginas que mudam junto |
-| Global | `build.inlineStylesheets` no `astro.config.mjs` | Propõe com o diff resumido |
+| Global | `build.inlineStylesheets` no `astro.config.mjs` | Propõe com o resumo da alteração |
 | Fora do código | Cabeçalho de cache da CDN | Descreve o ajuste para a hospedagem |
 
 Depois das correções autorizadas, a skill roda o build. Quando existe uma URL de preview
@@ -47,12 +47,13 @@ com as mudanças, ela mede de novo e compara.
 
 ## Uma página por vez
 
-O Pagespeedfy trabalha com uma URL por execução. Cada relatório fica ligado a
-uma rota, e a comparação de antes e depois mede o efeito das mudanças nessa
-rota. Para otimizar a home e o blog, rode a skill duas vezes.
+O Pagespeedfy trabalha com uma URL por execução, com cada relatório ligado a
+uma rota. Assim, a comparação de antes e depois mede o efeito das mudanças
+nessa rota. Para otimizar a home e o blog, rode a skill uma vez para cada
+página.
 
 ## Por que a URL precisa ser pública
 
-O Lighthouse do PageSpeed Insights roda no Google, não na sua máquina. Ele não
-alcança `localhost` nem a rede interna. Meça a produção ou um deploy de
-preview. O CLI recusa URLs locais antes de gastar a cota.
+O Lighthouse do PageSpeed Insights roda nos servidores do Google e não alcança
+`localhost` nem a rede interna. Meça a produção ou um deploy de preview, porque
+o CLI recusa URLs locais antes de gastar a cota.

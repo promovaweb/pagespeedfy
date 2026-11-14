@@ -8,8 +8,8 @@ Na pasta do projeto Astro:
 pagespeedfy run https://promovaweb.com/
 ```
 
-O CLI consulta mobile e depois desktop. Cada consulta leva de 20 a 90
-segundos. O progresso aparece no stderr:
+O CLI consulta mobile e depois desktop, com 20 a 90 segundos por consulta e o
+progresso no stderr:
 
 ```text
 Consultando mobile: https://promovaweb.com/
@@ -58,7 +58,7 @@ resolvidas, as novas e as que continuam.
 
 ## Variação entre medições
 
-O Lighthouse simula rede e CPU, e duas medições seguidas podem diferir alguns
+O Lighthouse simula rede e CPU. Por isso, duas medições seguidas podem diferir alguns
 pontos em Performance. Olhe as métricas e a lista de auditorias resolvidas
 antes de concluir que uma mudança funcionou. Os dados de campo refletem 28
 dias de usuários reais e só mostram o efeito semanas depois.

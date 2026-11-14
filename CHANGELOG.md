@@ -3,6 +3,13 @@
 Todas as mudanças relevantes do Pagespeedfy são registradas neste arquivo. O
 projeto segue versionamento semântico e commits convencionais.
 
+## [0.3.5] - 2026-11-14
+
+### Corrigido
+
+- Revisada a redação do guia do usuário em `docs/user/`, com explicações mais precisas e correções de linguagem.
+- Atualizados os formatos portáteis da documentação a partir das fontes revisadas.
+
 ## [0.3.4](https://github.com/promovaweb/pagespeedfy/compare/v0.3.3...v0.3.4) (2026-11-13)
 
 ### Correções

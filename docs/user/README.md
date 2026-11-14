@@ -16,10 +16,10 @@ npx skills add https://github.com/promovaweb/pagespeedfy
 pagespeedfy auth login
 ```
 
-O primeiro comando instala o CLI. O segundo, rodado na raiz do projeto Astro,
+O primeiro comando instala o CLI e o segundo, rodado na raiz do projeto Astro,
 instala a skill a partir do repositório
 [promovaweb/pagespeedfy](https://github.com/promovaweb/pagespeedfy). O terceiro
-grava a API key. Os detalhes estão em [Instalação](01-instalacao.md).
+grava a API key, conforme os detalhes de [Instalação](01-instalacao.md).
 
 ## Comece aqui
 
