@@ -3,6 +3,13 @@
 Todas as mudanças relevantes do Pagespeedfy são registradas neste arquivo. O
 projeto segue versionamento semântico e commits convencionais.
 
+## [0.3.4](https://github.com/promovaweb/pagespeedfy/compare/v0.3.3...v0.3.4) (2026-11-13)
+
+### Correções
+
+- Atualiza o README do ebook com os requisitos do gerador Node.js e a versão sincronizada com o pacote.
+- Regenera PDF e EPUB na edição 0.3.4, mantendo a identidade visual aplicada na 0.3.3.
+
 ## [0.3.3](https://github.com/promovaweb/pagespeedfy/compare/v0.3.2...v0.3.3) (2026-11-13)
 
 ### Correções
