@@ -1,13 +1,14 @@
 # Publicação de versões
 
-O Pagespeedfy é publicado desta máquina, do começo ao fim. O GitHub Actions
-roda só a CI (`.github/workflows/ci.yml`), que valida o código e o ebook a
-cada pull request e push na `main`. Nenhum workflow cria versão, release ou
-pacote no npm.
+A versão do Pagespeedfy sai em três partes: a tag no Git, a GitHub Release com
+os binários e o pacote npm. A tag dispara o workflow `release.yml`, que compila
+os binários. A publicação no npm é local, depois da release, a partir da pasta
+`npm/`, com a conta `contatopromovaweb`, como manda a regra da Promovaweb para
+todos os pacotes.
 
-A versão vem do `package.json` e o histórico fica no `CHANGELOG.md`. A
-publicação no npm é sempre local, com a conta `contatopromovaweb`, como
-manda a regra da Promovaweb para todos os pacotes.
+A versão vem do `package.json` e o histórico fica no `CHANGELOG.md`. O arquivo
+`npm/package.json` carrega a mesma versão, conferida pelo workflow e pelos
+testes. O `package.json` da raiz é privado: só a pasta `npm/` vai para o npm.
 
 ## Passo a passo
 
@@ -20,79 +21,97 @@ Os exemplos usam `X.Y.Z` para a versão nova.
    git fetch origin && git status -sb
    ```
 
-2. Avance a versão no `package.json` e no `package-lock.json`:
+2. Avance a versão em `package.json` e em `npm/package.json`. Os dois precisam
+   ficar iguais. Depois confira:
 
    ```bash
-   npm version X.Y.Z --no-git-tag-version
+   jq -r .version package.json npm/package.json
    ```
 
 3. Escreva a seção `## [X.Y.Z](https://github.com/promovaweb/pagespeedfy/compare/vA.B.C...vX.Y.Z) (AAAA-MM-DD)`
-   no topo do `CHANGELOG.md`.
-4. Copie a versão do pacote para `ebook/VERSION` e rode `npm run ebook`
-   para gerar o PDF e o EPUB novos em cada release.
-5. Valide:
+   no topo do `CHANGELOG.md`. O workflow extrai as notas daqui.
+
+4. Regenere o README do npm a partir do README da raiz:
 
    ```bash
-   npm run validar
-   npm run ebook:verify
-   npm run release:check -- vX.Y.Z
+   bun run npm:readme
    ```
 
-6. Empacote e instale o tarball em isolamento:
+5. Quando `docs/user/` mudar, copie a versão para `ebook/VERSION` e gere o PDF
+   e o EPUB:
 
    ```bash
-   mkdir -p release-assets
-   npm pack --pack-destination release-assets
-   npm run package:verify -- release-assets/promovaweb-pagespeedfy-X.Y.Z.tgz
+   bun run ebook
    ```
 
-7. Reúna o ebook e os checksums:
+6. Valide:
 
    ```bash
-   cp ebook/ebook-pagespeedfy.pdf release-assets/Pagespeedfy-Guia-do-Usuario.pdf
-   cp ebook/ebook-pagespeedfy.epub release-assets/Pagespeedfy-Guia-do-Usuario.epub
-   (cd release-assets && sha256sum * > SHA256SUMS.txt)
+   bun run validate
+   bun run ebook:verify
    ```
 
-8. Faça o commit, crie a tag e envie os dois juntos:
+   O `validate` roda `typecheck`, `bun test`, `skills:check`, `opencli:check`,
+   `docs:check` e `build`. O teste `tests/npm-wrapper.test.ts` confere a versão
+   do `npm/package.json` e o README gerado.
+
+7. Faça o commit, crie a tag e envie os dois juntos:
 
    ```bash
    git add -A
-   git commit -m "chore: publica X.Y.Z"
+   git commit -m "release: pagespeedfy vX.Y.Z"
    git tag -a vX.Y.Z -m "vX.Y.Z"
    git push --atomic origin HEAD:main vX.Y.Z
    ```
 
-9. Crie a GitHub Release com os anexos:
+8. Acompanhe o workflow `release.yml`:
 
    ```bash
-   gh release create vX.Y.Z -R promovaweb/pagespeedfy \
-     --title "vX.Y.Z" --notes "<seção X.Y.Z do CHANGELOG>" \
-     release-assets/*
+   gh run watch
    ```
 
-10. Publique no npm o mesmo tarball anexado à release:
+   Ele confere que a tag, o `package.json` e o `npm/package.json` têm a mesma
+   versão, roda `bun run validate`, compila `linux-x64`, `linux-arm64`,
+   `darwin-x64`, `darwin-arm64` e `windows-x64`, gera o `SHA256SUMS` e publica a
+   GitHub Release com as notas do changelog.
+
+9. Confira a release antes de publicar no npm:
+
+   ```bash
+   gh release view vX.Y.Z -R promovaweb/pagespeedfy
+   ```
+
+   A release precisa ter os cinco binários e o `SHA256SUMS`. O invólucro npm
+   baixa o binário daqui no primeiro uso.
+
+10. Publique o pacote npm a partir de `npm/`:
 
     ```bash
     npm whoami   # contatopromovaweb
-    npm publish release-assets/promovaweb-pagespeedfy-X.Y.Z.tgz --access public
+    cd npm
+    npm publish --access public
     ```
 
-    A conta pode pedir confirmação no navegador. Quando isso acontecer, rode
-    o comando num terminal interativo e conclua a confirmação.
-
-A pasta `release-assets/` fica fora do Git (`.gitignore`).
+    A conta pode pedir confirmação no navegador. Quando isso acontecer, rode o
+    comando num terminal interativo e conclua a confirmação.
 
 ## Conferência
 
 ```bash
 gh release view vX.Y.Z -R promovaweb/pagespeedfy
 npm view @promovaweb/pagespeedfy version license
+npx @promovaweb/pagespeedfy@X.Y.Z --version
 ```
 
-O npm pode levar alguns minutos para mostrar a versão nova. A release só está
-completa quando o npm mostra a mesma versão da tag.
+O npm pode levar alguns minutos para mostrar a versão nova. A publicação só
+está completa quando o npm mostra a mesma versão da tag e o comando pelo `npx`
+imprime `X.Y.Z`.
+
+Um binário baixado direto da release não passa pelo npm. Para trocar a versão,
+baixe o arquivo novo e substitua o antigo.
 
 Uma tag publicada não é movida nem reutilizada. Correções saem em versão nova.
-A 0.1.0 ficou retida no staging de publicação do npm e não pode ser
-reutilizada. Por isso a primeira versão no npm é a 0.1.1.
+Uma release sem o binário da plataforma quebra o invólucro npm: confira os
+anexos antes do `npm publish`.
+
+O build local está em [docs/release.md](docs/release.md).

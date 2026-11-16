@@ -5,5 +5,7 @@ docs/user/02-api-key-e-credencial.md
 docs/user/03-primeira-medicao.md
 docs/user/04-otimizando-com-a-skill.md
 docs/user/05-lendo-o-relatorio.md
-docs/user/06-referencia-cli.md
-docs/user/07-solucao-de-problemas.md
+docs/user/06-historico-e-comparacao.md
+docs/user/07-tui-e-mcp.md
+docs/user/08-referencia-cli.md
+docs/user/09-solucao-de-problemas.md

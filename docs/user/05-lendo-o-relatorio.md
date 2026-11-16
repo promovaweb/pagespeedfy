@@ -1,62 +1,66 @@
 # Ler o relatório
 
-Cada `pagespeedfy run` cria uma pasta própria. Nada é sobrescrito: duas
-medições da mesma página ficam lado a lado e podem ser comparadas com
-`pagespeedfy compare`. Se duas execuções começarem no mesmo segundo, a
-segunda pasta recebe o sufixo `-2`.
+## Abrir uma medição
 
-## Pasta de saída
-
-```text
-<output>/<host>/<rota>/<AAAAMMDD-HHMMSS>/
-├── mobile.raw.json
-├── desktop.raw.json
-├── report.json
-└── report.md
+```bash
+pagespeedfy report 12
 ```
 
-| Parte | Formação |
-| --- | --- |
-| `<output>` | `--output`, padrão `pagespeedfy-reports` no diretório atual |
-| `<host>` | Host da URL; `:` da porta vira `_` |
-| `<rota>` | Segmentos do caminho unidos por `--`, sem acentos; `/` vira `home`; query string vira sufixo `--q-...` |
-| `<AAAAMMDD-HHMMSS>` | Data e hora locais do início da execução |
+O argumento é o id da medição ou a URL da página. Com a URL, o comando mostra a
+medição mais recente daquela página, em mobile por padrão:
 
-## Arquivos
+```bash
+pagespeedfy report https://promovaweb.com/ --strategy desktop
+```
 
-- **`<estratégia>.raw.json`**: resposta da API sem nenhuma alteração. Contém o
-  `lighthouseResult` completo, incluindo auditorias aprovadas, telas de
-  carregamento em base64 e o mapa de entidades.
-- **`report.json`**: relatório normalizado, descrito abaixo.
-- **`report.md`**: o mesmo relatório em Markdown, com até cinco itens por
-  auditoria, que o comando `pagespeedfy report` gera de novo a partir do
-  `report.json`.
+O comando imprime Markdown, com esta ordem:
 
-## `report.json` (formatVersion 1)
+1. a identificação da medição, com id, estratégia, data, versão e a nota
+   registrada no `run`;
+2. a nota de cada categoria;
+3. as métricas de laboratório;
+4. os dados de campo do CrUX, quando existem;
+5. as auditorias pendentes, com orientação, itens e economia estimada;
+6. as verificações manuais;
+7. a contagem de auditorias aprovadas e o caminho do JSON bruto.
+
+O `report` não consulta a API. Ele lê o `history.db` e monta o texto a partir da
+medição gravada.
+
+## O JSON de uma medição
+
+Com `--json`, o envelope traz a medição inteira em `data`. Os campos de
+identificação ficam no topo e o resultado normalizado fica em `data.run`:
 
 ```json
 {
-  "formatVersion": 1,
-  "tool": "pagespeedfy",
-  "toolVersion": "0.2.0",
-  "generatedAt": "2026-11-05T13:30:12.000Z",
-  "url": "https://promovaweb.com/",
-  "locale": "pt-BR",
-  "categories": ["performance", "accessibility", "best-practices", "seo"],
-  "maxItems": 50,
-  "runs": [
-    {
+  "ok": true,
+  "command": "report",
+  "data": {
+    "id": 12,
+    "url": "https://promovaweb.com/",
+    "strategy": "mobile",
+    "measuredAt": "2026-11-16T13:30:12.000Z",
+    "note": "lazy-load hero video",
+    "samples": 3,
+    "toolVersion": "1.0.0",
+    "lighthouseVersion": "13.0.0",
+    "scores": { "performance": 84, "accessibility": 96, "best-practices": 100, "seo": 100 },
+    "lab": { "fcp": 1200, "lcp": 3100, "tbt": 180, "cls": 0.01, "si": 2400, "tti": 3600 },
+    "failedAudits": 4,
+    "run": {
+      "formatVersion": 2,
       "strategy": "mobile",
       "requestedUrl": "https://promovaweb.com/",
       "finalUrl": "https://promovaweb.com/",
-      "fetchTime": "2026-11-05T13:30:40.000Z",
+      "fetchTime": "2026-11-16T13:30:40.000Z",
       "lighthouseVersion": "13.0.0",
       "userAgent": "Mozilla/5.0 ...",
       "runWarnings": [],
       "runtimeError": null,
-      "scores": { "performance": 71, "accessibility": 96, "best-practices": 100, "seo": 100 },
+      "scores": { "performance": 84, "accessibility": 96, "best-practices": 100, "seo": 100 },
       "labMetrics": {
-        "largest-contentful-paint": { "title": "Largest Contentful Paint", "displayValue": "3,4 s", "numericValue": 3412, "score": 0.66 }
+        "largest-contentful-paint": { "title": "Largest Contentful Paint", "displayValue": "3,1 s", "numericValue": 3100, "score": 0.72 }
       },
       "field": {
         "page": { "overallCategory": "AVERAGE", "metrics": { "LARGEST_CONTENTFUL_PAINT_MS": { "percentile": 2900, "category": "AVERAGE" } } },
@@ -84,34 +88,77 @@ segunda pasta recebe o sufixo `-2`.
       ],
       "manualAudits": [{ "id": "focus-traps", "category": "accessibility", "title": "..." }],
       "passedAuditIds": ["document-title", "image-alt"],
-      "rawFile": "mobile.raw.json"
+      "rawFile": "reports/promovaweb.com/home/20261116-103012/mobile-2.raw.json",
+      "samples": 3,
+      "sampleScores": [81, 84, 86]
     }
-  ]
+  }
 }
 ```
 
-## Como a normalização funciona
+Os campos do `run` têm estes usos:
 
-- **Notas:** `score` da categoria multiplicado por 100 e arredondado.
-  Categoria sem nota fica `null`.
-- **Métricas de laboratório:** FCP, LCP, TBT, CLS, Speed Index e TTI. Elas
-  ficam fora de `failedAudits` mesmo quando reprovadas.
-- **Auditoria reprovada:** pertence a uma categoria consultada, tem
-  `scoreDisplayMode` igual a `binary`, `numeric` ou `metricSavings` e nota
-  menor que 0,9 (ou nula).
-- **Ignoradas:** `notApplicable`, `informative` e `error` ficam só no JSON
-  bruto, fora de todas as listas.
-- **Manuais:** `scoreDisplayMode` igual a `manual` vai para `manualAudits`.
-- **Ordem:** peso na categoria (maior primeiro), soma de `metricSavings`
-  (maior primeiro), nota (menor primeiro) e ID.
-- **Itens:** os primeiros `maxItems`, sem as chaves internas `boundingRect`,
-  `lhId` e `path`, com o total original em `totalItems`.
-- **Dados de campo:** `loadingExperience` vira `field.page` e
-  `originLoadingExperience` vira `field.origin`, com `null` no bloco sem
-  métricas.
+| Campo | Conteúdo |
+| --- | --- |
+| `formatVersion` | Versão do formato normalizado. Hoje é 2 |
+| `scores` | Nota de cada categoria de 0 a 100, ou `null` quando não foi pedida |
+| `labMetrics` | FCP, LCP, TBT, CLS, Speed Index e TTI, com valor, texto e nota |
+| `field.page` e `field.origin` | Dados de usuários reais do CrUX para a página e para a origem |
+| `failedAudits` | Auditorias pendentes, ordenadas por impacto |
+| `manualAudits` | Verificações que o Lighthouse não mede sozinho |
+| `passedAuditIds` | Auditorias que passaram |
+| `runWarnings` | Avisos que afetam a confiança na medição |
+| `runtimeError` | Erro do Lighthouse durante a medição |
+| `rawFile` | Caminho do JSON bruto, relativo a `.pagespeedfy/` |
+| `samples` e `sampleScores` | Quantas leituras foram feitas e a nota de Performance de cada uma |
+
+## Auditorias pendentes
+
+Uma auditoria entra em `failedAudits` quando pertence a uma categoria
+consultada, tem `scoreDisplayMode` igual a `binary`, `numeric` ou
+`metricSavings` e nota menor que 0,9. As demais ficam no JSON bruto, fora das
+listas.
+
+Cada auditoria traz os campos que você precisa para agir:
+
+- `weight`: o peso dela na nota da categoria;
+- `score` e `displayValue`: o resultado e o texto do Lighthouse;
+- `metricSavings`: quanto de LCP, FCP ou CLS ela pode economizar;
+- `description`: a orientação do Lighthouse, já sem links;
+- `items`: URLs, seletores, trechos de HTML e bytes economizáveis;
+- `totalItems` e `truncated`: quantos itens existem e se alguns ficaram fora.
+
+Para listar só os ids no terminal:
+
+```bash
+pagespeedfy --json report 12 | jq -r '.data.run.failedAudits[].id'
+```
+
+Para ver os itens de uma auditoria:
+
+```bash
+pagespeedfy --json report 12 | jq '.data.run.failedAudits[] | select(.id == "image-delivery-insight")'
+```
+
+## Dados de campo
+
+Os blocos `field.page` e `field.origin` vêm do Chrome UX Report e resumem 28
+dias de usuários reais. Eles só aparecem quando a página ou a origem tem
+tráfego suficiente. Uma página nova mostra `No CrUX field data for this URL or
+origin.` no texto e `null` nos dois blocos do JSON.
+
+## O que versionar
+
+O `report` não escreve nada. A medição já está no `history.db`. O JSON bruto
+já está em `.pagespeedfy/reports/`. O `history.db` pode ir para o Git. A pasta
+`reports/` é ignorada pelo `.pagespeedfy/.gitignore` criado pelo binário.
 
 ## Compatibilidade
 
-Um campo novo pode entrar em `report.json` sem mudar `formatVersion`. Remover
-um campo ou mudar o tipo dele exige `formatVersion` novo e registro no
+Um campo novo pode entrar no formato normalizado sem mudar `formatVersion`.
+Remover um campo ou mudar o tipo dele exige `formatVersion` novo e registro no
 CHANGELOG.
+
+A 0.3.x gravava `report.json` e `report.md` por pasta. Na 1.0, o relatório
+normalizado fica no `history.db` e o Markdown é gerado na hora por `report`. O
+command `import` lê os `report.json` da 0.3.x para trazer as medições antigas.

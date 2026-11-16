@@ -1,12 +1,14 @@
 # Modelo do plano de correções
 
-Grave o plano em `plano.md`, na pasta da medição, ao lado do `report.json`.
-Mostre o conteúdo completo no chat antes de pedir autorização.
+Grave o plano em `plano.md`, na pasta da medição aberta por `rawFile`, dentro
+de `.pagespeedfy/reports/`. Mostre o conteúdo completo no chat antes de pedir
+autorização.
 
 ````markdown
 # Plano de correções: <url>
 
-- Medição: <AAAA-MM-DD HH:MM> (`<caminho do report.json>`)
+- Medição: mobile #12 e desktop #13, de <AAAA-MM-DD HH:MM> (`<projeto>/.pagespeedfy/history.db`)
+- Pasta da medição: `<projeto>/.pagespeedfy/reports/<host>/<rota>/<AAAAMMDD-HHMMSS>/`
 - Medições anteriores lidas: <quantidade e datas, ou "nenhuma">
 - Rota no projeto: `<src/pages/...>`
 - Layout e componentes envolvidos: `<arquivos>`
@@ -15,11 +17,12 @@ Mostre o conteúdo completo no chat antes de pedir autorização.
 
 | Estratégia | Performance | Acessibilidade | Boas práticas | SEO | LCP | CLS | TBT |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Mobile | 71 | 96 | 100 | 100 | 3,4 s | 0,02 | 380 ms |
-| Desktop | 94 | 96 | 100 | 100 | 1,1 s | 0,01 | 40 ms |
+| Mobile | 71 | 96 | 100 | 100 | 3,4 s | 0,020 | 380 ms |
+| Desktop | 94 | 96 | 100 | 100 | 1,1 s | 0,010 | 40 ms |
 
 Dados de campo (CrUX): <resumo ou "sem dados">.
 Histórico: <auditorias recorrentes, resolvidas ou novas desde a medição anterior>.
+Comparação: <resultado de `pagespeedfy compare <url>` ou "primeira medição">.
 
 ## Correções propostas
 
@@ -58,9 +61,11 @@ Detalhe de cada linha, com os itens do relatório que justificam a correção:
 
 Regras:
 
-- Uma linha por auditoria reprovada, na ordem do `report.json`.
+- Uma linha por auditoria reprovada, na ordem da medição.
 - Escopo Global sempre com o diff resumido no detalhe da linha.
-- Efeito esperado vem de `metricSavings`, `wastedBytes` ou `wastedMs` do
-  relatório. Sem número no relatório, descreva o efeito sem inventar valor.
+- Efeito esperado vem de `metricSavings`, `wastedBytes` ou `wastedMs` da
+  medição. Sem número no relatório, descreva o efeito sem inventar valor.
 - Status possíveis: `pendente`, `aplicada`, `não aplicada` (com motivo) e
   `fora do código`.
+- Depois de medir de novo, acrescente a comparação e atualize o status de cada
+  linha antes de entregar o relatório final.

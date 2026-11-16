@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "version": "0.3.5",
-  "edition": "v0.3.5",
-  "generated_at": "2026-11-14T13:52:26Z",
-  "source_sha256": "9154cf45fb029bb08949c1cff885affc6af66d253d48be93ea76a673a717b3e7",
+  "version": "1.0.0",
+  "edition": "v1.0.0",
+  "generated_at": "2026-11-16T05:26:34Z",
+  "source_sha256": "f4f7e7ae9127a6f115fe233b8dd30926f9b9c167647d51cd6915a7782b533a44",
   "sources": [
     ".ebook/build-ebook.mjs",
     ".ebook/epub.css",
@@ -18,8 +18,10 @@
     "docs/user/03-primeira-medicao.md",
     "docs/user/04-otimizando-com-a-skill.md",
     "docs/user/05-lendo-o-relatorio.md",
-    "docs/user/06-referencia-cli.md",
-    "docs/user/07-solucao-de-problemas.md",
+    "docs/user/06-historico-e-comparacao.md",
+    "docs/user/07-tui-e-mcp.md",
+    "docs/user/08-referencia-cli.md",
+    "docs/user/09-solucao-de-problemas.md",
     "docs/user/README.md",
     "docs/user/reading-order.txt",
     "ebook/VERSION",
@@ -27,12 +29,12 @@
   ],
   "artifacts": {
     "pdf": {
-      "file": "Pagespeedfy-Guia-do-Usuario-v0.3.5.pdf",
-      "sha256": "56ed69b7a06cd433bc03e9270987fc5b5d286d392a9ad06c2952e0d64dd93ad4"
+      "file": "Pagespeedfy-Guia-do-Usuario-v1.0.0.pdf",
+      "sha256": "533eb805f04834862e718d6d9ec22b7c135f3b583871e8cfd6e3084ef0353dee"
     },
     "epub": {
-      "file": "Pagespeedfy-Guia-do-Usuario-v0.3.5.epub",
-      "sha256": "78a5c70362802667951fd6c3a05dab77d860d60f309687d2816d3c141c3b057d"
+      "file": "Pagespeedfy-Guia-do-Usuario-v1.0.0.epub",
+      "sha256": "2899f9ef5b85db7d660d0b3d3f16f3e48232407c500e0ebd9b4408c95acee775"
     }
   }
 }

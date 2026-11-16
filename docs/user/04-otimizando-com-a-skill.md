@@ -1,8 +1,8 @@
 # Otimizar uma página com a skill
 
 A skill leva um agente de programação da medição à correção de uma página
-Astro. Ela usa o CLI para medir e trabalha no código do projeto aberto no
-agente.
+Astro. Ela usa o CLI para medir e grava o resultado no histórico do projeto
+aberto no agente.
 
 ## Instalação
 
@@ -13,8 +13,8 @@ npx skills add https://github.com/promovaweb/pagespeedfy
 ```
 
 O `npx skills` lê a pasta `skills/` do repositório e instala a skill nos
-agentes escolhidos. A skill precisa do CLI instalado e de uma chave gravada
-com `pagespeedfy auth login`.
+agentes escolhidos. A skill precisa do binário instalado e de uma chave no
+cofre, gravada com `pagespeedfy credentials set pagespeed.api_key`.
 
 ## Acionamento
 
@@ -27,22 +27,24 @@ lista as outras para depois.
 
 ## O que a skill faz
 
-1. Confere o CLI, a chave, o projeto Astro e o estado do Git.
-2. Confere se `pagespeedfy-reports/` está no `.gitignore`. Se faltar, a linha
-   entra no plano de correções.
-3. Mede a página com `pagespeedfy run <url> --print path`.
-4. Lê todos os relatórios: o `report.json`, os dois JSON brutos e as
-   medições anteriores da mesma rota, para separar problemas recorrentes dos
-   novos.
-5. Acha a rota em `src/pages/`, o layout, os componentes e os arquivos de
+1. Confere o binário, a chave, o projeto Astro e o estado do Git.
+2. Mede a linha de base com
+   `pagespeedfy run <url> --samples 3 --note "baseline"`.
+3. Lê a medição com `pagespeedfy report <url> --json` e o histórico com
+   `pagespeedfy history <url> --json`, para separar auditorias recorrentes das
+   novas.
+4. Acha a rota em `src/pages/`, o layout, os componentes e os arquivos de
    origem de cada item reprovado, sem alterar nada.
-6. Cria o plano de correções em `plano.md`, na pasta da medição, com uma
-   linha por auditoria: escopo, arquivo, correção proposta e efeito esperado.
-7. **Mostra o plano na tela e espera você dizer que pode corrigir.**
-8. Aplica só as linhas autorizadas e atualiza o status de cada uma no plano.
-9. Roda o build e os testes do projeto.
-10. Mede de novo quando houver URL de preview e compara com a linha de base.
-11. Entrega o relatório final.
+5. Cria o plano de correções em `plano.md`, na pasta da medição dentro de
+   `.pagespeedfy/reports/`, com uma linha por auditoria: escopo, arquivo,
+   correção proposta e efeito esperado.
+6. **Mostra o plano na tela e espera você dizer que pode corrigir.**
+7. Aplica só as linhas autorizadas e atualiza o status de cada uma no plano.
+8. Roda o build e os testes do projeto.
+9. Mede de novo com
+   `pagespeedfy run <url> --samples 3 --note "correções do plano"` e compara
+   com `pagespeedfy compare <url> --json`.
+10. Entrega o relatório final com as medições de antes e depois.
 
 ## O plano de correções
 
@@ -79,8 +81,8 @@ Cada linha recebe um de quatro escopos:
 
 ## Referências da skill
 
-- `references/leitura-relatorio.md`: todos os campos do `report.json` e como
-  consultar o JSON bruto.
+- `references/leitura-relatorio.md`: todos os campos do JSON de `report` e
+  como consultar o arquivo bruto.
 - `references/astro-correcoes.md`: correção recomendada para cada ID de
   auditoria de Performance, Acessibilidade, Boas práticas e SEO.
 - `references/modelo-plano.md`: estrutura do `plano.md`.

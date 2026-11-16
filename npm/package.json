@@ -1,0 +1,39 @@
+{
+  "name": "@promovaweb/pagespeedfy",
+  "version": "1.0.0",
+  "description": "CLI, TUI and MCP stdio server to measure pages with PageSpeed Insights and track their improvement history.",
+  "license": "AGPL-3.0-only",
+  "author": "Promovaweb",
+  "homepage": "https://promovaweb.com/docs/pagespeedfy",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/promovaweb/pagespeedfy.git"
+  },
+  "keywords": [
+    "pagespeed",
+    "lighthouse",
+    "core-web-vitals",
+    "astro",
+    "cli",
+    "mcp",
+    "tui"
+  ],
+  "bin": {
+    "pagespeedfy": "bin/pagespeedfy.cjs"
+  },
+  "files": [
+    "bin",
+    "lib",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "postinstall": "node lib/binary.cjs"
+  },
+  "engines": {
+    "node": ">=18.17.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

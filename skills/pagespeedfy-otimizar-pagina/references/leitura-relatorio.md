@@ -1,48 +1,76 @@
 # Como ler o relatório do Pagespeedfy
 
-O comando `pagespeedfy run` grava uma pasta por execução:
+O Pagespeedfy guarda tudo no projeto, em `.pagespeedfy/`:
 
 ```text
-pagespeedfy-reports/<host>/<rota>/<AAAAMMDD-HHMMSS>/
-├── mobile.raw.json    resposta completa da API para mobile
-├── desktop.raw.json   resposta completa da API para desktop
-├── report.json        relatório normalizado (formatVersion 1)
-└── report.md          resumo legível do report.json
+.pagespeedfy/
+├── .gitignore
+├── history.db
+└── reports/<host>/<rota>/<AAAAMMDD-HHMMSS>/<estratégia>-<n>.raw.json
 ```
 
-O `report.json` é a fonte de trabalho. O `report.md` mostra no máximo cinco
-itens por auditoria. Os arquivos `*.raw.json` guardam tudo o que a API
-devolveu e servem para consultar um campo que a normalização resumiu.
+O `history.db` é a fonte de trabalho. Ele tem uma página por URL, uma medição
+por execução e a auditoria de cada estratégia. As respostas brutas da API
+ficam em `reports/`, um arquivo por leitura e por estratégia. Elas servem para
+consultar um campo que a normalização resumiu.
 
-## Campos da raiz
+A leitura acontece pelos comandos do CLI, com `--json` quando o agente precisa
+do dado estruturado:
+
+| Comando | Devolve |
+| --- | --- |
+| `pagespeedfy report <ref> --json` | a medição completa, com as notas, as métricas e cada auditoria reprovada |
+| `pagespeedfy history <url> --json` | a linha do tempo da página, da mais antiga para a mais nova |
+| `pagespeedfy compare <ref> [ref] --json` | a diferença entre duas medições |
+| `pagespeedfy run <url>` | a medição nova, com o id de cada estratégia |
+
+`<ref>` é o id da medição (`12`) ou a URL da página. Com URL, o `report`
+devolve a última medição da estratégia pedida, mobile por padrão.
+
+## O envelope
+
+Todo `--json` devolve `{ ok, command, data }` no sucesso e
+`{ ok, command, error }` no erro. Erros também saem em JSON, com `code`,
+`message` e a família do exit code. Leia `ok` antes de qualquer outro campo.
+
+## Campos da medição
+
+`report --json` devolve em `data`:
 
 | Campo | Conteúdo |
 | --- | --- |
-| `formatVersion` | Versão do formato. Hoje é `1` |
-| `toolVersion` | Versão do Pagespeedfy que gerou o arquivo |
-| `generatedAt` | Data ISO da execução |
-| `url` | URL consultada |
-| `locale` | Idioma dos textos das auditorias |
-| `categories` | Categorias consultadas |
-| `maxItems` | Limite de itens de detalhe por auditoria |
-| `runs` | Uma entrada por estratégia (`mobile`, `desktop`) |
+| `id` | Id da medição, usado em `report`, `compare` e `forget` |
+| `pageId` | Id da página no histórico |
+| `url` | URL medida |
+| `session` | Pasta da execução, no formato `AAAAMMDD-HHMMSS` |
+| `strategy` | `mobile` ou `desktop` |
+| `measuredAt` | Data ISO da medição |
+| `note` | Texto do `--note`, ou `null` |
+| `samples` | Quantas leituras geraram a medição |
+| `toolVersion` | Versão do Pagespeedfy |
+| `lighthouseVersion` | Versão do Lighthouse usada pelo Google |
+| `scores` | Nota de 0 a 100 por categoria, ou `null` quando a categoria não tem nota |
+| `lab` | LCP, TBT, CLS, FCP, SI e TTI em número |
+| `failedAudits` | Quantidade de auditorias reprovadas |
+| `run` | A leitura completa, descrita abaixo |
 
-## Campos de cada `runs[]`
+## Campos de `run`
 
 | Campo | Como usar |
 | --- | --- |
-| `strategy` | `mobile` simula um Moto G em rede 4G lenta; `desktop` simula conexão cabeada |
-| `finalUrl` | URL após redirecionamentos. Se for diferente da pedida, há redirect a corrigir |
+| `requestedUrl` e `finalUrl` | URL pedida e URL após redirecionamentos. Quando forem diferentes, há redirect a corrigir |
+| `fetchTime` | Data da consulta no formato da API |
 | `runtimeError` | Mensagem de falha do Lighthouse. Preenchido significa medição inválida |
 | `runWarnings` | Avisos que reduzem a confiança na medição |
-| `scores` | Notas de 0 a 100 por categoria, ou `null` quando a categoria não tem nota |
-| `labMetrics` | FCP, LCP, TBT, CLS, Speed Index e TTI em laboratório, com `numericValue` em ms (CLS sem unidade) |
+| `scores` | Notas por categoria |
+| `labMetrics` | FCP, LCP, TBT, CLS, SI e TTI, cada um com `numericValue` em ms (CLS sem unidade), `displayValue` e `score` |
 | `field.page` | CrUX da URL: p75 de LCP, CLS, INP, FCP e TTFB de usuários reais nos últimos 28 dias |
 | `field.origin` | CrUX do domínio inteiro. Usado quando a página não tem tráfego suficiente |
 | `failedAudits` | Auditorias reprovadas, já ordenadas por peso, economia e nota |
 | `manualAudits` | Verificações que o Lighthouse não automatiza |
 | `passedAuditIds` | IDs aprovados. Útil para confirmar que uma correção não quebrou outra |
-| `rawFile` | Nome do JSON bruto da estratégia, na mesma pasta |
+| `rawFile` | JSON bruto da estratégia, relativo a `.pagespeedfy/` |
+| `samples` e `sampleScores` | Quantas leituras foram feitas e a nota de performance de cada uma |
 
 `field` é sempre um objeto. Quando `field.page` e `field.origin` são `null`, o
 CrUX não tem dados da página nem do domínio. Nesse caso, trabalhe só com
@@ -79,21 +107,44 @@ Os formatos mais comuns:
 
 ## Ler o JSON bruto
 
-Para uma auditoria truncada:
+O `rawFile` da medição indica o caminho. Para uma auditoria truncada, na raiz
+do projeto:
 
 ```bash
-node -e 'const r=require("./mobile.raw.json");console.log(JSON.stringify(r.lighthouseResult.audits["<id>"].details,null,2))'
+jq '.lighthouseResult.audits["<id>"].details' ".pagespeedfy/$(jq -r '.data.run.rawFile' <arquivo-da-medição>)"
+```
+
+Com o caminho já conhecido, o comando fica direto:
+
+```bash
+jq '.lighthouseResult.audits["image-delivery-insight"].details' \
+  .pagespeedfy/reports/exemplo.com/home/20261105-094934/mobile-1.raw.json
 ```
 
 Para ver o elemento de LCP:
 
 ```bash
-node -e 'const r=require("./mobile.raw.json");console.log(JSON.stringify(r.lighthouseResult.audits["largest-contentful-paint-element"]?.details,null,2))'
+jq '.lighthouseResult.audits["largest-contentful-paint-element"].details' \
+  .pagespeedfy/reports/exemplo.com/home/20261105-094934/mobile-1.raw.json
 ```
+
+## Histórico e comparação
+
+`history <url> --json` devolve `data.url` e `data.measurements`, com uma
+entrada resumida por medição: `id`, `strategy`, `measuredAt`, `note`, `samples`,
+`scores`, `lab` e `failedAudits`. Sem URL, devolve `data.pages`, cada página com
+a contagem de medições, a data da última e a nota mais recente por estratégia.
+
+`compare --json` devolve `data.before` e `data.after` (com `id`, `measuredAt`,
+`note` e `samples`), `data.scores` e `data.labMetrics` com `before`, `after` e
+`delta`, as listas `resolvedAudits`, `newAudits` e `remainingAudits` e o
+booleano `regression`.
+
+`sameUrl` e `sameStrategy` avisam quando as duas medições não são comparáveis.
 
 ## Laboratório e campo
 
-As notas e `labMetrics` vêm de uma única execução simulada e variam alguns
-pontos entre medições. Os dados de `field` refletem usuários reais e mudam
-devagar. Uma correção boa aparece primeiro no laboratório. O campo confirma
-semanas depois.
+As notas e `labMetrics` vêm de uma execução simulada e variam alguns pontos
+entre medições. Os dados de `field` refletem usuários reais e mudam devagar.
+Uma correção boa aparece primeiro no laboratório. O campo confirma semanas
+depois.

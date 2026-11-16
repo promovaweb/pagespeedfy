@@ -6,3 +6,10 @@ coverage/
 pagespeedfy-reports/
 .ebook/build/
 release-assets/
+*.tsbuildinfo
+.env.*
+!.env.example
+.termfy-home/
+# Local history of this repository's own test measurements.
+.pagespeedfy/
+.briefs/

@@ -2,12 +2,13 @@
 
 ## Requisitos
 
-- Node.js 22.12 ou superior.
-- Git.
 - Um projeto Astro para otimizar.
 - Um agente de programação com suporte a skills, como Codex ou Claude Code.
+- Node.js 18.17 ou superior apenas se você instalar pelo npm. O binário não
+  precisa de Node para rodar.
+- Git, para versionar o histórico do projeto.
 
-## Instalar o CLI
+## Instalar pelo npm
 
 O pacote está no npm como `@promovaweb/pagespeedfy`:
 
@@ -15,19 +16,48 @@ O pacote está no npm como `@promovaweb/pagespeedfy`:
 npm install -g @promovaweb/pagespeedfy
 ```
 
-Para rodar sem instalar:
+O pacote npm é um invólucro. No primeiro uso, ele baixa o binário da GitHub
+Release da mesma versão, confere o SHA-256 e guarda em
+`~/.pagespeedfy/bin/v<versão>/`. As execuções seguintes usam esse arquivo,
+sem baixar de novo.
+
+Para experimentar sem instalar:
 
 ```bash
 npx @promovaweb/pagespeedfy --version
 ```
 
-Confira:
+## Baixar o binário da release
+
+Quem não usa npm pode baixar o executável direto da
+[página de releases](https://github.com/promovaweb/pagespeedfy/releases). Há um
+arquivo por plataforma:
+
+- `linux-x64`
+- `linux-arm64`
+- `darwin-x64`
+- `darwin-arm64`
+- `windows-x64`
+
+Mova o arquivo para uma pasta do `PATH` e dê permissão de execução:
+
+```bash
+chmod +x pagespeedfy-linux-x64
+mv pagespeedfy-linux-x64 ~/.local/bin/pagespeedfy
+```
+
+## Conferir a instalação
 
 ```bash
 pagespeedfy --version
 ```
 
-O comando imprime a versão, por exemplo `0.2.0`.
+A saída traz a versão, por exemplo `pagespeedfy 1.0.0`. Para ver o diagnóstico
+do ambiente, a origem da chave e a leitura do cofre:
+
+```bash
+pagespeedfy doctor
+```
 
 ## Instalar a skill no projeto
 
@@ -40,23 +70,27 @@ npx skills add https://github.com/promovaweb/pagespeedfy
 ```
 
 O comando baixa a skill `pagespeedfy-otimizar-pagina` do GitHub, pergunta para
-quais agentes instalar (Codex, Claude Code e outros) e registra a origem no
-`skills-lock.json` do projeto. Para conferir:
+quais agentes instalar e registra a origem no `skills-lock.json` do projeto.
+Para conferir:
 
 ```bash
 npx skills list
 ```
 
-## Ignorar os relatórios no Git
+## Onde ficam os dados
 
-Os relatórios trazem URLs e trechos de HTML que não pertencem ao repositório.
-No projeto Astro:
+O binário guarda só o que é da máquina em `~/.pagespeedfy/`:
 
-```bash
-echo "pagespeedfy-reports/" >> .gitignore
+```text
+~/.pagespeedfy/
+├── settings.json
+├── credentials.json
+├── master.key
+└── bin/
 ```
 
-A skill faz essa conferência sozinha na primeira execução.
+O histórico de medições não fica aqui. Ele fica em
+`<projeto>/.pagespeedfy/`, junto do site.
 
 ## Atualizar
 
@@ -64,7 +98,8 @@ A skill faz essa conferência sozinha na primeira execução.
 npm install -g @promovaweb/pagespeedfy@latest
 ```
 
-Para atualizar a skill no projeto, rode de novo:
+Quem usa o binário da release baixa o arquivo novo e substitui o antigo. Para
+atualizar a skill no projeto, rode de novo:
 
 ```bash
 npx skills add https://github.com/promovaweb/pagespeedfy

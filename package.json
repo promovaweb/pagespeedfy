@@ -1,67 +1,69 @@
 {
-  "name": "@promovaweb/pagespeedfy",
-  "version": "0.3.5",
-  "description": "CLI e skill da Promovaweb para consultar o PageSpeed Insights e otimizar páginas de sites Astro.",
+  "name": "pagespeedfy",
+  "version": "1.0.0",
+  "description": "CLI, TUI and MCP stdio server to measure pages with PageSpeed Insights and track their improvement history.",
   "type": "module",
+  "private": true,
+  "license": "AGPL-3.0-only",
   "bin": {
-    "pagespeedfy": "bin/pagespeedfy.js"
+    "pagespeedfy": "src/main.ts"
   },
-  "files": [
-    "CHANGELOG.md",
-    "README.md",
-    "RELEASING.md",
-    "bin",
-    "dist",
-    "docs",
-    "ebook",
-    "skills"
-  ],
+  "termfy": {
+    "bin": "pagespeedfy",
+    "title": "Pagespeedfy",
+    "author": "Promovaweb",
+    "site": "https://promovaweb.com/docs/pagespeedfy",
+    "repository": "https://github.com/promovaweb/pagespeedfy",
+    "framework": "https://github.com/promovaweb/termfy",
+    "starterKit": "0.9.4"
+  },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "dev": "tsx src/cli.ts",
-    "prepack": "npm run build",
-    "start": "node dist/cli.js",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.tests.json --noEmit",
-    "validar": "npm run typecheck && npm run test && npm run build",
-    "ebook": "node .ebook/build-ebook.mjs",
-    "ebook:verify": "node .ebook/build-ebook.mjs --check",
-    "release:check": "node scripts/validar-release.mjs",
-    "package:verify": "node scripts/verificar-pacote.mjs"
+    "dev": "bun run src/main.ts",
+    "start": "bun run src/main.ts",
+    "tui": "bun run src/main.ts",
+    "mcp": "bun run src/main.ts mcp",
+    "build": "bun run scripts/build.ts",
+    "build:all": "bun run scripts/build.ts --all",
+    "test": "bun test",
+    "typecheck": "bunx tsc --noEmit",
+    "opencli": "bun run src/main.ts --opencli > docs/opencli.json",
+    "opencli:check": "bun run scripts/check-opencli.ts",
+    "skills:install": "npx -y skills add https://github.com/promovaweb/termfy -y -a universal -a claude-code -a codex -a opencode -a cursor -a gemini-cli",
+    "skills:update": "npx -y skills update -y -p",
+    "skills:check": "bun run scripts/check-skills.ts",
+    "init": "bun run scripts/init.ts",
+    "validate": "bun run typecheck && bun test && bun run skills:check && bun run opencli:check && bun run docs:check && bun run build",
+    "docs:check": "bun run scripts/check-docs.ts",
+    "npm:readme": "bun run scripts/npm-readme.ts",
+    "ebook": "bun .ebook/build-ebook.mjs",
+    "ebook:verify": "bun .ebook/build-ebook.mjs --check"
   },
   "engines": {
-    "node": ">=22.12.0"
+    "bun": ">=1.4.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/promovaweb/pagespeedfy.git"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "@opentui/core": "^0.8.4",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@fontsource/inter": "5.3.0",
+    "@fontsource/manrope": "5.3.0",
+    "@types/bun": "^1.4.4",
+    "playwright": "1.65.1",
+    "typescript": "^7.0.2"
   },
   "keywords": [
     "pagespeed",
     "lighthouse",
     "core-web-vitals",
     "astro",
-    "cli"
-  ],
-  "license": "AGPL-3.0-only",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/promovaweb/pagespeedfy.git"
-  },
-  "dependencies": {
-    "commander": "^15.0.0"
-  },
-  "devDependencies": {
-    "@fontsource/inter": "5.3.0",
-    "@fontsource/manrope": "5.3.0",
-    "@types/node": "^24.10.0",
-    "playwright": "1.65.1",
-    "tsx": "^4.20.6",
-    "typescript": "^7.0.2",
-    "vitest": "^4.1.0"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "homepage": "https://github.com/promovaweb/pagespeedfy#readme",
-  "bugs": {
-    "url": "https://github.com/promovaweb/pagespeedfy/issues"
-  }
+    "cli",
+    "mcp",
+    "tui"
+  ]
 }

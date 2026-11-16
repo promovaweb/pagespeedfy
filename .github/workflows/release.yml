@@ -1,0 +1,66 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  binarios:
+    name: Compilar binários
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obter código
+        uses: actions/checkout@v4
+
+      - name: Configurar Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Instalar dependências
+        run: bun install --frozen-lockfile
+
+      # Pacotes nativos de todas as plataformas na versão do lockfile; sem nome de
+      # pacote, o install não busca uma versão mais nova que a travada.
+      - name: Instalar pacotes nativos do OpenTUI para todos os alvos
+        run: bun install --frozen-lockfile --os="*" --cpu="*" --libc="*"
+
+      - name: Conferir versão da tag
+        run: |
+          versao="${GITHUB_REF_NAME#v}"
+          test "$(jq -r .version package.json)" = "$versao"
+          test "$(jq -r .version npm/package.json)" = "$versao"
+
+      - name: Validar projeto
+        run: bun run validate
+
+      # O validate deixa dist/pagespeedfy da máquina do runner; a release leva só os alvos nomeados.
+      - name: Limpar dist
+        run: rm -rf dist
+
+      - name: Compilar para todas as plataformas
+        run: bun run build:all
+
+      - name: Gerar checksums
+        run: cd dist && sha256sum * > SHA256SUMS
+
+      - name: Extrair notas do changelog
+        run: |
+          versao="${GITHUB_REF_NAME#v}"
+          awk -v v="$versao" '
+            $0 ~ "^## \\[" v "\\]" { imprimir = 1; next }
+            /^## \[/ { if (imprimir) exit }
+            imprimir { print }
+          ' CHANGELOG.md > notas.md
+          test -s notas.md || echo "Release ${GITHUB_REF_NAME}." > notas.md
+
+      - name: Publicar GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          body_path: notas.md
+          files: |
+            dist/*

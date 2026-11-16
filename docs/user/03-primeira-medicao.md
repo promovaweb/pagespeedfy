@@ -2,63 +2,92 @@
 
 ## Medir
 
-Na pasta do projeto Astro:
+Na raiz do projeto, rode:
 
 ```bash
-pagespeedfy run https://promovaweb.com/
+pagespeedfy run https://promovaweb.com/ --note "baseline"
 ```
 
-O CLI consulta mobile e depois desktop, com 20 a 90 segundos por consulta e o
-progresso no stderr:
+O comando consulta mobile e desktop em paralelo, com 20 a 90 segundos por
+consulta. O progresso vai para o stderr e o resumo para o stdout:
 
 ```text
-Consultando mobile: https://promovaweb.com/
-Consultando desktop: https://promovaweb.com/
-mobile: performance 71 · accessibility 96 · best-practices 100 · seo 100 · 6 auditorias pendentes
-desktop: performance 94 · accessibility 96 · best-practices 100 · seo 100 · 3 auditorias pendentes
-Relatório: pagespeedfy-reports/promovaweb.com/home/20261105-103012/report.json
-Resumo: pagespeedfy-reports/promovaweb.com/home/20261105-103012/report.md
+Measuring mobile: https://promovaweb.com/
+Measuring desktop: https://promovaweb.com/
+mobile  #1  perf 71 · a11y 96 · bp 100 · seo 100  LCP 3.4 s · TBT 210 ms · CLS 0.010 · 6 failed audits
+desktop #2  perf 94 · a11y 96 · bp 100 · seo 100  LCP 1.7 s · TBT 40 ms · CLS 0.002 · 3 failed audits
+History: /home/você/site/.pagespeedfy/history.db
+Details: pagespeedfy report 1 · Timeline: pagespeedfy history https://promovaweb.com/
 ```
 
-## Ler o resumo
+A nota entre parênteses é o identificador da medição no histórico. Use esse
+número em `report`, `compare` e `forget`.
+
+## O que ficou no projeto
+
+```text
+<projeto>/.pagespeedfy/
+├── history.db
+├── .gitignore
+└── reports/
+    └── promovaweb.com/
+        └── home/
+            └── 20261116-103012/
+                ├── mobile-1.raw.json
+                └── desktop-1.raw.json
+```
+
+O binário cria `.pagespeedfy/.gitignore` na primeira execução. Ele ignora a
+pasta `reports/` e os arquivos temporários do SQLite (`*.db-wal`, `*.db-shm`,
+`*.bak`).
+
+## O que versionar
+
+| Arquivo | Versionar | Por quê |
+| --- | --- | --- |
+| `.pagespeedfy/history.db` | Sim | O time compartilha a linha do tempo e compara com a mesma base |
+| `.pagespeedfy/reports/` | Não | Os JSON brutos são grandes e trazem HTML da página |
+| `.pagespeedfy/.gitignore` | Sim | Mantém a regra de ignore junto do histórico |
+
+O histórico é binário. Evite dois commits ao mesmo tempo no mesmo arquivo,
+porque o Git não faz merge de SQLite.
+
+## Medir com três leituras
+
+O Lighthouse simula rede e CPU, por isso duas medições seguidas podem diferir
+alguns pontos. A opção `--samples` faz N leituras por estratégia e grava a
+mediana pela nota de Performance:
 
 ```bash
-pagespeedfy report pagespeedfy-reports/promovaweb.com/home/20261105-103012
+pagespeedfy run https://promovaweb.com/ --samples 3 --note "lazy-load hero video"
 ```
 
-O resumo mostra, por estratégia:
+O resumo marca `median of 3`. As notas de cada leitura aparecem em dois
+lugares: no campo `sampleScores` do `--json` e no cabeçalho do `report`. Use 3
+leituras na linha de base e depois de cada mudança que for comparar.
 
-1. a nota de cada categoria;
-2. as métricas de laboratório (LCP, CLS, TBT e outras);
-3. os dados de campo do CrUX, quando existem;
-4. as auditorias reprovadas, com a orientação do Lighthouse e os primeiros
-   itens (URLs, seletores, economia estimada);
-5. as verificações manuais.
-
-## Medir mais rápido enquanto ajusta
-
-Para repetir só o que interessa:
+## Ler a medição
 
 ```bash
-pagespeedfy run https://promovaweb.com/ -s mobile -c performance
+pagespeedfy report 1
 ```
 
-## Comparar
-
-Depois de publicar uma mudança, meça de novo e compare as duas pastas:
+O comando imprime o relatório em Markdown, com notas, métricas de laboratório,
+dados de campo e auditorias pendentes. Para ver a linha do tempo da página:
 
 ```bash
-pagespeedfy compare \
-  pagespeedfy-reports/promovaweb.com/home/20261105-103012 \
-  pagespeedfy-reports/promovaweb.com/home/20261106-091544
+pagespeedfy history https://promovaweb.com/
 ```
 
-A comparação mostra a diferença de notas e métricas e lista as auditorias
-resolvidas, as novas e as que continuam.
+## Quem vem da 0.3.x
 
-## Variação entre medições
+A 0.3.x gravava as pastas em `pagespeedfy-reports/`, com `report.json` e
+`report.md`. Também aceitava `--output` e `--print path`. Na 1.0, a pasta
+dentro do projeto é fixa em `.pagespeedfy/`, o relatório fica no banco e o caminho do
+histórico aparece no fim de cada `run`. Para trazer as medições antigas:
 
-O Lighthouse simula rede e CPU. Por isso, duas medições seguidas podem diferir alguns
-pontos em Performance. Olhe as métricas e a lista de auditorias resolvidas
-antes de concluir que uma mudança funcionou. Os dados de campo refletem 28
-dias de usuários reais e só mostram o efeito semanas depois.
+```bash
+pagespeedfy import pagespeedfy-reports
+```
+
+Os detalhes estão em [Histórico e comparação](06-historico-e-comparacao.md).

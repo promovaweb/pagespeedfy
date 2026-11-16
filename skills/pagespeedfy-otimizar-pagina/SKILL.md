@@ -1,6 +1,6 @@
 ---
 name: pagespeedfy-otimizar-pagina
-description: Mede uma única página com o CLI do Pagespeedfy, lê todos os relatórios da rota, cria e exibe um plano de correções e só altera o projeto Astro depois da autorização da pessoa.
+description: Mede uma única página com o Pagespeedfy pelo CLI ou pelo MCP, lê o histórico do projeto, cria e exibe um plano de correções e só altera o projeto Astro depois da autorização da pessoa.
 ---
 
 # Otimizar uma página Astro com o Pagespeedfy
@@ -11,7 +11,7 @@ técnico de uma página publicada de um site Astro.
 
 A skill trabalha com **uma página por execução**. A medição, a leitura e as
 correções valem para a URL informada. Componentes compartilhados podem mudar
-outras páginas, e isso entra no relatório final.
+outras páginas. Isso entra no relatório final.
 
 ## Entrada
 
@@ -27,49 +27,77 @@ outras páginas, e isso entra no relatório final.
 
 1. Rode `pagespeedfy --version`. Se o comando não existir, oriente a
    instalação descrita no README do Pagespeedfy e pare.
-2. Rode `pagespeedfy auth status`. Sem chave configurada, peça que a pessoa
-   execute `! pagespeedfy auth login` no próprio terminal. Nunca peça a API
-   key no chat, nunca a escreva em arquivo do projeto e nunca a passe como
-   argumento de comando.
+2. Rode `pagespeedfy credentials status`. Sem chave configurada, peça que a
+   pessoa execute `! pagespeedfy credentials set pagespeed.api_key` no próprio
+   terminal. Nunca peça a API key no chat, nunca a escreva em arquivo do projeto
+   e nunca a passe como argumento de comando. A variável `PAGESPEEDFY_API_KEY`,
+   quando existir, vale mais que o cofre.
 3. Confirme que o diretório atual é um projeto Astro: `astro.config.*` na raiz
    e `astro` em `package.json`. Leia `AGENTS.md`, `CLAUDE.md` ou o README do
    projeto e siga as regras locais de código, design e documentação.
 4. Rode `git status --short` e preserve mudanças que já existiam.
-5. Confira se `pagespeedfy-reports/` está no `.gitignore` do projeto. Os
-   relatórios trazem URLs e trechos de HTML que não pertencem ao repositório.
-   Se a linha faltar, não edite agora: inclua a mudança no plano do passo 4.
+5. Confira que `.pagespeedfy/.gitignore` existe. O binário cria a pasta e o
+   arquivo no primeiro `run`. Não edite o `.gitignore` do projeto: o arquivo
+   dentro de `.pagespeedfy/` já ignora `reports/` e os temporários do SQLite.
+   Quando a pasta não existir, siga para a medição e confira depois dela.
 
 ## Fluxo
 
 ### 1. Medir a linha de base
 
+Na raiz do site:
+
 ```bash
-pagespeedfy run <url> --print path
+pagespeedfy run <url> --samples 3 --note "baseline"
 ```
 
-O comando consulta mobile e desktop nas quatro categorias e imprime o caminho
-do `report.json`. Guarde esse caminho como linha de base. A consulta leva de
-20 a 90 segundos por estratégia.
+O comando consulta mobile e desktop nas quatro categorias e grava a mediana de
+três leituras por estratégia. A saída traz as notas, a métrica de cada
+estratégia, o caminho do `history.db` e o id de cada medição, por exemplo
+`mobile #12` e `desktop #13`.
+
+Guarde os ids e a URL. A linha de base é a medição mais recente da página
+naquele momento.
 
 Se o comando falhar por cota diária, chave recusada ou URL inacessível, relate
 a mensagem do CLI e pare. Não repita em laço.
 
-### 2. Ler todos os relatórios
+### 2. Ler a medição e o histórico
 
-Leia `references/leitura-relatorio.md` e depois **todos** os arquivos da
-pasta da medição, sem pular nenhum:
+Leia `references/leitura-relatorio.md` e depois consulte o histórico da página:
 
-- `report.json`, das duas estratégias;
-- `mobile.raw.json` e `desktop.raw.json`, para conferir cada auditoria
-  reprovada e completar os itens que o `report.json` cortou
-  (`truncated: true`);
-- `report.md`, só como conferência do resumo.
+```bash
+pagespeedfy report <url> --json
+pagespeedfy history <url> --json
+```
 
-Depois liste as medições anteriores da mesma rota, nas pastas irmãs de
-`pagespeedfy-reports/<host>/<rota>/`, e leia o `report.json` de cada uma.
-Use o histórico para separar auditorias recorrentes das novas e para saber se
-uma correção anterior já foi tentada. Quando houver mais de uma medição, rode
-`pagespeedfy compare` entre a mais antiga e a atual.
+`report` mostra a última medição da página em mobile por padrão. Para desktop,
+acrescente `--strategy desktop`. Para uma medição específica, use o id:
+`pagespeedfy report 12 --json`.
+
+O JSON vem no envelope `{ ok, command, data }`. Em `data` ficam a URL, a
+estratégia, a data, a nota de cada categoria, as métricas de laboratório, os
+dados de campo do CrUX, as auditorias reprovadas com todos os itens e as
+verificações manuais.
+
+Depois leia as medições anteriores da mesma página em `data.measurements` do
+`history`, da mais antiga para a mais nova. Use o histórico para separar
+auditorias recorrentes das novas e para saber se uma correção anterior já foi
+tentada. Quando houver mais de uma medição, rode:
+
+```bash
+pagespeedfy compare <url> --json
+```
+
+Cada auditoria reprovada traz `id`, `categories`, `group`, `weight`, `score`,
+`displayValue`, `metricSavings`, `description`, `headings` e `items`. O campo
+`truncated` avisa quando os itens foram cortados em `--max-items` (padrão 50).
+Nesse caso, leia o restante no arquivo bruto indicado por `rawFile`, relativo a
+`.pagespeedfy/`:
+
+```bash
+jq '.lighthouseResult.audits["<id>"].details' ".pagespeedfy/<caminho de rawFile>"
+```
 
 Para cada estratégia, registre:
 
@@ -79,6 +107,7 @@ Para cada estratégia, registre:
 - `scores`, `labMetrics` e `field` (CrUX de página e de origem).
 - Cada item de `failedAudits`, com todos os `items`, conferidos no JSON bruto.
 - `manualAudits`, que vão para o plano como verificação humana.
+- `samples` e `sampleScores`, para saber quanto a nota variou entre as leituras.
 
 ### 3. Localizar a página no código
 
@@ -101,9 +130,10 @@ Nesta etapa, só leia. Não altere nenhum arquivo do projeto.
 ### 4. Criar o plano
 
 Monte o plano com o modelo de `references/modelo-plano.md` e grave em
-`plano.md`, na pasta da medição, ao lado do `report.json`. O plano tem uma
-linha por auditoria reprovada, na ordem do `report.json`, e diz para cada uma:
-estratégias afetadas, escopo, arquivo, correção proposta e efeito esperado.
+`plano.md`, na pasta da medição aberta por `rawFile`, dentro de
+`.pagespeedfy/reports/`. O plano tem uma linha por auditoria reprovada, na
+ordem do relatório. Cada linha traz as estratégias afetadas, o escopo, o
+arquivo, a correção proposta e o efeito esperado.
 
 Use quatro escopos:
 
@@ -120,7 +150,7 @@ explicada, sem correção inventada.
 
 ### 5. Exibir o plano e aguardar autorização
 
-Mostre o plano completo na tela, no chat, e não só o caminho do arquivo.
+Mostre o plano completo na tela, no chat. Não mostre só o caminho do arquivo.
 Termine com a pergunta: "Posso aplicar as correções deste plano?"
 
 Pare e aguarde a resposta. Não altere arquivo do projeto antes de a pessoa
@@ -160,10 +190,10 @@ peça autorização antes de aplicar.
 
 ### 7. Validar localmente
 
-Rode o build do projeto (`npm run build` ou o script equivalente) e, se
-existir, `astro check` e a suíte de testes. Corrija o que quebrar antes de
-seguir. Abra o HTML gerado em `dist/` para conferir o resultado das mudanças
-no `<head>`, nas imagens e nos scripts.
+Rode o build do projeto (`bun run build`, `npm run build` ou o script
+equivalente) e, se existir, `astro check` e a suíte de testes. Corrija o que
+quebrar antes de seguir. Abra o HTML gerado em `dist/` para conferir o
+resultado das mudanças no `<head>`, nas imagens e nos scripts.
 
 ### 8. Medir de novo
 
@@ -171,9 +201,15 @@ O PageSpeed Insights só mede URL pública. Quando a pessoa tiver uma URL de
 preview com as mudanças publicadas, rode:
 
 ```bash
-pagespeedfy run <url-de-preview> --print path
-pagespeedfy compare <report-da-linha-de-base> <report-novo>
+pagespeedfy run <url-de-preview> --samples 3 --note "correções do plano"
+pagespeedfy compare <url> --json
 ```
+
+A comparação usa as duas últimas medições da página, em mobile por padrão.
+Para desktop, acrescente `--strategy desktop`. Mostra a diferença de
+notas e de métricas e as auditorias resolvidas, novas e mantidas. Para falhar
+o comando quando houver regressão, use `--fail-on-regression`: a saída é `10`
+quando uma nota caiu ou surgiu auditoria nova.
 
 Sem preview, entregue as mudanças e informe o comando de comparação para
 depois da publicação. Não faça deploy, commit nem push por conta própria.
@@ -186,7 +222,7 @@ auditorias resolvidas, não só a nota.
 
 Entregue em Markdown e atualize o `plano.md` com o resultado:
 
-1. URL, data da medição e caminhos do `report.json` e do `plano.md`.
+1. URL, data da medição, ids das medições e caminho do `plano.md`.
 2. Notas e métricas por estratégia, antes e depois quando houver remedição.
 3. Tabela do plano com o status final de cada linha.
 4. Mudanças em componentes compartilhados e as páginas que elas alcançam.
@@ -196,9 +232,26 @@ Entregue em Markdown e atualize o `plano.md` com o resultado:
 8. Dados de campo do CrUX, lembrando que eles refletem 28 dias de usuários
    reais e só mudam depois desse período.
 
+## Com MCP
+
+Quando o projeto tem o servidor MCP do Pagespeedfy configurado (`pagespeedfy
+mcp`), as mesmas ações existem como tools, sem passar pelo shell:
+
+| Ação | Tool |
+| --- | --- |
+| medir e gravar | `pagespeed_run` |
+| listar páginas ou a linha do tempo | `pagespeed_history` |
+| ler uma medição completa | `pagespeed_report` |
+| comparar duas medições | `pagespeed_compare` |
+
+Passe `project` com o caminho absoluto do projeto Astro, porque o cliente
+escolhe a pasta onde o servidor roda. As regras desta skill valem igual no MCP:
+uma página por execução, plano antes de editar, autorização antes de alterar o
+código. Use o shell quando o MCP não estiver configurado.
+
 ## Limites
 
 - Uma URL por execução. Para outra página, comece de novo pelo passo 1.
 - Nenhuma correção sem plano exibido e autorizado pela pessoa.
 - A skill não altera configuração de hospedagem nem de CDN.
-- A skill não grava, lê nem exibe a API key.
+- A skill não grava, não lê e não exibe a API key.

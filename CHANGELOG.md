@@ -3,6 +3,41 @@
 Todas as mudanças relevantes do Pagespeedfy são registradas neste arquivo. O
 projeto segue versionamento semântico e commits convencionais.
 
+## [1.0.0](https://github.com/promovaweb/pagespeedfy/compare/v0.3.5...v1.0.0) (2026-11-16)
+
+O Pagespeedfy passa a ser um binário [Termfy](https://github.com/promovaweb/termfy):
+TUI, CLI e servidor MCP stdio no mesmo executável, com o histórico de
+melhorias de cada página guardado no projeto.
+
+### Adicionado
+
+- Histórico em SQLite no projeto do usuário, em `.pagespeedfy/history.db`, com os JSON brutos em `.pagespeedfy/reports/` e um `.gitignore` gerado que deixa só o banco versionável.
+- Commands `history` (páginas ou linha do tempo), `report <id|url>`, `compare` por URL, id ou par, `import` (relatórios da 0.3.x) e `forget`.
+- `run --samples N`: N leituras por estratégia, com a mediana gravada no histórico.
+- `run --note`: registra o que mudou antes da medição e aparece na linha do tempo.
+- `run --fail-under` e `compare --fail-on-regression`, com o exit code 10 `BUDGET` para uso no CI.
+- TUI com a aba History: páginas, linha do tempo com sparkline, filtro por estratégia, detalhe e comparação com a medição anterior.
+- Servidor MCP com as tools `pagespeed_run`, `pagespeed_history`, `pagespeed_report` e `pagespeed_compare` e o prompt `optimize_page`.
+- Binários para linux-x64, linux-arm64, darwin-x64, darwin-arm64 e windows-x64 na GitHub Release.
+
+### Alterado
+
+- A API key fica no cofre cifrado do Termfy (`pagespeedfy credentials set pagespeed.api_key`). A chave da 0.3.x em `~/.pagespeedfy/credentials` é movida para o cofre no primeiro uso.
+- A chave vai no cabeçalho `X-Goog-Api-Key`, fora da URL.
+- Mobile e desktop são medidos em paralelo.
+- O pacote npm `@promovaweb/pagespeedfy` virou um invólucro que baixa e confere o binário da release. Ele não leva mais os PDFs e EPUBs de versões antigas (de 3,1 MB para poucos KB).
+- Código, mensagens e campos do `--json` em inglês, como pede o Termfy.
+
+### Corrigido
+
+- URLs de `0.0.0.0`, link-local, CGNAT (Tailscale), IPv6 privado e nomes `.internal`, `.lan` e `.home.arpa` são recusadas antes da consulta.
+- Um relatório ilegível não derruba mais o CLI com stack trace.
+
+### Removido
+
+- Commands `auth login`, `auth status` e `auth logout`, substituídos por `credentials`.
+- Options `--output` e `--print` e os arquivos `report.json` e `report.md`.
+
 ## [0.3.5] - 2026-11-14
 
 ### Corrigido
