@@ -3,7 +3,7 @@
   "opencli": "0.1",
   "info": {
     "title": "Pagespeedfy",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "summary": "CLI, TUI and MCP stdio server to measure pages with PageSpeed Insights and track their improvement history.",
     "description": "CLI, TUI and MCP stdio server to measure pages with PageSpeed Insights and track their improvement history. Without arguments it opens the TUI; \"pagespeedfy mcp\" starts the MCP server over stdio; any other command runs as a CLI with text or --json output.",
     "contact": {

@@ -3,6 +3,10 @@
 Todas as mudanças relevantes do Pagespeedfy são registradas neste arquivo. O
 projeto segue versionamento semântico e commits convencionais.
 
+## [1.0.2] - 2026-11-22
+
+- Alinha a versão do ebook à versão do CLI e reconstrói os downloads.
+
 ## [1.0.1] - 2026-11-22
 
 - Documenta a atualização das tarefas do ClickUp para pronto após o commit e publicado após o push.
