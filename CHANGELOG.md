@@ -3,6 +3,10 @@
 Todas as mudanças relevantes do Pagespeedfy são registradas neste arquivo. O
 projeto segue versionamento semântico e commits convencionais.
 
+## [1.0.1] - 2026-11-22
+
+- Documenta a atualização das tarefas do ClickUp para pronto após o commit e publicado após o push.
+
 ## [1.0.0](https://github.com/promovaweb/pagespeedfy/compare/v0.3.5...v1.0.0) (2026-11-16)
 
 O Pagespeedfy passa a ser um binário [Termfy](https://github.com/promovaweb/termfy):

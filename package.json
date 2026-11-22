@@ -1,6 +1,6 @@
 {
   "name": "pagespeedfy",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "CLI, TUI and MCP stdio server to measure pages with PageSpeed Insights and track their improvement history.",
   "type": "module",
   "private": true,
