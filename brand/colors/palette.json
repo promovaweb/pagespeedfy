@@ -1,4 +1,9 @@
 {
+  "projectColor": {
+    "name": "Verde de desempenho",
+    "hex": "#22C55E",
+    "meaning": "O verde do ponteiro remete à faixa de bom desempenho do medidor do PageSpeed."
+  },
   "name": "Pagespeedfy",
   "families": {
     "primary": {

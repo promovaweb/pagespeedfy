@@ -3,6 +3,10 @@
 Todas as mudanças relevantes do Pagespeedfy são registradas neste arquivo. O
 projeto segue versionamento semântico e commits convencionais.
 
+## [1.0.3] - 2026-11-22
+
+- Atualiza a identidade visual do projeto e sua apresentação no README.
+
 ## [1.0.2] - 2026-11-22
 
 - Alinha a versão do ebook à versão do CLI e reconstrói os downloads.

@@ -7,9 +7,7 @@ página rápida.
 
 ## Conceito visual
 
-O símbolo é uma **página veloz**: a folha de um site, desenhada em turquesa,
-com um **raio verde** recortado no centro. A composição mostra a página do
-site que fica mais rápida depois das correções.
+Medida de desempenho. A cor de identificação é `#22C55E`.
 
 ## Arquivos oficiais
 

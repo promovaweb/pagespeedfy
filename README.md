@@ -1,8 +1,8 @@
 <p align="center">
-  <a href="https://github.com/promovaweb/pagespeedfy">
+  <a href="https://promovaweb.com/pagespeedfy/">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/promovaweb/pagespeedfy/main/brand/logo/logo-dark.png">
-      <img alt="Pagespeedfy" src="https://raw.githubusercontent.com/promovaweb/pagespeedfy/main/brand/logo/logo-light.png" width="360">
+      <source type="image/svg+xml" srcset="https://raw.githubusercontent.com/promovaweb/pagespeedfy/main/brand/logo/icon.svg">
+      <img alt="PageSpeedfy" src="https://raw.githubusercontent.com/promovaweb/pagespeedfy/main/brand/logo/icon.png" width="112" height="112">
     </picture>
   </a>
 </p>
@@ -26,7 +26,10 @@
 </p>
 
 <p align="center">
+  <a href="https://promovaweb.com/pagespeedfy/">Site do PageSpeedfy</a> ·
   <a href="https://promovaweb.com/docs/pagespeedfy/">Documentação</a> ·
+  <a href="https://promovaweb.com/harness/">Harness</a> ·
+  <a href="https://promovaweb.com/ferramentas/">Ferramentas</a> ·
   <a href="https://promovaweb.com/discord">Discord</a> ·
   <a href="https://promovaweb.com/planos?utm_source=github&utm_medium=readme&utm_campaign=pagespeedfy">Planos da Promovaweb</a> ·
   <a href="https://github.com/promovaweb/pagespeedfy/blob/main/CHANGELOG.md">Changelog</a>

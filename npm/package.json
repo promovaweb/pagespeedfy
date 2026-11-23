@@ -1,6 +1,6 @@
 {
   "name": "@promovaweb/pagespeedfy",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "CLI, TUI and MCP stdio server to measure pages with PageSpeed Insights and track their improvement history.",
   "license": "AGPL-3.0-only",
   "author": "Promovaweb",
